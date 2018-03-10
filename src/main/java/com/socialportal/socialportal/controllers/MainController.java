@@ -4,20 +4,18 @@ import com.socialportal.socialportal.errors.DifferentPasswordException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.UserManager;
 import com.socialportal.socialportal.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping
 public class MainController {
 
     @Autowired
@@ -33,12 +31,12 @@ public class MainController {
 
     @GetMapping("/registration")
     public String registration(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("userData", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("user") User user, Model model, BindingResult bindingResult){
+    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors())
             return "registration";
 
@@ -53,7 +51,7 @@ public class MainController {
         }
 
         userManager.register(user);
-        return "registration";
+        return "registrationCompleted";
     }
 
     //temporary

@@ -1,8 +1,7 @@
 package com.socialportal.socialportal.models;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,11 +17,11 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(min = 4, max = 30)
+    @Size(min = 3, max = 30)
     private String firstName;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 3, max = 30)
     private String lastName;
 
     @NotNull
