@@ -12,17 +12,17 @@ public class UserManager implements IUserManager {
     @Autowired
     UserRepository userRepository;
 
-    public void register(User user){
+    public void register(User user) {
         userRepository.save(user);
     }
 
-    public User findUserByEmail(User user){
+    public User findUserByEmail(User user) {
         return userRepository.findUserByEmail(user.getEmail());
     }
 
 
     //temporary
-    public Iterable<User> allUsers(){
+    public Iterable<User> allUsers() {
         return userRepository.findAll();
     }
 }

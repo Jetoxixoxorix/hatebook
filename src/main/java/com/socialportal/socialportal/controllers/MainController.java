@@ -4,12 +4,11 @@ import com.socialportal.socialportal.errors.DifferentPasswordException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.validators.UserValidator;
+import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,22 +21,22 @@ public class MainController {
     IUserManager userManager;
 
     @Autowired
-    UserValidator userValidator;
+    IUserValidator userValidator;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @GetMapping("/registration")
-    public String registration(Model model){
+    public String registration(Model model) {
         model.addAttribute("userData", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors())
+    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors())
             return "registration";
 
         try {
@@ -56,7 +55,8 @@ public class MainController {
 
     //temporary
     @GetMapping("/users")
-    public @ResponseBody Iterable<User> allUsers(){
+    public @ResponseBody
+    Iterable<User> allUsers() {
         return userManager.allUsers();
     }
 }

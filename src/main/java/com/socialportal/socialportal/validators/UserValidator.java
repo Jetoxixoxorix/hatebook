@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserValidator {
+public class UserValidator implements IUserValidator {
 
     @Autowired
     IUserManager userManager;
@@ -21,12 +21,12 @@ public class UserValidator {
 
 
     public void checkEmail(User user) throws ExistingEmailException {
-        if(userManager.findUserByEmail(user) != null)
+        if (userManager.findUserByEmail(user) != null)
             throw new ExistingEmailException();
     }
 
-    public void checkPassword(User user) throws DifferentPasswordException{
-        if(!user.getConfirmPassword().equals(user.getPassword()))
+    public void checkPassword(User user) throws DifferentPasswordException {
+        if (!user.getConfirmPassword().equals(user.getPassword()))
             throw new DifferentPasswordException();
     }
 }
