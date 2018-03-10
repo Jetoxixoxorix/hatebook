@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserManager {
+public class UserManager implements IUserManager {
 
     @Autowired
     UserRepository userRepository;
@@ -16,6 +16,12 @@ public class UserManager {
         userRepository.save(user);
     }
 
+    public User findEmail(User user){
+        return userRepository.findUserByEmail(user.getEmail());
+    }
+
+
+    //temporary
     public Iterable<User> allUsers(){
         return userRepository.findAll();
     }

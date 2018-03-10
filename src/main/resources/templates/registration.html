@@ -10,18 +10,23 @@
             <tr>
                 <td>First Name</td>
                 <td><input class="form-control" type="text" th:field="*{firstName}"/></td>
+                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Login Error</td>
             </tr>
             <tr>
                 <td>Last Name</td>
                 <td><input class="form-control" type="text" th:field="*{lastName}"/></td>
+                <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input class="form-control" type="text" th:field="*{email}"/></td>
+                <td><input class="form-control" type="email" th:field="*{email}"/></td>
+                <td th:if="${existingEmail}" th:text="${existingEmail}">Existing email error</td>
+
             </tr>
             <tr>
                 <td>Password</td>
                 <td><input class="form-control" type="password" th:field="*{password}"/></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
             </tr>
             <tr>
                 <td>Confirm Password</td>
