@@ -16,7 +16,7 @@ public class UserManager implements IUserManager {
         userRepository.save(user);
     }
 
-    public User findEmail(User user){
+    public User findUserByEmail(User user){
         return userRepository.findUserByEmail(user.getEmail());
     }
 
