@@ -1,6 +1,7 @@
 package com.socialportal.socialportal.validators;
 
 
+import com.socialportal.socialportal.errors.DifferentPasswordException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
@@ -13,8 +14,19 @@ public class UserValidator {
     @Autowired
     IUserManager userManager;
 
+    public void validateUser(User user) throws DifferentPasswordException, ExistingEmailException {
+        checkEmail(user);
+        checkPassword(user);
+    }
+
+
     public void checkEmail(User user) throws ExistingEmailException {
         if(userManager.findUserByEmail(user) != null)
             throw new ExistingEmailException();
+    }
+
+    public void checkPassword(User user) throws DifferentPasswordException{
+        if(!user.getConfirmPassword().equals(user.getPassword()))
+            throw new DifferentPasswordException();
     }
 }

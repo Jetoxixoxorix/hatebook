@@ -4,6 +4,6 @@ public class ExistingEmailException extends Exception {
 
     @Override
     public String getMessage() {
-        return "This email already exists";
+        return "This email already exists.";
     }
 }

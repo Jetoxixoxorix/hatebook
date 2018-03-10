@@ -1,5 +1,6 @@
 package com.socialportal.socialportal.controllers;
 
+import com.socialportal.socialportal.errors.DifferentPasswordException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
@@ -42,9 +43,12 @@ public class MainController {
             return "registration";
 
         try {
-            userValidator.checkEmail(user);
+            userValidator.validateUser(user);
         } catch (ExistingEmailException e) {
             model.addAttribute("existingEmail", e.getMessage());
+            return "registration";
+        } catch (DifferentPasswordException e) {
+            model.addAttribute("differentPasswords", e.getMessage());
             return "registration";
         }
 

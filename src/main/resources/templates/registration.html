@@ -31,6 +31,7 @@
             <tr>
                 <td>Confirm Password</td>
                 <td><input class="form-control" type="password" th:field="*{confirmPassword}"/></td>
+                <td th:if="${differentPasswords}" th:text="${differentPasswords}">Not matching passwords error</td>
             </tr>
             <tr>
                 <td>
