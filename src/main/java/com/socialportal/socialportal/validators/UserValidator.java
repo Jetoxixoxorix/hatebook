@@ -21,7 +21,7 @@ public class UserValidator implements IUserValidator {
 
 
     public void checkEmail(User user) throws ExistingEmailException {
-        if (userManager.findUserByEmail(user) != null)
+        if (userManager.findUserByEmail(user.getEmail()) != null)
             throw new ExistingEmailException();
     }
 

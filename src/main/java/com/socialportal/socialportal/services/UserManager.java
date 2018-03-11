@@ -16,10 +16,10 @@ public class UserManager implements IUserManager {
         userRepository.save(user);
     }
 
-    public User findUserByEmail(User user) {
-        return userRepository.findUserByEmail(user.getEmail());
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
-
 
     //temporary
     public Iterable<User> allUsers() {

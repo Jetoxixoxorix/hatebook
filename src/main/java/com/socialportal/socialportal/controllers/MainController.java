@@ -17,11 +17,13 @@ import javax.validation.Valid;
 @RequestMapping
 public class MainController {
 
-    @Autowired
     IUserManager userManager;
-
-    @Autowired
     IUserValidator userValidator;
+
+    public MainController(IUserManager userManager, IUserValidator userValidator){
+        this.userManager = userManager;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/")
     public String index() {
@@ -51,6 +53,12 @@ public class MainController {
 
         userManager.register(user);
         return "registrationCompleted";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("loginData", new User());
+        return "login";
     }
 
     //temporary

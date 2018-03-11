@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <form th:action="@{/login}" th:object="${loginData}" method="post">
+        <table>
+            <tr>
+                <td>Email</td>
+                <td><input class="form-control" type="email" th:field="*{email}"/></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input class="form-control" type="password" th:field="*{password}"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn btn-default" id="login" type="submit">Sign in</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div th:if="${param.error}">
+        Invalid email and password.
+    </div>
+</div>
+</body>
+</html>
