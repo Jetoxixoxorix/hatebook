@@ -4,6 +4,7 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
+    <h2>Register your account</h2>
     <form action="#" th:action="@{/registration}" th:object="${userData}" method="post">
         <table>
             <tr>
@@ -17,17 +18,17 @@
                 <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</td>
             </tr>
             <tr>
-                <td>Email</td>
+                <td>Email:</td>
                 <td><input class="form-control" type="email" th:field="*{username}"/></td>
                 <td th:if="${existingEmail}" th:text="${existingEmail}">Existing email error</td>
             </tr>
             <tr>
-                <td>Password</td>
+                <td>Password:</td>
                 <td><input class="form-control" type="password" th:field="*{password}"/></td>
                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
             </tr>
             <tr>
-                <td>Confirm Password</td>
+                <td>Confirm Password:</td>
                 <td><input class="form-control" type="password" th:field="*{confirmPassword}"/></td>
                 <td th:if="${differentPasswords}" th:text="${differentPasswords}">Not matching passwords error</td>
             </tr>

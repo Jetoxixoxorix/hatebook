@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="head :: head">
 </head>
 <body>
 <nav class="navbar navbar-fixed-top" th:fragment="navbar">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a href="#" th:href="@{/registration}">Register</a>
-        </li>
-    </ul>
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" th:href="@{/registration}">Register</a>
+            </li>
+            <li>
+                <a href="#" th:href="@{/login}">Sign in</a>
+            </li>
+            <li>
+                <form th:action="@{/logout}" method="post" id="logout"></form>
+                <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 </body>
 </html>

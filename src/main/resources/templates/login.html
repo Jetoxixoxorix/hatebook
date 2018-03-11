@@ -5,14 +5,15 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
+    <h2>Sign in</h2>
     <form action="#" th:action="@{/login}" th:object="${loginData}" method="post">
         <table>
             <tr>
-                <td>Email</td>
+                <td>Email:</td>
                 <td><input class="form-control" type="email" th:field="*{username}"/></td>
             </tr>
             <tr>
-                <td>Password</td>
+                <td>Password:</td>
                 <td><input class="form-control" type="password" th:field="*{password}"/></td>
             </tr>
             <tr>
