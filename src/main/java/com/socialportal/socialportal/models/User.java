@@ -7,8 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
+//@Data
 @Entity
+@Table(name = "user")
 public class User {
 
 
@@ -25,7 +26,7 @@ public class User {
     private String lastName;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 6, max = 60)
     private String password;
 
     @NotNull
@@ -63,12 +64,12 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getUsername() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.email = username;
     }
 
     public String getConfirmPassword() {

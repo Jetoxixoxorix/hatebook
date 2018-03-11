@@ -5,11 +5,11 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <form th:action="@{/login}" th:object="${loginData}" method="post">
+    <form action="#" th:action="@{/login}" th:object="${loginData}" method="post">
         <table>
             <tr>
                 <td>Email</td>
-                <td><input class="form-control" type="email" th:field="*{email}"/></td>
+                <td><input class="form-control" type="email" th:field="*{username}"/></td>
             </tr>
             <tr>
                 <td>Password</td>

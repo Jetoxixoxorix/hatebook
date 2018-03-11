@@ -17,13 +17,11 @@ import javax.validation.Valid;
 @RequestMapping
 public class MainController {
 
+    @Autowired
     IUserManager userManager;
-    IUserValidator userValidator;
 
-    public MainController(IUserManager userManager, IUserValidator userValidator){
-        this.userManager = userManager;
-        this.userValidator = userValidator;
-    }
+    @Autowired
+    IUserValidator userValidator;
 
     @GetMapping("/")
     public String index() {
@@ -56,7 +54,7 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(Model model){
+    public String login(Model model) {
         model.addAttribute("loginData", new User());
         return "login";
     }

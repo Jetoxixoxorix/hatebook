@@ -17,8 +17,9 @@ public class ExampleUsers implements CommandLineRunner {
         User user = new User();
         user.setFirstName("Jan");
         user.setLastName("Kox");
-        user.setEmail("prosty@gmail.com");
         user.setPassword("qwerty");
+        user.setUsername("prosty@gmail.com");
+
         userManager.register(user);
     }
 }

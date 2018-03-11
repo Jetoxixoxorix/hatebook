@@ -15,11 +15,12 @@ public class MyUserDetailService implements UserDetailsService {
     IUserManager userManager;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userManager.findUserByEmail(email);
+    public UserDetails loadUserByUsername(String username) {
+        User user = userManager.findUserByEmail(username);
         if (user == null)
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(username);
 
         return new MyUserPrincipal(user);
     }
+
 }
