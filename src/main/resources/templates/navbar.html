@@ -6,13 +6,16 @@
 <nav class="navbar navbar-fixed-top" th:fragment="navbar">
     <div class="container">
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li sec:authorize="isAnonymous()">
                 <a href="#" th:href="@{/registration}">Register</a>
             </li>
-            <li>
+            <li sec:authorize="isAnonymous()">
                 <a href="#" th:href="@{/login}">Sign in</a>
             </li>
-            <li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="#" sec:authentication="name">Username</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post" id="logout"></form>
                 <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>
             </li>
