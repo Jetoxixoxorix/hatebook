@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserManager implements IUserManager {
 
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public UserManager(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserValidator implements IUserValidator {
 
-    @Autowired
     IUserManager userManager;
+
+    @Autowired
+    public UserValidator(IUserManager userManager){
+        this.userManager = userManager;
+    }
 
     public void validateUser(User user) throws DifferentPasswordException, ExistingEmailException {
         checkEmail(user);

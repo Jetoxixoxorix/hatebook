@@ -17,11 +17,14 @@ import javax.validation.Valid;
 @RequestMapping
 public class MainController {
 
-    @Autowired
     IUserManager userManager;
+    IUserValidator userValidator;
 
     @Autowired
-    IUserValidator userValidator;
+    public MainController(IUserManager userManager, IUserValidator userValidator){
+        this.userManager = userManager;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/")
     public String index() {

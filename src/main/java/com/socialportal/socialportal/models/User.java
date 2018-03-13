@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-//@Data
+@Data
 @Entity
 @Table(name = "user")
 public class User {
@@ -74,9 +74,5 @@ public class User {
 
     public String getConfirmPassword() {
         return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 }
