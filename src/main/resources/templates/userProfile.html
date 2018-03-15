@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <form th:action="@{/add}">
+        <input type="text"/>
+        <button class="btn btn-default" id="add" type="submit">Add status</button>
+    </form>
+</div>
+</body>
+</html>

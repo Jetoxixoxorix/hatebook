@@ -1,6 +1,7 @@
 package com.socialportal.socialportal.models;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 
@@ -32,16 +33,8 @@ public class User {
 
     @NotNull
     @Column(unique = true)
-    private String email;
+    private String username;
 
     @Transient
     private String confirmPassword;
-
-    public String getUsername() {
-        return email;
-    }
-
-    public void setUsername(String username) {
-        this.email = username;
-    }
 }

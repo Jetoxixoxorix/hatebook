@@ -1,17 +1,14 @@
 package com.socialportal.socialportal.controllers;
 
-import com.socialportal.socialportal.errors.DifferentPasswordException;
-import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping
@@ -31,30 +28,12 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userData", new User());
-        return "registration";
+    @GetMapping("/userprofile/{id}")
+    public String getUserProfile(@PathVariable("id") Long id, Model model){
+        model.addAttribute("profile", new User());
+        return "userProfile/{id}";
     }
 
-    @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors())
-            return "registration";
-
-        try {
-            userValidator.validateUser(user);
-        } catch (ExistingEmailException e) {
-            model.addAttribute("existingEmail", e.getMessage());
-            return "registration";
-        } catch (DifferentPasswordException e) {
-            model.addAttribute("differentPasswords", e.getMessage());
-            return "registration";
-        }
-
-        userManager.register(user);
-        return "registrationCompleted";
-    }
 
     @GetMapping("/login")
     public String login(Model model) {

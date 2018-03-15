@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="head :: head">
-</head>
+<head th:replace="head :: head"></head>
 <body>
 <nav class="navbar navbar-fixed-top" th:fragment="navbar">
     <div class="container">
@@ -13,7 +12,8 @@
                 <a href="#" th:href="@{/login}">Sign in</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a href="#" sec:authentication="name">Username</a>
+                <form th:action="@{'/userProfile/' + ${}"></form>
+                <a href="#" sec:authentication="name" >Username</a>
             </li>
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post" id="logout"></form>

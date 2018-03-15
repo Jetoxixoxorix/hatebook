@@ -25,8 +25,8 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+    public User findUserByEmail(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
     //temporary
