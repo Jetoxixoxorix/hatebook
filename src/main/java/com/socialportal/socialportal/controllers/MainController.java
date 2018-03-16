@@ -1,8 +1,9 @@
 package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.models.User;
+import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.validators.IUserValidator;
+import com.socialportal.socialportal.services.StatusManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class MainController {
 
-    IUserManager userManager;
-    IUserValidator userValidator;
+    private IUserManager userManager;
+    private StatusManager statusManager;
 
     @Autowired
-    public MainController(IUserManager userManager, IUserValidator userValidator){
+    public MainController(IUserManager userManager, StatusManager statusManager){
         this.userManager = userManager;
-        this.userValidator = userValidator;
+        this.statusManager = statusManager;
     }
 
     @GetMapping("/")
@@ -30,10 +31,21 @@ public class MainController {
 
     @GetMapping("/userprofile/{id}")
     public String getUserProfile(@PathVariable("id") Long id, Model model){
-        model.addAttribute("profile", new User());
-        return "userProfile/{id}";
+        model.addAttribute("profile", userManager.getById(id));
+        return "userProfile";
     }
 
+    @GetMapping("/status")
+    public String addNewStatus(Model model){
+        model.addAttribute("add", new UserStatus());
+        return "status";
+    }
+
+    @PostMapping("/status")
+    public String addNewStatus(@ModelAttribute("add") UserStatus userStatus){
+        statusManager.addNewStatus(userStatus, userManager.getUserId());
+        return "status";
+    }
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -46,5 +58,11 @@ public class MainController {
     public @ResponseBody
     Iterable<User> allUsers() {
         return userManager.allUsers();
+    }
+
+    //temporary
+    @GetMapping("/statuses")
+    public @ResponseBody Iterable<UserStatus> allStatuses(){
+        return statusManager.allStatus();
     }
 }

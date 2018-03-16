@@ -2,6 +2,7 @@ package com.socialportal.socialportal.security;
 
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
+import com.socialportal.socialportal.services.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +25,7 @@ public class MyUserDetailService implements UserDetailsService {
         if (user == null)
             throw new UsernameNotFoundException(username);
 
+        UserManager.user = user;
         return new MyUserPrincipal(user);
     }
 

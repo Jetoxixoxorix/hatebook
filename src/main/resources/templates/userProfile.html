@@ -4,10 +4,9 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <form th:action="@{/add}">
-        <input type="text"/>
-        <button class="btn btn-default" id="add" type="submit">Add status</button>
-    </form>
+    <div class="status">
+        <p th:each="status : ${profile}"></p>
+    </div>
 </div>
 </body>
 </html>

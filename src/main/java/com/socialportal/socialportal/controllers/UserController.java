@@ -6,6 +6,7 @@ import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +19,14 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-    IUserValidator userValidator;
-    IUserManager userManager;
+    private IUserManager userManager;
+    private IUserValidator userValidator;
 
+    @Autowired
+    public UserController(IUserManager userManager, IUserValidator userValidator){
+        this.userManager = userManager;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {
