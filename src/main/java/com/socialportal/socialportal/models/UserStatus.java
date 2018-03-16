@@ -3,15 +3,18 @@ package com.socialportal.socialportal.models;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class UserStatus {
 
     @Id
@@ -23,4 +26,11 @@ public class UserStatus {
 
     private Long userId;
 
+    private Date date;
+
+    public UserStatus(String content, Long userId, Date date) {
+        this.content = content;
+        this.userId = userId;
+        this.date = date;
+    }
 }

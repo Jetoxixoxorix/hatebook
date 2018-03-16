@@ -23,13 +23,14 @@ public class StatusManager {
         userStatusRepository.save(userStatus);
     }
 
-    //temporary
-    public Iterable<UserStatus> allStatus() {
-        return userStatusRepository.findAll();
-    }
-
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserId(id);
     }
 
+
+
+    //temporary
+    public Iterable<UserStatus> allStatus() {
+        return userStatusRepository.findAll();
+    }
 }

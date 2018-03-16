@@ -1,9 +1,6 @@
 package com.socialportal.socialportal.models;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +9,8 @@ import javax.validation.constraints.Size;
 @Data
 @Entity
 @Table(name = "user")
+@NoArgsConstructor
+
 public class User {
 
     @Id
@@ -37,4 +36,13 @@ public class User {
 
     @Transient
     private String confirmPassword;
+
+
+    public User(@NotNull @Size(min = 3, max = 30) String firstName, @NotNull @Size(min = 3, max = 30) String lastName, @NotNull @Size(min = 6, max = 60) String password, @NotNull String username) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.username = username;
+    }
+
 }
