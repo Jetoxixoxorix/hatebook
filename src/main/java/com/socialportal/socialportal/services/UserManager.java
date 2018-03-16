@@ -13,16 +13,15 @@ import org.springframework.stereotype.Service;
 public class UserManager implements IUserManager {
 
     UserRepository userRepository;
-    //UserStatusRepository userStatusRepository;
 
     public static User user;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserManager(UserRepository userRepository, UserStatusRepository userStatusRepository){
+    @Autowired
+    public UserManager(UserRepository userRepository){
         this.userRepository = userRepository;
-        //this.userStatusRepository = userStatusRepository;
     }
 
     public void register(User user) {
@@ -44,7 +43,7 @@ public class UserManager implements IUserManager {
         return findUserByEmail(user.getUsername()).getId();
     }
 
-    @Override
+
 
     //temporary
     public Iterable<User> allUsers() {

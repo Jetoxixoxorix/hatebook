@@ -5,7 +5,7 @@
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
     <div class="status">
-        <p th:each="status : ${profile}"></p>
+        <p th:each="status : ${statuses}" th:text="${status.content}"></p>
     </div>
 </div>
 </body>

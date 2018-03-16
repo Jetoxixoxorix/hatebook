@@ -3,13 +3,17 @@ package com.socialportal.socialportal.services;
 
 import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.repositories.UserStatusRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StatusManager {
 
     private UserStatusRepository userStatusRepository;
 
+    @Autowired
     public StatusManager(UserStatusRepository userStatusRepository){
         this.userStatusRepository = userStatusRepository;
     }
@@ -22,6 +26,10 @@ public class StatusManager {
     //temporary
     public Iterable<UserStatus> allStatus() {
         return userStatusRepository.findAll();
+    }
+
+    public List<UserStatus> getStatuses(Long id){
+        return userStatusRepository.getUserStatusesByUserId(id);
     }
 
 }

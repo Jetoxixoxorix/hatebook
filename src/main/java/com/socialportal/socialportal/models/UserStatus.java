@@ -17,10 +17,10 @@ public class UserStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private Long id;
+    private Long statusId;
 
     private String content;
 
-    private Long UserId;
+    private Long userId;
 
 }
