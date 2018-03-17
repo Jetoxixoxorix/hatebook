@@ -6,10 +6,11 @@ import com.socialportal.socialportal.repositories.UserStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class StatusManager {
+public class StatusManager implements IStatusManager {
 
     private UserStatusRepository userStatusRepository;
 
@@ -18,11 +19,14 @@ public class StatusManager {
         this.userStatusRepository = userStatusRepository;
     }
 
+    @Override
     public void addNewStatus(UserStatus userStatus, Long userId) {
         userStatus.setUserId(userId);
+        userStatus.setDate(new Date());
         userStatusRepository.save(userStatus);
     }
 
+    @Override
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserId(id);
     }
@@ -30,6 +34,7 @@ public class StatusManager {
 
 
     //temporary
+    @Override
     public Iterable<UserStatus> allStatus() {
         return userStatusRepository.findAll();
     }

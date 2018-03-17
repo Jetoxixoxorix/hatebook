@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -24,8 +25,10 @@ public class UserStatus {
 
     private String content;
 
+    @NotNull
     private Long userId;
 
+    @NotNull
     private Date date;
 
     public UserStatus(String content, Long userId, Date date) {

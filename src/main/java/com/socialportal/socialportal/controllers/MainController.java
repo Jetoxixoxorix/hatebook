@@ -2,8 +2,8 @@ package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserStatus;
+import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.StatusManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private IUserManager userManager;
-    private StatusManager statusManager;
+    private IStatusManager statusManager;
 
     @Autowired
-    public MainController(IUserManager userManager, StatusManager statusManager){
+    public MainController(IUserManager userManager, IStatusManager statusManager){
         this.userManager = userManager;
         this.statusManager = statusManager;
     }
