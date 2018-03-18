@@ -31,9 +31,15 @@ public class MainController {
 
     @GetMapping("/userprofile/{id}")
     public String getUserProfile(@PathVariable("id") Long id, Model model){
-        model.addAttribute("profile", userManager.getById(id));
+        model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         return "userProfile";
+    }
+
+    @PostMapping("/userprofile/{id}")
+    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model){
+        statusManager.addNewStatus(userStatus, userManager.getUserId());
+        return getUserProfile(id, model);
     }
 
     @GetMapping("/status")
