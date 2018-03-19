@@ -28,7 +28,7 @@ public class MainController {
     public String index() {
         return "index";
     }
-    
+
     @GetMapping("/userprofile")
     public String getYourProfile(Model model){
         return getUserProfile(userManager.getUserId(), model);
@@ -44,7 +44,7 @@ public class MainController {
 
     @PostMapping("/userprofile/{id}")
     public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model){
-        statusManager.addNewStatus(userStatus, userManager.getUserId());
+        statusManager.addNewStatus(userStatus, id);
         return getUserProfile(id, model);
     }
 
