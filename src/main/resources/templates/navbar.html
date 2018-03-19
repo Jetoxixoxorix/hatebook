@@ -19,7 +19,7 @@
                 <a href="#" th:href="@{/login}">Sign in</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <form th:action="@{'/userprofile/1'}" method="get" id="profile"></form>
+                <form th:action="@{'/userprofile'}" method="get" id="profile"></form>
                 <a href="#" sec:authentication="name" onclick="document.getElementById('profile').submit()" >Username</a>
             </li>
             <li sec:authorize="isAuthenticated()">

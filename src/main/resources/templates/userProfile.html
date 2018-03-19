@@ -5,7 +5,7 @@
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
     <div class="add">
-        <form th:action="@{/userprofile/1}" th:object="${add}" method="post">
+        <form th:action="@{'/userprofile/' + ${userId}}" th:object="${add}" method="post">
             <textarea rows="4" cols="50" th:field="*{content}"></textarea>
             <button class="btn btn-default" id="add" type="submit">Add status</button>
         </form>

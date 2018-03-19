@@ -28,11 +28,17 @@ public class MainController {
     public String index() {
         return "index";
     }
+    
+    @GetMapping("/userprofile")
+    public String getYourProfile(Model model){
+        return getUserProfile(userManager.getUserId(), model);
+    }
 
     @GetMapping("/userprofile/{id}")
     public String getUserProfile(@PathVariable("id") Long id, Model model){
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
+        model.addAttribute("userId", id);
         return "userProfile";
     }
 
