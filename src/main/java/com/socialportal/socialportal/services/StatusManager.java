@@ -1,6 +1,7 @@
 package com.socialportal.socialportal.services;
 
 
+import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.repositories.UserStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,10 @@ public class StatusManager implements IStatusManager {
     }
 
     @Override
-    public void addNewStatus(UserStatus userStatus, Long userId) {
-        userStatus.setUserId(userId);
+    public void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUserId) {
+        userStatus.setUserId(userProfileId);
         userStatus.setDate(new Date());
+        userStatus.setAddingUserId(addingUserId);
         userStatusRepository.save(userStatus);
     }
 
@@ -30,8 +32,6 @@ public class StatusManager implements IStatusManager {
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserId(id);
     }
-
-
 
     //temporary
     @Override

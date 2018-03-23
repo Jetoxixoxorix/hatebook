@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserStatusRepository extends CrudRepository<UserStatus, Long> {
     List<UserStatus> getUserStatusesByUserId(Long id);
+    UserStatus getUserStatusByUserId(Long id);
 }

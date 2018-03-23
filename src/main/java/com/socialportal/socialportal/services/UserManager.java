@@ -44,10 +44,8 @@ public class UserManager implements IUserManager {
     }
 
 
-
     //temporary
     public Iterable<User> allUsers() {
         return userRepository.findAll();
     }
-
 }

@@ -11,6 +11,7 @@
         </form>
     </div>
     <div class="status" th:each="status : ${statuses}">
+        <p th:text="*{status.addingUserId.firstName}"></p>
         <p th:text="${status.date}"></p>
         <p th:text="${status.content}"></p>
         <br>

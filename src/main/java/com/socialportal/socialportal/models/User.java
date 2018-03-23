@@ -7,15 +7,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-@Entity
-@Table(name = "user")
+@Entity(name = "USER")
+@Table(name = "USER")
 @NoArgsConstructor
-
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
+    @Column(name = "user_id")
     private Long id;
 
     @NotNull

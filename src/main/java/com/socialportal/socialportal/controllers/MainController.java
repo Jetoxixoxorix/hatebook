@@ -39,12 +39,13 @@ public class MainController {
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("userId", id);
+        //model.addAttribute("user", userManager.getById(id));
         return "userProfile";
     }
 
     @PostMapping("/userprofile/{id}")
     public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model){
-        statusManager.addNewStatus(userStatus, id);
+        statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 
@@ -56,7 +57,7 @@ public class MainController {
 
     @PostMapping("/status")
     public String addNewStatus(@ModelAttribute("add") UserStatus userStatus){
-        statusManager.addNewStatus(userStatus, userManager.getUserId());
+        statusManager.addNewStatus(userStatus, userManager.getUserId(), userManager.getById(userManager.getUserId()));
         return "status";
     }
 

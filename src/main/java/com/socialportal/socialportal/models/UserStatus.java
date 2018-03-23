@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -31,9 +28,18 @@ public class UserStatus {
     @NotNull
     private Date date;
 
-    public UserStatus(String content, Long userId, Date date) {
+    /*@NotNull
+    private Long addingUserId;*/
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn
+    private User addingUserId;
+
+    public UserStatus(String content, Long userId, Date date, User addingUserId) {
         this.content = content;
         this.userId = userId;
         this.date = date;
+        this.addingUserId = addingUserId;
     }
 }
