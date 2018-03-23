@@ -28,10 +28,9 @@ public class ExampleUsers implements CommandLineRunner {
         userManager.register(user1);
         userManager.register(user2);
 
-        //UserStatus userStatus = new UserStatus("First status",  1L, new Date(), 1L);
-        //UserStatus userStatus1 = new UserStatus("Second status",  1L, new Date(), 2L);
-        //IStatusManager.addNewStatus(userStatus, 1L, 1L);
-        //IStatusManager.addNewStatus(userStatus1, 1L, 2L);
-
+        UserStatus userStatus = new UserStatus("First status",  1L, new Date(), user);
+        UserStatus userStatus1 = new UserStatus("Second status",  1L, new Date(), user1);
+        IStatusManager.addNewStatus(userStatus, 1L, user);
+        IStatusManager.addNewStatus(userStatus1, 1L, user1);
     }
 }
