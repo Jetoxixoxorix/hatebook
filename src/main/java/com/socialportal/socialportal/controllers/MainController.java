@@ -39,7 +39,9 @@ public class MainController {
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("userId", id);
-        //model.addAttribute("user", userManager.getById(id));
+        if(userManager.getById(id) == null){
+            return "notExistingUser";
+        }
         return "userProfile";
     }
 
