@@ -30,7 +30,7 @@ public class StatusManager implements IStatusManager {
 
     @Override
     public List<UserStatus> getStatuses(Long id){
-        return userStatusRepository.getUserStatusesByUserId(id);
+        return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);
     }
 
     //temporary

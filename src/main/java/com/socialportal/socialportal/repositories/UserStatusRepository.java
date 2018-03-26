@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface UserStatusRepository extends CrudRepository<UserStatus, Long> {
-    List<UserStatus> getUserStatusesByUserId(Long id);
+    List<UserStatus> getUserStatusesByUserIdOrderByDateDesc(Long id);
     UserStatus getUserStatusByUserId(Long id);
 }
