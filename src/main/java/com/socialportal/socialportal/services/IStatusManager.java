@@ -6,7 +6,7 @@ import com.socialportal.socialportal.models.UserStatus;
 import java.util.List;
 
 public interface IStatusManager {
-    void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUserId);
+    void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser);
 
     List<UserStatus> getStatuses(Long id);
 

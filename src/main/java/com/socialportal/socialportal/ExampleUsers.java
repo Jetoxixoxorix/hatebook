@@ -30,7 +30,7 @@ public class ExampleUsers implements CommandLineRunner {
 
         UserStatus userStatus = new UserStatus("First status",  1L, new Date(), user);
         UserStatus userStatus1 = new UserStatus("Second status",  1L, new Date(), user1);
-        IStatusManager.addNewStatus(userStatus, 1L, user);
-        IStatusManager.addNewStatus(userStatus1, 1L, user1);
+        IStatusManager.addNewStatus(userStatus1, 1L, user);
+        IStatusManager.addNewStatus(userStatus, 1L, user1);
     }
 }

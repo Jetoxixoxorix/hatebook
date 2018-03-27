@@ -21,10 +21,10 @@ public class StatusManager implements IStatusManager {
     }
 
     @Override
-    public void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUserId) {
+    public void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser) {
         userStatus.setUserId(userProfileId);
         userStatus.setDate(new Date());
-        userStatus.setAddingUserId(addingUserId);
+        userStatus.setAddingUser(addingUser);
         userStatusRepository.save(userStatus);
     }
 

@@ -28,18 +28,15 @@ public class UserStatus {
     @NotNull
     private Date date;
 
-    /*@NotNull
-    private Long addingUserId;*/
-
     @NotNull
     @ManyToOne
     @JoinColumn
-    private User addingUserId;
+    private User addingUser;
 
-    public UserStatus(String content, Long userId, Date date, User addingUserId) {
+    public UserStatus(String content, Long userId, Date date, User addingUser) {
         this.content = content;
         this.userId = userId;
         this.date = date;
-        this.addingUserId = addingUserId;
+        this.addingUser = addingUser;
     }
 }
