@@ -47,7 +47,7 @@ public class UserManager implements IUserManager {
 
     @Override
     public List<User> findUsersByName(String name) {
-        return userRepository.findUserByFirstName(name);
+        return userRepository.findUserByFirstNameOrLastName(name, name);
     }
 
     //temporary
