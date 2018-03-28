@@ -5,9 +5,22 @@
 <nav class="navbar navbar-fixed-top" th:fragment="navbar">
     <div class="container">
         <ul class="nav navbar-nav navbar-left">
-            <li>
+            <!--<li>
                 <form th:action="@{'/status'}" method="get"></form>
                 <a href="#" th:href="@{/status}">Add status</a>
+            </li>-->
+<!--            <div id="search">
+                <form th:action="@{/search}" method="get">
+                    <li>
+                        <input class="form-control" type="text" th:field="*{username}">
+                    </li>
+                    <li>
+                        <button class="btn btn-default" id="find" type="submit">Find</button>
+                    </li>
+                </form>
+            </div>-->
+            <li>
+                <a href="#" th:href="@{/search}">Search</a>
             </li>
         </ul>
 
@@ -20,7 +33,7 @@
             </li>
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{'/userprofile'}" method="get" id="profile"></form>
-                <a href="#" sec:authentication="name" onclick="document.getElementById('profile').submit()" >Username</a>
+                <a href="#" sec:authentication="name" onclick="document.getElementById('profile').submit()">Username</a>
             </li>
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post" id="logout"></form>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <h1>Results:</h1>
+    <div th:object="${users}" th:each="user : ${users}">
+        <p th:text="${user.firstName} + ' ' + ${user.lastName}"></p>
+    </div>
+</div>
+</body>
+</html>

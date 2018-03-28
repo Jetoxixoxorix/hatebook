@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserManager implements IUserManager {
 
@@ -43,6 +45,10 @@ public class UserManager implements IUserManager {
         return findUserByEmail(user.getUsername()).getId();
     }
 
+    @Override
+    public List<User> findUsersByName(String name) {
+        return userRepository.findUserByFirstName(name);
+    }
 
     //temporary
     public Iterable<User> allUsers() {

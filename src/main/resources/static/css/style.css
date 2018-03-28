@@ -5,3 +5,8 @@
 #content {
     margin-top: 60px;
 }
+
+#search li{
+    display: inline-block;
+    margin-top: 8px;
+}

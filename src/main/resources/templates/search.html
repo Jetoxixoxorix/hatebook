@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <div id="search">
+        <form action="#" th:action="@{/search}" th:object="${search}" method="post">
+            <ul>
+                <li>
+                    <input id="searchName" class="form-control" type="text" th:field="*{firstName}"/>
+                </li>
+                <li>
+                    <button class="btn btn-default" id="find" type="submit">Find</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+</html>
