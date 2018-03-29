@@ -10,3 +10,8 @@
     display: inline-block;
     margin-top: 8px;
 }
+
+.status {
+    border: solid;
+    margin-bottom: 10px;
+}
