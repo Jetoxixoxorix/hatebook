@@ -16,7 +16,8 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
-            <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}" th:action="@{'/delete/' + ${status.statusId}}" method="get">
+            <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
+                  th:action="@{'/userprofile/' + ${userId} + '/delete/' + ${status.statusId}}" method="get">
                 <button class="btn btn-default" type="submit">Delete</button>
             </form>
         </div>

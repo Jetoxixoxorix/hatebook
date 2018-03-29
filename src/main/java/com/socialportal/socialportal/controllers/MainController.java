@@ -71,10 +71,10 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteStatus(Model model,@PathVariable("id") Long id){
+    @GetMapping("/userprofile/{userid}/delete/{id}")
+    public String deleteStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId){
         statusManager.deleteStatus(id);
-        return getUserProfile(userManager.getUserId(), model);
+        return getUserProfile(userId, model);
     }
 
     //temporary
