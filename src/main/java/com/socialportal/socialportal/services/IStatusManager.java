@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IStatusManager {
     void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser);
-
+    void deleteStatus(Long id);
     List<UserStatus> getStatuses(Long id);
 
     //temporary

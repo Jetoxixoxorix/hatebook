@@ -15,7 +15,9 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
-            <br>
+            <form th:action="@{'/delete/' + ${status.statusId}}" method="get">
+                <button class="btn btn-default" type="submit">Delete</button>
+            </form>
         </div>
     </div>
     <div class="nonExistingUser" th:if="${nonExistingUser}">

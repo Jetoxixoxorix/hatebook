@@ -29,6 +29,11 @@ public class StatusManager implements IStatusManager {
     }
 
     @Override
+    public void deleteStatus(Long id) {
+        userStatusRepository.delete(userStatusRepository.getUserStatusByStatusId(id));
+    }
+
+    @Override
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);
     }
