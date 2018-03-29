@@ -1,9 +1,11 @@
 package com.socialportal.socialportal.controllers;
 
+import com.socialportal.socialportal.errors.HasPrivilegeException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
+import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +19,13 @@ public class MainController {
 
     private IUserManager userManager;
     private IStatusManager statusManager;
+    private IUserValidator userValidator;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager){
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator){
         this.userManager = userManager;
         this.statusManager = statusManager;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/")
@@ -73,6 +77,13 @@ public class MainController {
 
     @GetMapping("/userprofile/{userid}/delete/{id}")
     public String deleteStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId){
+        try {
+            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), userId);
+        }catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "index";
+        }
+
         statusManager.deleteStatus(id);
         return getUserProfile(userId, model);
     }

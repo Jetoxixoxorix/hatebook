@@ -4,7 +4,8 @@
 </head>
 <body>
 <nav th:replace="navbar :: navbar"></nav>
-
-
+<div id="content" class="container">
+    <h1 th:if="${privilege}" th:text="${privilege}"></h1>
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.socialportal.socialportal.validators;
 
 import com.socialportal.socialportal.errors.DifferentPasswordException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
+import com.socialportal.socialportal.errors.HasPrivilegeException;
 import com.socialportal.socialportal.models.User;
 
 public interface IUserValidator {
@@ -10,4 +11,6 @@ public interface IUserValidator {
     void checkEmail(User user) throws ExistingEmailException;
 
     void checkPassword(User user) throws DifferentPasswordException;
+
+    void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException;
 }

@@ -33,6 +33,11 @@ public class StatusManager implements IStatusManager {
         userStatusRepository.delete(userStatusRepository.getUserStatusByStatusId(id));
     }
 
+    public Long getAuthorOfStatus(Long id){
+        UserStatus userStatus = userStatusRepository.getUserStatusByStatusId(id);
+        return userStatus.getAddingUser().getId();
+    }
+
     @Override
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);

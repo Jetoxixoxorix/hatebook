@@ -2,10 +2,10 @@ package com.socialportal.socialportal.validators;
 
 
 import com.socialportal.socialportal.errors.DifferentPasswordException;
+import com.socialportal.socialportal.errors.HasPrivilegeException;
 import com.socialportal.socialportal.errors.ExistingEmailException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +32,10 @@ public class UserValidator implements IUserValidator {
     public void checkPassword(User user) throws DifferentPasswordException {
         if (!user.getConfirmPassword().equals(user.getPassword()))
             throw new DifferentPasswordException();
+    }
+
+    public void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException {
+        if(loggedUser != profileUser && loggedUser != statusUser)
+            throw new HasPrivilegeException();
     }
 }
