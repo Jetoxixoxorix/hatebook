@@ -39,6 +39,8 @@ public class MainController {
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("userId", id);
+        model.addAttribute("loggedUserId", userManager.getUserId());
+        model.addAttribute("userProfile", userManager.getById(id));
         if(userManager.getById(id) == null){
             model.addAttribute("nonExistingUser", "There is no such user.");
         }

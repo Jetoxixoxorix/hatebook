@@ -5,6 +5,7 @@
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
     <div class="existingUser" th:if="${nonExistingUser == null}">
+        <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
         <div class="add">
             <form th:action="@{'/userprofile/' + ${userId}}" th:object="${add}" method="post">
                 <textarea rows="4" cols="50" th:field="*{content}"></textarea>
@@ -15,7 +16,7 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
-            <form th:action="@{'/delete/' + ${status.statusId}}" method="get">
+            <form th:if="${loggedUserId} == ${status.userId}" th:action="@{'/delete/' + ${status.statusId}}" method="get">
                 <button class="btn btn-default" type="submit">Delete</button>
             </form>
         </div>
