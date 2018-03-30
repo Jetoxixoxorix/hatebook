@@ -15,3 +15,7 @@
     border: solid;
     margin-bottom: 10px;
 }
+
+.status .buttons form {
+    display: inline-block;
+}

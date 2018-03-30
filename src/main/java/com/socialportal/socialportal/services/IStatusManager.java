@@ -10,6 +10,9 @@ public interface IStatusManager {
     void deleteStatus(Long id);
     List<UserStatus> getStatuses(Long id);
     Long getAuthorOfStatus(Long id);
+    UserStatus getUserStatus(Long id);
+    void editUserStatus(UserStatus userStatus, long id, String content);
+
     //temporary
     Iterable<UserStatus> allStatus();
 }

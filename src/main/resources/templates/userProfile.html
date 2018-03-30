@@ -16,10 +16,16 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
-            <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
-                  th:action="@{'/userprofile/' + ${userId} + '/delete/' + ${status.statusId}}" method="get">
-                <button class="btn btn-default" type="submit">Delete</button>
-            </form>
+            <div class="buttons">
+                <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
+                      th:action="@{'/userprofile/' + ${userId} + '/delete/' + ${status.statusId}}" method="get">
+                    <button class="btn btn-default" type="submit">Delete</button>
+                </form>
+                <form th:if="${loggedUserId} == ${status.addingUser.id}"
+                      th:action="@{'/userprofile/' + ${userId} + '/edit/' + ${status.statusId}}" method="get">
+                    <button class="btn btn-default" type="submit">Edit</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="nonExistingUser" th:if="${nonExistingUser}">

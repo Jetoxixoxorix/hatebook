@@ -39,8 +39,19 @@ public class StatusManager implements IStatusManager {
     }
 
     @Override
+    public UserStatus getUserStatus(Long id) {
+        return userStatusRepository.getUserStatusByStatusId(id);
+    }
+
+    @Override
     public List<UserStatus> getStatuses(Long id){
         return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);
+    }
+
+    public void editUserStatus(UserStatus userStatus, long id, String content){
+        userStatus = getUserStatus(id);
+        userStatus.setContent(content);
+        userStatusRepository.save(userStatus);
     }
 
     //temporary

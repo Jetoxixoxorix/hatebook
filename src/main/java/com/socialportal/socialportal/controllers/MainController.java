@@ -88,6 +88,32 @@ public class MainController {
         return getUserProfile(userId, model);
     }
 
+    @GetMapping("/userprofile/{userid}/edit/{id}")
+    public String editStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId){
+/*        try {
+            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), userId);
+        }catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "index";
+        }*/
+
+        model.addAttribute("userStatus", statusManager.getUserStatus(id));
+        return "edit";
+    }
+
+    @PostMapping("/userprofile/{userid}/edit/{id}")
+    public String editStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId, String content){
+/*        try {
+            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), userId);
+        }catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "index";
+        }*/
+
+        statusManager.editUserStatus(statusManager.getUserStatus(id), id, content);
+        return getUserProfile(userId, model);
+    }
+
     //temporary
     @GetMapping("/users")
     public @ResponseBody

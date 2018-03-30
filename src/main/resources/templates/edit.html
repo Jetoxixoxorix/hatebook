@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head"></head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <div class="status">
+        <form th:action="@{'/userprofile/' + ${userStatus.userId} + '/edit/' + ${userStatus.statusId}}" th:object="${userStatus}" method="post">
+            <textarea th:text="*{content}" th:field="*{content}"></textarea>
+            <button class="btn btn-default" type="submit">Done</button>
+        </form>
+        <form th:action="@{'/userprofile/' + ${userStatus.userId}}" method="get">
+            <button class="btn btn-default" type="submit">Cancel</button>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>
