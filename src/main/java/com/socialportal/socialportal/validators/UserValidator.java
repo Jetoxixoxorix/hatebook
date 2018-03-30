@@ -38,4 +38,9 @@ public class UserValidator implements IUserValidator {
         if(loggedUser != profileUser && loggedUser != statusUser)
             throw new HasPrivilegeException();
     }
+
+    public void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException{
+        if(loggedUser != statusUser)
+            throw new HasPrivilegeException();
+    }
 }

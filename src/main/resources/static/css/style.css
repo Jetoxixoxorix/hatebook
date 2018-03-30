@@ -19,3 +19,12 @@
 .status .buttons form {
     display: inline-block;
 }
+
+.status form textarea{
+    display: block;
+}
+
+.status form {
+    display: inline-block;
+}
+
