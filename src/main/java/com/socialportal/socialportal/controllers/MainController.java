@@ -42,7 +42,6 @@ public class MainController {
     public String getUserProfile(@PathVariable("id") Long id, Model model){
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
-        model.addAttribute("userId", id);
         model.addAttribute("loggedUserId", userManager.getUserId());
         model.addAttribute("userProfile", userManager.getById(id));
         if(userManager.getById(id) == null){

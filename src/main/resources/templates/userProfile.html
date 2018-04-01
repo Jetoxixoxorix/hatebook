@@ -7,7 +7,7 @@
     <div class="existingUser" th:if="${nonExistingUser == null}">
         <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
         <div class="add">
-            <form th:action="@{'/userprofile/' + ${userId}}" th:object="${add}" method="post">
+            <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${add}" method="post">
                 <textarea rows="4" cols="50" th:field="*{content}"></textarea>
                 <button class="btn btn-default" id="add" type="submit">Add status</button>
             </form>
@@ -18,11 +18,11 @@
             <p th:text="${status.content}"></p>
             <div class="buttons">
                 <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
-                      th:action="@{'/userprofile/' + ${userId} + '/delete/' + ${status.statusId}}" method="get">
+                      th:action="@{'/userprofile/' + ${userProfile.id} + '/delete/' + ${status.statusId}}" method="get">
                     <button class="btn btn-default" type="submit">Delete</button>
                 </form>
                 <form th:if="${loggedUserId} == ${status.addingUser.id}"
-                      th:action="@{'/userprofile/' + ${userId} + '/edit/' + ${status.statusId}}" method="get">
+                      th:action="@{'/userprofile/' + ${userProfile.id} + '/edit/' + ${status.statusId}}" method="get">
                     <button class="btn btn-default" type="submit">Edit</button>
                 </form>
             </div>
