@@ -16,7 +16,7 @@ public class StatusManager implements IStatusManager {
     private UserStatusRepository userStatusRepository;
 
     @Autowired
-    public StatusManager(UserStatusRepository userStatusRepository){
+    public StatusManager(UserStatusRepository userStatusRepository) {
         this.userStatusRepository = userStatusRepository;
     }
 
@@ -33,7 +33,7 @@ public class StatusManager implements IStatusManager {
         userStatusRepository.delete(userStatusRepository.getUserStatusByStatusId(id));
     }
 
-    public Long getAuthorOfStatus(Long id){
+    public Long getAuthorOfStatus(Long id) {
         UserStatus userStatus = userStatusRepository.getUserStatusByStatusId(id);
         return userStatus.getAddingUser().getId();
     }
@@ -44,11 +44,11 @@ public class StatusManager implements IStatusManager {
     }
 
     @Override
-    public List<UserStatus> getStatuses(Long id){
+    public List<UserStatus> getStatuses(Long id) {
         return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);
     }
 
-    public void editUserStatus(UserStatus userStatus, long id, String content){
+    public void editUserStatus(UserStatus userStatus, long id, String content) {
         userStatus = getUserStatus(id);
         userStatus.setContent(content);
         userStatusRepository.save(userStatus);

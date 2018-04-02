@@ -8,7 +8,6 @@
     <table>
         <tr th:object="${users}" th:each="user : ${users}">
             <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-
             <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get">
                 <td>
                     <button class="btn btn-default">Profile</button>

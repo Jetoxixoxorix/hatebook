@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @Controller
 @RequestMapping
 public class MainController {
@@ -22,7 +21,7 @@ public class MainController {
     private IUserValidator userValidator;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator){
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.userValidator = userValidator;
@@ -34,36 +33,36 @@ public class MainController {
     }
 
     @GetMapping("/userprofile")
-    public String getYourProfile(Model model){
+    public String getYourProfile(Model model) {
         return getUserProfile(userManager.getUserId(), model);
     }
 
     @GetMapping("/userprofile/{id}")
-    public String getUserProfile(@PathVariable("id") Long id, Model model){
+    public String getUserProfile(@PathVariable("id") Long id, Model model) {
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("loggedUserId", userManager.getUserId());
         model.addAttribute("userProfile", userManager.getById(id));
-        if(userManager.getById(id) == null){
+        if (userManager.getById(id) == null) {
             model.addAttribute("nonExistingUser", "There is no such user.");
         }
         return "userProfile";
     }
 
     @PostMapping("/userprofile/{id}")
-    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model){
+    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model) {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 
     @GetMapping("/status")
-    public String addNewStatus(Model model){
+    public String addNewStatus(Model model) {
         model.addAttribute("add", new UserStatus());
         return "status";
     }
 
     @PostMapping("/status")
-    public String addNewStatus(@ModelAttribute("add") UserStatus userStatus){
+    public String addNewStatus(@ModelAttribute("add") UserStatus userStatus) {
         statusManager.addNewStatus(userStatus, userManager.getUserId(), userManager.getById(userManager.getUserId()));
         return "status";
     }
@@ -75,10 +74,10 @@ public class MainController {
     }
 
     @GetMapping("/userprofile/{userid}/delete/{id}")
-    public String deleteStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId){
+    public String deleteStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
             userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), userId);
-        }catch (HasPrivilegeException e) {
+        } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "index";
         }
@@ -88,10 +87,10 @@ public class MainController {
     }
 
     @GetMapping("/userprofile/{userid}/edit/{id}")
-    public String editStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId){
+    public String editStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
             userValidator.editPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id));
-        }catch (HasPrivilegeException e) {
+        } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "index";
         }
@@ -101,7 +100,7 @@ public class MainController {
     }
 
     @PostMapping("/userprofile/{userid}/edit/{id}")
-    public String editStatus(Model model,@PathVariable("id") Long id, @PathVariable("userid") Long userId, String content){
+    public String editStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId, String content) {
         statusManager.editUserStatus(statusManager.getUserStatus(id), id, content);
         return getUserProfile(userId, model);
     }
@@ -115,7 +114,8 @@ public class MainController {
 
     //temporary
     @GetMapping("/statuses")
-    public @ResponseBody Iterable<UserStatus> allStatuses(){
+    public @ResponseBody
+    Iterable<UserStatus> allStatuses() {
         return statusManager.allStatus();
     }
 }
