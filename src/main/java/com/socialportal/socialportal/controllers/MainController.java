@@ -54,19 +54,7 @@ public class MainController {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
-
-    @GetMapping("/status")
-    public String addNewStatus(Model model) {
-        model.addAttribute("add", new UserStatus());
-        return "status";
-    }
-
-    @PostMapping("/status")
-    public String addNewStatus(@ModelAttribute("add") UserStatus userStatus) {
-        statusManager.addNewStatus(userStatus, userManager.getUserId(), userManager.getById(userManager.getUserId()));
-        return "status";
-    }
-
+    
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("loginData", new User());
