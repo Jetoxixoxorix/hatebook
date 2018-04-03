@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserManager implements IUserManager {
@@ -22,7 +22,7 @@ public class UserManager implements IUserManager {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserManager(UserRepository userRepository){
+    public UserManager(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -36,7 +36,7 @@ public class UserManager implements IUserManager {
         return userRepository.findUserByUsername(username);
     }
 
-    public User getById(Long id){
+    public User getById(Long id) {
         return userRepository.findUserById(id);
     }
 
@@ -47,7 +47,24 @@ public class UserManager implements IUserManager {
 
     @Override
     public List<User> findUsersByName(String name) {
-        return userRepository.findUserByFirstNameOrLastName(name, name);
+        String[] words = name.split(" ");
+        if (words.length == 1)
+            return userRepository.findUserByFirstNameOrLastName(name, name);
+
+        else if (words.length == 2) {
+            List<User> users = userRepository.findUserByFirstNameOrLastName(words[0], words[1]);
+            List<User> users2 = userRepository.findUserByFirstNameOrLastName(words[1], words[0]);
+
+            Set<User> usersSet = new LinkedHashSet<>(users);
+            usersSet.addAll(users2);
+
+            List<User> allUsers = new LinkedList<>(usersSet);
+            
+            return allUsers;
+        }
+        // for more than 2 words, later
+        else
+            return null;
     }
 
     //temporary

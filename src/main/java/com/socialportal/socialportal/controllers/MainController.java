@@ -54,7 +54,7 @@ public class MainController {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
-    
+
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("loginData", new User());
