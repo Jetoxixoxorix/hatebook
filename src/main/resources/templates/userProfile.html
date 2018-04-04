@@ -16,6 +16,7 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
+            <textarea rows="1" cols="40" placeholder="Add comment"></textarea>
             <div class="buttons">
                 <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
                       th:action="@{'/userprofile/' + ${userProfile.id} + '/delete/' + ${status.statusId}}" method="get">

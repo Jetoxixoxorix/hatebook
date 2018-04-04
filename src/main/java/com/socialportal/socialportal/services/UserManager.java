@@ -59,7 +59,7 @@ public class UserManager implements IUserManager {
             usersSet.addAll(users2);
 
             List<User> allUsers = new LinkedList<>(usersSet);
-            
+
             return allUsers;
         }
         // for more than 2 words, later
