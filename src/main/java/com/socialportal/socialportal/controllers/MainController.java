@@ -2,7 +2,9 @@ package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.errors.HasPrivilegeException;
 import com.socialportal.socialportal.models.User;
+import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
+import com.socialportal.socialportal.services.CommentManager;
 import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
@@ -19,12 +21,14 @@ public class MainController {
     private IUserManager userManager;
     private IStatusManager statusManager;
     private IUserValidator userValidator;
+    private CommentManager commentManager;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator) {
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, CommentManager commentManager) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.userValidator = userValidator;
+        this.commentManager = commentManager;
     }
 
     @GetMapping("/")
@@ -43,6 +47,10 @@ public class MainController {
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("loggedUserId", userManager.getUserId());
         model.addAttribute("userProfile", userManager.getById(id));
+
+        model.addAttribute("addComment", new UserComment());
+        model.addAttribute("comments", commentManager.getUserComments(id));
+
         if (userManager.getById(id) == null) {
             model.addAttribute("nonExistingUser", "There is no such user.");
         }
@@ -50,8 +58,11 @@ public class MainController {
     }
 
     @PostMapping("/userprofile/{id}")
-    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model) {
+    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model, @ModelAttribute("addComment") UserComment userComment) {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
+
+        //userStatus tutaj nie pasuje
+        commentManager.addNewComment(userComment, id, userStatus);
         return getUserProfile(id, model);
     }
 
@@ -106,4 +117,8 @@ public class MainController {
     Iterable<UserStatus> allStatuses() {
         return statusManager.allStatus();
     }
+
+    //temporary
+    @GetMapping("/comments")
+    public @ResponseBody Iterable<UserComment> allComments() {return commentManager.allComments();}
 }
