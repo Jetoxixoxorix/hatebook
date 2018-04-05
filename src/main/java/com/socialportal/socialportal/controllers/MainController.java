@@ -58,11 +58,17 @@ public class MainController {
     }
 
     @PostMapping("/userprofile/{id}")
-    public String getUserProfile(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model, @ModelAttribute("addComment") UserComment userComment) {
+    public String addStatus(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model) {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
 
         //userStatus tutaj nie pasuje
-        commentManager.addNewComment(userComment, id, userStatus);
+        //commentManager.addNewComment(userComment, id, userStatus);
+        return getUserProfile(id, model);
+    }
+
+    @PostMapping("/addcomment/{id}/{statusId}")
+    public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
+        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId));
         return getUserProfile(id, model);
     }
 
@@ -120,5 +126,8 @@ public class MainController {
 
     //temporary
     @GetMapping("/comments")
-    public @ResponseBody Iterable<UserComment> allComments() {return commentManager.allComments();}
+    public @ResponseBody
+    Iterable<UserComment> allComments() {
+        return commentManager.allComments();
+    }
 }

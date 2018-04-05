@@ -16,17 +16,6 @@
             <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
             <p th:text="${status.date}"></p>
             <p th:text="${status.content}"></p>
-            <div class="comment">
-                <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${addComment}" method="post">
-                    <textarea rows="1" cols="40" placeholder="Add comment" th:field="*{content}"></textarea>
-                    <button class="btn btn-default" id="addComment" type="submit">Add comment</button>
-                </form>
-                <div class="comments" th:each="comment : ${comments}">
-                    <p th:text="${comment.userStatus.addingUser.firstName} + ' ' + ${comment.userStatus.addingUser.lastName}"></p>
-                    <p th:text="${comment.date}"></p>
-                    <p th:text="${comment.content}"></p>
-                </div>
-            </div>
 
             <div class="buttons">
                 <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
@@ -37,6 +26,19 @@
                       th:action="@{'/userprofile/' + ${userProfile.id} + '/edit/' + ${status.statusId}}" method="get">
                     <button class="btn btn-default" type="submit">Edit</button>
                 </form>
+            </div>
+
+            <div class="comment">
+                <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}" th:object="${addComment}" method="post">
+                    <textarea rows="1" cols="40" placeholder="Add comment" th:field="*{content}"></textarea>
+                    <button class="btn btn-default" id="addComment" type="submit">Add comment</button>
+                </form>
+                <!-- here, write this to show only comments for status -->
+                <div class="comments" th:each="comment : ${comments}" >
+                    <p th:text="${comment.userStatus.addingUser.firstName} + ' ' + ${comment.userStatus.addingUser.lastName}"></p>
+                    <p th:text="${comment.date}"></p>
+                    <p th:text="${comment.content}"></p>
+                </div>
             </div>
         </div>
     </div>
