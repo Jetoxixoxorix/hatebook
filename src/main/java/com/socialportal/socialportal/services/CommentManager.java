@@ -1,5 +1,6 @@
 package com.socialportal.socialportal.services;
 
+import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.repositories.UserCommentRepository;
@@ -23,11 +24,12 @@ public class CommentManager {
         return userCommentRepository.getUserCommentsByUserId(id);
     }
 
-    public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus) {
+    public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user) {
 
         userComment.setUserId(userProfileId);
         userComment.setDate(new Date());
         userComment.setUserStatus(userStatus);
+        userComment.setAddingUser(user);
         userCommentRepository.save(userComment);
 
     }

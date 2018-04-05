@@ -29,4 +29,9 @@ public class UserComment {
     @ManyToOne
     @JoinColumn
     private UserStatus userStatus;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn
+    private User addingUser;
 }

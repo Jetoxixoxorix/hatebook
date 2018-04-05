@@ -68,7 +68,7 @@ public class MainController {
 
     @PostMapping("/addcomment/{id}/{statusId}")
     public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
-        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId));
+        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 
