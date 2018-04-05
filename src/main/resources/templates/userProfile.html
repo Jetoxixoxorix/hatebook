@@ -29,12 +29,14 @@
             </div>
 
             <div class="comment">
-                <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}" th:object="${addComment}" method="post">
+                <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}"
+                      th:object="${addComment}" method="post">
                     <textarea rows="1" cols="40" placeholder="Add comment" th:field="*{content}"></textarea>
                     <button class="btn btn-default" id="addComment" type="submit">Add comment</button>
                 </form>
-                <!-- here, write this to show only comments for status -->
-                <div class="comments" th:each="comment : ${comments}" >
+
+                <div class="comments" th:each="comment : ${comments}"
+                     th:if="${comment.userStatus.statusId == status.statusId}">
                     <p th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}"></p>
                     <p th:text="${comment.date}"></p>
                     <p th:text="${comment.content}"></p>
