@@ -11,6 +11,7 @@ public interface ICommentManager {
     void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user);
     void deleteComment(Long id);
     Long getAuthorOfComment(Long id);
+    UserComment getUserComment(Long id);
 
     //temporary
     Iterable<UserComment> allComments();

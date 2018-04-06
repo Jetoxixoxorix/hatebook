@@ -42,6 +42,12 @@ public class CommentManager implements ICommentManager {
         return userComment.getAddingUser().getId();
     }
 
+    @Override
+    public UserComment getUserComment(Long id) {
+        return userCommentRepository.getUserCommentByCommentId(id);
+    }
+
+
     //temporary
     public Iterable<UserComment> allComments() {
         return userCommentRepository.findAll();

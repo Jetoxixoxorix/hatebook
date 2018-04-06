@@ -30,15 +30,15 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <form th:if="${loggedUserId} == ${status.addingUser.id}"
-                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/edit/' + ${status.statusId}}"
+                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/editstatus/' + ${status.statusId}}"
                                                   method="get">
                                                 <button class="btn btn-default" type="submit">Edit</button>
                                             </form>
                                         </li>
                                         <li>
                                             <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
-                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/delete/' + ${status.statusId}}"
-                                                  method="get">
+                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/deletestatus/' + ${status.statusId}}"
+                                                  method="post">
                                                 <button class="btn btn-default" type="submit">Delete</button>
                                             </form>
                                         </li>
@@ -66,7 +66,7 @@
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
-                                                          th:action="@{'/deletecomment/' + ${userProfile.id} + '/' + ${comment.commentId}}"
+                                                          th:action="@{'/userprofile/' + ${userProfile.id} + '/deletecomment/' + ${comment.commentId}}"
                                                           method="post">
                                                         <button class="btn btn-default" type="submit">Delete</button>
                                                     </form>
@@ -77,8 +77,7 @@
                                 </div>
                             </div>
 
-
-                            <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}"
+                            <form th:action="@{'/userprofile/' + ${userProfile.id} + '/addcomment/' + ${status.statusId}}"
                                   th:object="${addComment}" method="post">
                         <textarea id="addComment" rows="1" cols="40" placeholder="Add comment"
                                   th:field="*{content}"></textarea>

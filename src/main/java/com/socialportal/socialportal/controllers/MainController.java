@@ -71,10 +71,10 @@ public class MainController {
         return getUserProfile(id, model);
     }
 
-    @GetMapping("/userprofile/{userid}/delete/{id}")
+    @PostMapping("/userprofile/{userid}/deletestatus/{id}")
     public String deleteStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), userId);
+            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "index";
@@ -84,8 +84,8 @@ public class MainController {
         return getUserProfile(userId, model);
     }
 
-    @GetMapping("/userprofile/{userid}/edit/{id}")
-    public String editStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
+    @GetMapping("/userprofile/{userid}/editstatus/{id}")
+    public String editStatus(Model model, @PathVariable("id") Long id) {
         try {
             userValidator.editPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id));
         } catch (HasPrivilegeException e) {
@@ -106,16 +106,16 @@ public class MainController {
 
     //comments
 
-    @PostMapping("/addcomment/{id}/{statusId}")
+    @PostMapping("/userprofile/{id}/addcomment/{statusId}")
     public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
         commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 
-    @PostMapping("/deletecomment/{id}/{commentId}")
+    @PostMapping("/userprofile/{id}/deletecomment/{commentId}")
     public String deleteComment(@PathVariable("id") Long id, @PathVariable("commentId") Long commentId, Model model) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId), id);
+            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId), commentManager.getUserComment(commentId).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "index";
