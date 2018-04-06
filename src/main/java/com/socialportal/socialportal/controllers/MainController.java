@@ -112,10 +112,16 @@ public class MainController {
         return getUserProfile(id, model);
     }
 
-    @PostMapping("/deletecomment/{id}/{statusId}")
-    public String deleteComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, Model model) {
-        //validation later
-        commentManager.deleteComment(statusId);
+    @PostMapping("/deletecomment/{id}/{commentId}")
+    public String deleteComment(@PathVariable("id") Long id, @PathVariable("commentId") Long commentId, Model model) {
+        try {
+            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId), id);
+        } catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "index";
+        }
+
+        commentManager.deleteComment(commentId);
         return getUserProfile(id, model);
     }
 

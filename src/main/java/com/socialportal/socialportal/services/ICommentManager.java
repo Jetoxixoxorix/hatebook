@@ -10,6 +10,7 @@ public interface ICommentManager {
     List<UserComment> getUserComments(Long id);
     void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user);
     void deleteComment(Long id);
+    Long getAuthorOfComment(Long id);
 
     //temporary
     Iterable<UserComment> allComments();

@@ -33,7 +33,13 @@ public class CommentManager implements ICommentManager {
     }
 
     public void deleteComment(Long id){
-        userCommentRepository.delete(userCommentRepository.getUserCommentsByCommentId(id));
+        userCommentRepository.delete(userCommentRepository.getUserCommentByCommentId(id));
+    }
+
+    @Override
+    public Long getAuthorOfComment(Long id) {
+        UserComment userComment = userCommentRepository.getUserCommentByCommentId(id);
+        return userComment.getAddingUser().getId();
     }
 
     //temporary
