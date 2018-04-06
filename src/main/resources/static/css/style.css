@@ -6,7 +6,7 @@
     margin-top: 60px;
 }
 
-#search li{
+#search li {
     display: inline-block;
     margin-top: 8px;
 }
@@ -16,7 +16,7 @@
     margin-bottom: 10px;
 }
 
-.status form textarea{
+.status form textarea {
     display: block;
 }
 
@@ -26,4 +26,26 @@
 
 .menu {
     margin-right: 14px;
+}
+
+textarea {
+    resize: none;
+}
+
+.statusContent {
+    margin-left: 5px;
+}
+
+.date {
+    font-size: 8px;
+    color: grey;
+
+}
+
+.name{
+
+}
+
+.comments{
+    margin-left: 10px;
 }
