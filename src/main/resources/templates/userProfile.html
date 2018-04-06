@@ -55,7 +55,13 @@
                                 <p th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}"></p>
                                 <p class="date" th:text="${comment.date}"></p>
                                 <p th:text="${comment.content}"></p>
+                                <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
+                                      th:action="@{'/deletecomment/' + ${userProfile.id} + '/' + ${comment.commentId}}"
+                                      method="post">
+                                    <button class="btn btn-default" type="submit">Delete</button>
+                                </form>
                             </div>
+
 
                             <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}"
                                   th:object="${addComment}" method="post">

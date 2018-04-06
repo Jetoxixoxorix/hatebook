@@ -25,13 +25,15 @@ public class CommentManager {
     }
 
     public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user) {
-
         userComment.setUserId(userProfileId);
         userComment.setDate(new Date());
         userComment.setUserStatus(userStatus);
         userComment.setAddingUser(user);
         userCommentRepository.save(userComment);
+    }
 
+    public void deleteComment(Long id){
+        userCommentRepository.delete(userCommentRepository.getUserCommentsByCommentId(id));
     }
 
     //temporary

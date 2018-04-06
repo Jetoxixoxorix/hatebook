@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserCommentRepository extends CrudRepository<UserComment, Long> {
     List<UserComment> getUserCommentsByUserId(Long id);
+    UserComment getUserCommentsByCommentId(Long id);
 }
