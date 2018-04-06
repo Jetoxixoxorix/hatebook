@@ -4,7 +4,7 @@ import com.socialportal.socialportal.errors.HasPrivilegeException;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
-import com.socialportal.socialportal.services.CommentManager;
+import com.socialportal.socialportal.services.ICommentManager;
 import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
@@ -21,10 +21,10 @@ public class MainController {
     private IUserManager userManager;
     private IStatusManager statusManager;
     private IUserValidator userValidator;
-    private CommentManager commentManager;
+    private ICommentManager commentManager;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, CommentManager commentManager) {
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, ICommentManager commentManager) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.userValidator = userValidator;
@@ -104,8 +104,6 @@ public class MainController {
     }
 
 
-
-
     //comments
 
     @PostMapping("/addcomment/{id}/{statusId}")
@@ -115,7 +113,7 @@ public class MainController {
     }
 
     @PostMapping("/deletecomment/{id}/{statusId}")
-    public String deleteComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, Model model){
+    public String deleteComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, Model model) {
         //validation later
         commentManager.deleteComment(statusId);
         return getUserProfile(id, model);

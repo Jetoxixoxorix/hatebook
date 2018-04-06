@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class CommentManager {
+public class CommentManager implements ICommentManager {
 
     private UserCommentRepository userCommentRepository;
 
