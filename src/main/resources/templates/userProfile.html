@@ -5,41 +5,63 @@
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
     <div class="existingUser" th:if="${nonExistingUser == null}">
-        <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
-        <div class="add">
-            <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${add}" method="post">
-                <textarea rows="4" cols="50" th:field="*{content}"></textarea>
-                <button class="btn btn-default" id="add" type="submit">Add status</button>
-            </form>
-        </div>
-        <div class="status" th:each="status : ${statuses}">
-            <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
-            <p th:text="${status.date}"></p>
-            <p th:text="${status.content}"></p>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
+                <div class="add">
+                    <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${add}" method="post">
+                        <textarea id="addStatus" rows="4" cols="50" th:field="*{content}"></textarea>
+                        <button class="btn btn-default" id="add" type="submit">Add status</button>
+                    </form>
+                </div>
+                <div class="status" th:each="status : ${statuses}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
+                        </div>
+                        <div class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                        data-toggle="dropdown"><span
+                                        class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <form th:if="${loggedUserId} == ${status.addingUser.id}"
+                                              th:action="@{'/userprofile/' + ${userProfile.id} + '/edit/' + ${status.statusId}}"
+                                              method="get">
+                                            <button class="btn btn-default" type="submit">Edit</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
+                                              th:action="@{'/userprofile/' + ${userProfile.id} + '/delete/' + ${status.statusId}}"
+                                              method="get">
+                                            <button class="btn btn-default" type="submit">Delete</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <p th:text="${status.date}"></p>
+                    <p th:text="${status.content}"></p>
 
-            <div class="buttons">
-                <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
-                      th:action="@{'/userprofile/' + ${userProfile.id} + '/delete/' + ${status.statusId}}" method="get">
-                    <button class="btn btn-default" type="submit">Delete</button>
-                </form>
-                <form th:if="${loggedUserId} == ${status.addingUser.id}"
-                      th:action="@{'/userprofile/' + ${userProfile.id} + '/edit/' + ${status.statusId}}" method="get">
-                    <button class="btn btn-default" type="submit">Edit</button>
-                </form>
-            </div>
+                    <div class="comment">
+                        <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}"
+                              th:object="${addComment}" method="post">
+                        <textarea id="addComment" rows="1" cols="40" placeholder="Add comment"
+                                  th:field="*{content}"></textarea>
+                            <button class="btn btn-default" id="addCommentBtn" type="submit">Add comment</button>
+                        </form>
 
-            <div class="comment">
-                <form th:action="@{'/addcomment/' + ${userProfile.id} + '/' + ${status.statusId}}"
-                      th:object="${addComment}" method="post">
-                    <textarea rows="1" cols="40" placeholder="Add comment" th:field="*{content}"></textarea>
-                    <button class="btn btn-default" id="addComment" type="submit">Add comment</button>
-                </form>
-
-                <div class="comments" th:each="comment : ${comments}"
-                     th:if="${comment.userStatus.statusId == status.statusId}">
-                    <p th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}"></p>
-                    <p th:text="${comment.date}"></p>
-                    <p th:text="${comment.content}"></p>
+                        <div class="comments" th:each="comment : ${comments}"
+                             th:if="${comment.userStatus.statusId == status.statusId}">
+                            <p th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}"></p>
+                            <p th:text="${comment.date}"></p>
+                            <p th:text="${comment.content}"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

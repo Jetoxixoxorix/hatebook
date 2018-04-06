@@ -16,10 +16,6 @@
     margin-bottom: 10px;
 }
 
-.status .buttons form {
-    display: inline-block;
-}
-
 .status form textarea{
     display: block;
 }
@@ -28,3 +24,6 @@
     display: inline-block;
 }
 
+.menu {
+    margin-right: 14px;
+}

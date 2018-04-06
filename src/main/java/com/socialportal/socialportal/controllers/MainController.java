@@ -31,6 +31,12 @@ public class MainController {
         this.commentManager = commentManager;
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("loginData", new User());
+        return "login";
+    }
+
     @GetMapping("/")
     public String index() {
         return "index";
@@ -57,25 +63,12 @@ public class MainController {
         return "userProfile";
     }
 
+    //statuses
+
     @PostMapping("/userprofile/{id}")
     public String addStatus(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model) {
         statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
-
-        //userStatus tutaj nie pasuje
-        //commentManager.addNewComment(userComment, id, userStatus);
         return getUserProfile(id, model);
-    }
-
-    @PostMapping("/addcomment/{id}/{statusId}")
-    public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
-        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getById(userManager.getUserId()));
-        return getUserProfile(id, model);
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("loginData", new User());
-        return "login";
     }
 
     @GetMapping("/userprofile/{userid}/delete/{id}")
@@ -109,6 +102,16 @@ public class MainController {
         statusManager.editUserStatus(statusManager.getUserStatus(id), id, content);
         return getUserProfile(userId, model);
     }
+
+
+    //comments
+
+    @PostMapping("/addcomment/{id}/{statusId}")
+    public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
+        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getById(userManager.getUserId()));
+        return getUserProfile(id, model);
+    }
+
 
     //temporary
     @GetMapping("/users")
