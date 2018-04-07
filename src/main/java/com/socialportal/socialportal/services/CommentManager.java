@@ -37,6 +37,13 @@ public class CommentManager implements ICommentManager {
     }
 
     @Override
+    public void editComment(Long id, String content) {
+        UserComment userComment = getUserComment(id);
+        userComment.setContent(content);
+        userCommentRepository.save(userComment);
+    }
+
+    @Override
     public Long getAuthorOfComment(Long id) {
         UserComment userComment = userCommentRepository.getUserCommentByCommentId(id);
         return userComment.getAddingUser().getId();
@@ -46,7 +53,6 @@ public class CommentManager implements ICommentManager {
     public UserComment getUserComment(Long id) {
         return userCommentRepository.getUserCommentByCommentId(id);
     }
-
 
     //temporary
     public Iterable<UserComment> allComments() {

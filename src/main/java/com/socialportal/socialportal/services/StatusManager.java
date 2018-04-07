@@ -48,8 +48,8 @@ public class StatusManager implements IStatusManager {
         return userStatusRepository.getUserStatusesByUserIdOrderByDateDesc(id);
     }
 
-    public void editUserStatus(UserStatus userStatus, long id, String content) {
-        userStatus = getUserStatus(id);
+    public void editUserStatus(Long id, String content) {
+        UserStatus userStatus = getUserStatus(id);
         userStatus.setContent(content);
         userStatusRepository.save(userStatus);
     }

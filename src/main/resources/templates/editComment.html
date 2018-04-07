@@ -9,17 +9,16 @@
         <div class="col-md-6">
             <div class="comment">
                 <div class="commentContent">
-
-<!--                    th:action="@{'/userprofile/' + ${userStatus.userId} + '/editcomment/' + ${userStatus.statusId}}"
-                    th:object="${userComment}" method="post"-->
-                    <form th:object="${editComment}">
+                    <form th:object="${editComment}"
+                          th:action="@{'/userprofile/' + ${editComment.userId} + '/editcomment/' + ${editComment.commentId}}"
+                          method="post">
                         <p th:text="*{date}"></p>
                         <textarea id="editComment" th:text="*{content}" th:field="*{content}"></textarea>
                         <button class="btn btn-default" type="submit">Done</button>
                     </form>
-<!--                    <form th:action="@{'/userprofile/' + ${userStatus.userId}}" method="get">
+                    <form th:action="@{'/userprofile/' + ${editComment.userId}}" method="get">
                         <button class="btn btn-default" type="submit">Cancel</button>
-                    </form>-->
+                    </form>
                 </div>
             </div>
         </div>

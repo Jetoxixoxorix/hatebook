@@ -8,11 +8,15 @@ import java.util.List;
 
 public interface ICommentManager {
     List<UserComment> getUserComments(Long id);
-    void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user);
-    void deleteComment(Long id);
     Long getAuthorOfComment(Long id);
     UserComment getUserComment(Long id);
 
+    void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user);
+    void deleteComment(Long id);
+    void editComment(Long id, String content);
+
     //temporary
     Iterable<UserComment> allComments();
+
+
 }

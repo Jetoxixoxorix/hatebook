@@ -11,7 +11,7 @@ public interface IStatusManager {
     List<UserStatus> getStatuses(Long id);
     Long getAuthorOfStatus(Long id);
     UserStatus getUserStatus(Long id);
-    void editUserStatus(UserStatus userStatus, long id, String content);
+    void editUserStatus(Long id, String content);
 
     //temporary
     Iterable<UserStatus> allStatus();

@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="status">
                 <div class="statusContent">
-                    <form th:action="@{'/userprofile/' + ${userStatus.userId} + '/edit/' + ${userStatus.statusId}}"
+                    <form th:action="@{'/userprofile/' + ${userStatus.userId} + '/editstatus/' + ${userStatus.statusId}}"
                           th:object="${userStatus}" method="post">
                         <p th:text="*{date}"></p>
                         <textarea id="editStatus" th:text="*{content}" th:field="*{content}"></textarea>

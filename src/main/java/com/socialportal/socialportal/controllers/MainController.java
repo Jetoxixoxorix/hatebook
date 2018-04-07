@@ -97,9 +97,9 @@ public class MainController {
         return "edit";
     }
 
-    @PostMapping("/userprofile/{userid}/edit/{id}")
+    @PostMapping("/userprofile/{userid}/editstatus/{id}")
     public String editStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId, String content) {
-        statusManager.editUserStatus(statusManager.getUserStatus(id), id, content);
+        statusManager.editUserStatus(id, content);
         return getUserProfile(userId, model);
     }
 
@@ -126,11 +126,16 @@ public class MainController {
     }
 
     @GetMapping("/userprofile/{userid}/editcomment/{id}")
-    public String editComment(Model model, @PathVariable("id") Long commentId){
+    public String editComment(Model model, @PathVariable("id") Long commentId) {
         model.addAttribute("editComment", commentManager.getUserComment(commentId));
         return "editComment";
     }
 
+    @PostMapping("/userprofile/{userid}/editcomment/{id}")
+    public String editComment(Model model, @PathVariable("userid") Long userid, String content, @PathVariable("id") Long commentId) {
+        commentManager.editComment(commentId, content);
+        return getUserProfile(userid, model);
+    }
 
     //temporary
     @GetMapping("/users")
