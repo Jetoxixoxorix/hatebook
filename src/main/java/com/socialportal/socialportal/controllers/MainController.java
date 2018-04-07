@@ -127,6 +127,13 @@ public class MainController {
 
     @GetMapping("/userprofile/{userid}/editcomment/{id}")
     public String editComment(Model model, @PathVariable("id") Long commentId) {
+        try {
+            userValidator.editPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId));
+        } catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "index";
+        }
+        
         model.addAttribute("editComment", commentManager.getUserComment(commentId));
         return "editComment";
     }
