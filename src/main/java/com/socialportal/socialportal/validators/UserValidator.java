@@ -1,22 +1,26 @@
 package com.socialportal.socialportal.validators;
 
 
-import com.socialportal.socialportal.errors.DifferentPasswordException;
-import com.socialportal.socialportal.errors.HasPrivilegeException;
-import com.socialportal.socialportal.errors.ExistingEmailException;
+import com.socialportal.socialportal.errors.*;
+import com.socialportal.socialportal.models.Friend;
 import com.socialportal.socialportal.models.User;
+import com.socialportal.socialportal.services.FriendManager;
 import com.socialportal.socialportal.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserValidator implements IUserValidator {
 
-    IUserManager userManager;
+    private IUserManager userManager;
+    private FriendManager friendManager;
 
     @Autowired
-    public UserValidator(IUserManager userManager){
+    public UserValidator(IUserManager userManager, FriendManager friendManager) {
         this.userManager = userManager;
+        this.friendManager = friendManager;
     }
 
     public void validateUser(User user) throws DifferentPasswordException, ExistingEmailException {
@@ -35,12 +39,31 @@ public class UserValidator implements IUserValidator {
     }
 
     public void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException {
-        if(loggedUser != profileUser && loggedUser != statusUser)
+        if (loggedUser != profileUser && loggedUser != statusUser)
             throw new HasPrivilegeException();
     }
 
-    public void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException{
-        if(loggedUser != statusUser)
+    public void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException {
+        if (loggedUser != statusUser)
             throw new HasPrivilegeException();
     }
+
+    public void checkAddingFriend(Long loggedUser, Long addedFriend) throws SameUserException, HasThisFriendException {
+        checkSameUser(loggedUser, addedFriend);
+        checkIsFriend(loggedUser, addedFriend);
+    }
+
+    public void checkIsFriend(Long loggedUserId, Long addedFriend) throws HasThisFriendException {
+        List<Friend> friendsList = friendManager.getFriendsList(loggedUserId);
+        for (Friend f : friendsList) {
+            if (f.getFriend().getId() == addedFriend)
+                throw new HasThisFriendException();
+        }
+    }
+
+    public void checkSameUser(Long loggedUser, Long addedFriend) throws SameUserException {
+        if (loggedUser == addedFriend)
+            throw new SameUserException();
+    }
 }
+

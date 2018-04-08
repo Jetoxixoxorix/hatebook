@@ -1,8 +1,6 @@
 package com.socialportal.socialportal.validators;
 
-import com.socialportal.socialportal.errors.DifferentPasswordException;
-import com.socialportal.socialportal.errors.ExistingEmailException;
-import com.socialportal.socialportal.errors.HasPrivilegeException;
+import com.socialportal.socialportal.errors.*;
 import com.socialportal.socialportal.models.User;
 
 public interface IUserValidator {
@@ -15,4 +13,6 @@ public interface IUserValidator {
     void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException;
 
     void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException;
+
+    void checkAddingFriend(Long loggedUser, Long addedFriend) throws SameUserException, HasThisFriendException;
 }
