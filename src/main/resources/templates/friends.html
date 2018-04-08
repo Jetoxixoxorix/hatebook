@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: head"></head>
+<head th:replace="head :: head">
+</head>
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <h1>Results:</h1>
+    <h1>Friends:</h1>
     <table>
-        <tr th:object="${users}" th:each="user : ${users}">
-            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get">
+        <tr th:object="${friends}" th:each="friend : ${friends}">
+            <td th:text="${friend.friend.firstName} + ' ' + ${friend.friend.lastName}"></td>
+            <form action="#" th:action="@{'/userprofile/' + ${friend.friend.id}}" method="get">
                 <td>
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:action="@{'/addfriend/' + ${user.id}}" method="post">
+<!--
+here i will add deleting from friends
+<form>
                 <td>
                     <button class="btn btn-default">Add to friends</button>
                 </td>
-            </form>
+            </form>-->
         </tr>
     </table>
 </div>

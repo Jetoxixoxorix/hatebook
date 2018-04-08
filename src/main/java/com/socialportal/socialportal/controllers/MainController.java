@@ -133,7 +133,7 @@ public class MainController {
             model.addAttribute("privilege", e.getMessage());
             return "index";
         }
-        
+
         model.addAttribute("editComment", commentManager.getUserComment(commentId));
         return "editComment";
     }

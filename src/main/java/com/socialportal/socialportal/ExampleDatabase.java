@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class ExampleUsers implements CommandLineRunner {
+public class ExampleDatabase implements CommandLineRunner {
 
     @Autowired
     IUserManager userManager;
