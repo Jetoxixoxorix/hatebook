@@ -4,7 +4,7 @@ package com.socialportal.socialportal.validators;
 import com.socialportal.socialportal.errors.*;
 import com.socialportal.socialportal.models.Friend;
 import com.socialportal.socialportal.models.User;
-import com.socialportal.socialportal.services.FriendManager;
+import com.socialportal.socialportal.services.IFriendManager;
 import com.socialportal.socialportal.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.List;
 public class UserValidator implements IUserValidator {
 
     private IUserManager userManager;
-    private FriendManager friendManager;
+    private IFriendManager friendManager;
 
     @Autowired
-    public UserValidator(IUserManager userManager, FriendManager friendManager) {
+    public UserValidator(IUserManager userManager, IFriendManager friendManager) {
         this.userManager = userManager;
         this.friendManager = friendManager;
     }

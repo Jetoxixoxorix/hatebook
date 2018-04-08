@@ -77,7 +77,7 @@ public class MainController {
             userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
-            return "index";
+            return "errors";
         }
 
         statusManager.deleteStatus(id);
@@ -90,7 +90,7 @@ public class MainController {
             userValidator.editPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id));
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
-            return "index";
+            return "errors";
         }
 
         model.addAttribute("userStatus", statusManager.getUserStatus(id));
@@ -118,7 +118,7 @@ public class MainController {
             userValidator.checkPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId), commentManager.getUserComment(commentId).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
-            return "index";
+            return "errors";
         }
 
         commentManager.deleteComment(commentId);
@@ -131,7 +131,7 @@ public class MainController {
             userValidator.editPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId));
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
-            return "index";
+            return "errors";
         }
 
         model.addAttribute("editComment", commentManager.getUserComment(commentId));

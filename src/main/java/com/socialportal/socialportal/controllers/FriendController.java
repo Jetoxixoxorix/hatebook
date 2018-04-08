@@ -2,7 +2,7 @@ package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.errors.HasThisFriendException;
 import com.socialportal.socialportal.errors.SameUserException;
-import com.socialportal.socialportal.services.FriendManager;
+import com.socialportal.socialportal.services.IFriendManager;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.stereotype.Controller;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class FriendController {
 
-    private FriendManager friendManager;
+    private IFriendManager friendManager;
     private IUserManager userManager;
     private IUserValidator userValidator;
 
-    public FriendController(FriendManager friendManager, IUserManager userManager, IUserValidator userValidator){
+    public FriendController(IFriendManager friendManager, IUserManager userManager, IUserValidator userValidator){
         this.friendManager = friendManager;
         this.userManager = userManager;
         this.userValidator = userValidator;
@@ -38,10 +38,10 @@ public class FriendController {
             userValidator.checkAddingFriend(userManager.getUserId(), id);
         }catch (SameUserException e){
             model.addAttribute("sameUser", e.getMessage());
-            return "index";
+            return "errors";
         } catch (HasThisFriendException e) {
             model.addAttribute("haveThisFriend", e.getMessage());
-            return "index";
+            return "errors";
         }
 
         friendManager.addFriend(userManager.getUserId(), userManager.getById(id));

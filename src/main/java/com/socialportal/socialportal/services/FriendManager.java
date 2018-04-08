@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FriendManager {
+public class FriendManager implements IFriendManager {
 
     private FriendRepository friendRepository;
 
