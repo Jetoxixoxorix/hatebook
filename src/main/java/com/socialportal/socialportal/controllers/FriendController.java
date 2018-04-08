@@ -21,15 +21,16 @@ public class FriendController {
         this.userManager = userManager;
     }
 
-    @GetMapping("/friends")
-    public String getFriendsList(Model model){
-        model.addAttribute("friends", friendManager.getFriendsList(userManager.getUserId()));
+    @GetMapping("/friends/{id}")
+    public String getFriendsList(Model model, @PathVariable("id") Long userProfileid){
+        model.addAttribute("friends", friendManager.getFriendsList(userProfileid));
         return "friends";
     }
 
     @PostMapping("/addfriend/{id}")
     public String addFriend(@PathVariable Long id, Model model){
         friendManager.addFriend(userManager.getUserId(), userManager.getById(id));
-        return getFriendsList(model);
+        friendManager.addFriend(id, userManager.getById(userManager.getUserId()));
+        return getFriendsList(model, userManager.getUserId());
     }
 }
