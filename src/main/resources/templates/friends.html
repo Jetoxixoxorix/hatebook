@@ -14,13 +14,18 @@
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-<!--
-here i will add deleting from friends
-<form>
+            <form th:if="${yourFriends.contains(friend.friend) == true}"
+                  th:action="@{'/deletefriend/' + ${friend.friend.id}}" method="post">
+                <td>
+                    <button class="btn btn-default">Delete from friends</button>
+                </td>
+            </form>
+            <form th:if="${yourFriends.contains(friend.friend) == false and loggedUserid != friend.friend.id}"
+                  th:action="@{'/addfriend/' + ${friend.friend.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Add to friends</button>
                 </td>
-            </form>-->
+            </form>
         </tr>
     </table>
 </div>

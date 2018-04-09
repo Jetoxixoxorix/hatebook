@@ -29,6 +29,9 @@ public class FriendController {
     @GetMapping("/friends/{id}")
     public String getFriendsList(Model model, @PathVariable("id") Long userProfileid){
         model.addAttribute("friends", friendManager.getFriendsList(userProfileid));
+        //model.addAttribute("yourFriends", friendManager.getFriendsList(userManager.getUserId()));
+        model.addAttribute("yourFriends", friendManager.getUsersFromFriendsList(userManager.getUserId()));
+        model.addAttribute("loggedUserid", userManager.getUserId());
         return "friends";
     }
 
@@ -46,6 +49,14 @@ public class FriendController {
 
         friendManager.addFriend(userManager.getUserId(), userManager.getById(id));
         friendManager.addFriend(id, userManager.getById(userManager.getUserId()));
+        return getFriendsList(model, userManager.getUserId());
+    }
+
+    @PostMapping("/deletefriend/{id}")
+    public String deleteFriend(@PathVariable("id") Long id, Model model){
+        friendManager.deleteFriend(userManager.getUserId(), userManager.getById(id));
+        friendManager.deleteFriend(id, userManager.getById(userManager.getUserId()));
+
         return getFriendsList(model, userManager.getUserId());
     }
 }

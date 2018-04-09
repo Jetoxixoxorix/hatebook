@@ -40,4 +40,10 @@ public class FriendManager implements IFriendManager {
         friend.setFriend(user);
         friendRepository.save(friend);
     }
+
+    @Override
+    public void deleteFriend(Long loggedUserid, User user) {
+        Friend friend = friendRepository.getFriendByUserIdAndFriend(loggedUserid, user);
+        friendRepository.delete(friend);
+    }
 }
