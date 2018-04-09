@@ -6,11 +6,12 @@ import com.socialportal.socialportal.models.UserStatus;
 import java.util.List;
 
 public interface IStatusManager {
-    void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser);
-    void deleteStatus(Long id);
     List<UserStatus> getStatuses(Long id);
     Long getAuthorOfStatus(Long id);
     UserStatus getUserStatus(Long id);
+
+    void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser);
+    void deleteStatus(Long id);
     void editUserStatus(Long id, String content);
 
     //temporary

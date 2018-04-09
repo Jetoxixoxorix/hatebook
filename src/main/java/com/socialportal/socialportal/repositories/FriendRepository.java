@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface FriendRepository extends CrudRepository<Friend, Long> {
     List<Friend> getFriendsByUserId(Long id);
-    Friend getFriendByFriend(Friend friend);
     Friend getFriendByUserIdAndFriend(Long id, User friend);
 }

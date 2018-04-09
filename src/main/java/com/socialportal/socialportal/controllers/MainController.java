@@ -103,7 +103,6 @@ public class MainController {
         return getUserProfile(userId, model);
     }
 
-
     //comments
 
     @PostMapping("/userprofile/{id}/addcomment/{statusId}")

@@ -6,11 +6,12 @@ import com.socialportal.socialportal.models.UserStatus;
 import java.util.List;
 
 public interface IUserManager {
-    void register(User user);
     User findUserByEmail(String email);
     User getById(Long id);
     Long getUserId();
     List<User> findUsersByName(String name);
+
+    void register(User user);
 
     //temporary
     Iterable<User> allUsers();

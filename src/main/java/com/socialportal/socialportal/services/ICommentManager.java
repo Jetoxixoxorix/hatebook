@@ -17,6 +17,4 @@ public interface ICommentManager {
 
     //temporary
     Iterable<UserComment> allComments();
-
-
 }
