@@ -2,7 +2,6 @@ package com.socialportal.socialportal.validators;
 
 
 import com.socialportal.socialportal.errors.*;
-import com.socialportal.socialportal.models.Friend;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IFriendManager;
 import com.socialportal.socialportal.services.IUserManager;
@@ -54,11 +53,9 @@ public class UserValidator implements IUserValidator {
     }
 
     public void checkIsFriend(Long loggedUserId, Long addedFriend) throws HasThisFriendException {
-        List<Friend> friendsList = friendManager.getFriendsList(loggedUserId);
-        for (Friend f : friendsList) {
-            if (f.getFriend().getId() == addedFriend)
-                throw new HasThisFriendException();
-        }
+        List<User> friendsList = friendManager.getUsersFromFriendsList(loggedUserId);
+        if (friendsList.contains(userManager.getById(addedFriend)))
+            throw new HasThisFriendException();
     }
 
     public void checkSameUser(Long loggedUser, Long addedFriend) throws SameUserException {

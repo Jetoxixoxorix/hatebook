@@ -8,4 +8,5 @@ import java.util.List;
 public interface IFriendManager {
     List<Friend> getFriendsList(Long id);
     void addFriend(Long loggedUserid, User user);
+    List<User> getUsersFromFriendsList(Long id);
 }
