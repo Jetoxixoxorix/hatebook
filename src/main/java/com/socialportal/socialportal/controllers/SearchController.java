@@ -2,8 +2,8 @@ package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.IFriendManager;
+import com.socialportal.socialportal.services.IInvitationManager;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.InvitationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +15,10 @@ public class SearchController {
 
     private IUserManager userManager;
     private IFriendManager friendManager;
-    private InvitationManager invitationManager;
+    private IInvitationManager invitationManager;
 
     @Autowired
-    public SearchController(IUserManager userManager, IFriendManager friendManager, InvitationManager invitationManager){
+    public SearchController(IUserManager userManager, IFriendManager friendManager, IInvitationManager invitationManager){
         this.userManager = userManager;
         this.friendManager = friendManager;
         this.invitationManager = invitationManager;

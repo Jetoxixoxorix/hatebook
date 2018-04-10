@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class InvitationManager {
+public class InvitationManager implements IInvitationManager {
 
     private InvitationRepository invitationRepository;
     private IUserManager userManager;

@@ -5,8 +5,8 @@ import com.socialportal.socialportal.errors.HasInvitationException;
 import com.socialportal.socialportal.errors.HasThisFriendException;
 import com.socialportal.socialportal.errors.SameUserException;
 import com.socialportal.socialportal.models.Invitation;
+import com.socialportal.socialportal.services.IInvitationManager;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.InvitationManager;
 import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class InvitationController {
 
-    private InvitationManager invitationManager;
+    private IInvitationManager invitationManager;
     private IUserManager userManager;
     private IUserValidator userValidator;
 
     @Autowired
-    public InvitationController(InvitationManager invitationManager, IUserManager userManager, IUserValidator userValidator) {
+    public InvitationController(IInvitationManager invitationManager, IUserManager userManager, IUserValidator userValidator) {
         this.invitationManager = invitationManager;
         this.userManager = userManager;
         this.userValidator = userValidator;
