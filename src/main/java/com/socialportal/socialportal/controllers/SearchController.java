@@ -36,7 +36,8 @@ public class SearchController {
         model.addAttribute("loggedUserid", userManager.getUserId());
         model.addAttribute("friends", friendManager.getUsersFromFriendsList(userManager.getUserId()));
 
-        //model.addAttribute("invitations", invitationManager.getReceivedInvitations(userManager.getUserId()));
+        model.addAttribute("Rinvitations", invitationManager.getReceivedInvitations(userManager.getUserId()));
+        model.addAttribute("Sinvitations", invitationManager.getSendInvitations(userManager.getById(userManager.getUserId())));
 
         model.addAttribute("receivedInvitations", invitationManager.getUsersFromInvitationsList(userManager.getUserId()));
         model.addAttribute("sendInvitations", invitationManager.getSendUsersFromInvitationsList(userManager.getUserId()));
