@@ -1,8 +1,11 @@
 package com.socialportal.socialportal.controllers;
 
 
+import com.socialportal.socialportal.errors.HasThisFriendException;
+import com.socialportal.socialportal.errors.SameUserException;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.services.InvitationManager;
+import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +20,13 @@ public class InvitationController {
 
     private InvitationManager invitationManager;
     private IUserManager userManager;
+    private IUserValidator userValidator;
 
     @Autowired
-    public InvitationController(InvitationManager invitationManager, IUserManager userManager) {
+    public InvitationController(InvitationManager invitationManager, IUserManager userManager, IUserValidator userValidator) {
         this.invitationManager = invitationManager;
         this.userManager = userManager;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/invitations")
@@ -34,6 +39,17 @@ public class InvitationController {
     //later change to post
     @GetMapping("/sendinvitation/{id}")
     public String sendInvitation(@PathVariable("id") Long id, Model model) {
+        try{
+            userValidator.checkAddingFriend(userManager.getUserId(), id);
+        } catch (SameUserException e) {
+            model.addAttribute("sameUser",e.getMessage());
+            return "errors";
+        } catch (HasThisFriendException e) {
+            model.addAttribute("haveThisFriend", e.getMessage());
+            return "errors";
+        }
+
+
         invitationManager.sendInvitation(id, userManager.getUserId());
         return getInvitations(model);
     }
