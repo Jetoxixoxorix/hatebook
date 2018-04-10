@@ -1,6 +1,7 @@
 package com.socialportal.socialportal.controllers;
 
 
+import com.socialportal.socialportal.errors.HasInvitationException;
 import com.socialportal.socialportal.errors.HasThisFriendException;
 import com.socialportal.socialportal.errors.SameUserException;
 import com.socialportal.socialportal.services.IUserManager;
@@ -40,12 +41,15 @@ public class InvitationController {
     @GetMapping("/sendinvitation/{id}")
     public String sendInvitation(@PathVariable("id") Long id, Model model) {
         try{
-            userValidator.checkAddingFriend(userManager.getUserId(), id);
+            userValidator.checkSendInvitation(userManager.getUserId(), id);
         } catch (SameUserException e) {
             model.addAttribute("sameUser",e.getMessage());
             return "errors";
         } catch (HasThisFriendException e) {
             model.addAttribute("haveThisFriend", e.getMessage());
+            return "errors";
+        } catch (HasInvitationException e) {
+            model.addAttribute("invitation", e.getMessage());
             return "errors";
         }
 

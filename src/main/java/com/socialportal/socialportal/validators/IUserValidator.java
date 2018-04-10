@@ -15,4 +15,6 @@ public interface IUserValidator {
     void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException;
 
     void checkAddingFriend(Long loggedUser, Long addedFriend) throws SameUserException, HasThisFriendException;
+
+    void checkSendInvitation(Long loggedUser, Long addedFriend) throws HasInvitationException, HasThisFriendException, SameUserException;
 }
