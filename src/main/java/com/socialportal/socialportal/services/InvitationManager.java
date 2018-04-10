@@ -5,6 +5,8 @@ import com.socialportal.socialportal.repositories.InvitationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InvitationManager {
 
@@ -15,6 +17,10 @@ public class InvitationManager {
     public InvitationManager(InvitationRepository invitationRepository, IUserManager userManager){
         this.invitationRepository = invitationRepository;
         this.userManager = userManager;
+    }
+
+    public List<Invitation> getInvitations(Long id){
+        return invitationRepository.getInvitationsByUserId(id);
     }
 
     public void sendInvitation(Long userId, Long id) {

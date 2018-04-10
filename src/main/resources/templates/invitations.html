@@ -6,8 +6,28 @@
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
     <h1>Invitations received:</h1>
-
+    <table>
+        <tr th:object="${invitations}" th:each="invitation : ${invitations}">
+            <td th:text="${invitation.user.firstName} + ' ' + ${invitation.user.lastName}"></td>
+            <form action="#" th:action="@{'/userprofile/' + ${invitation.user.id}}" method="get">
+                <td>
+                    <button class="btn btn-default">Profile</button>
+                </td>
+            </form>
+            <form th:action="@{'/addfriend/' + ${invitation.user.id}}" method="post">
+                <td>
+                    <button class="btn btn-default">Accept invitation</button>
+                </td>
+            </form>
+            <form th:action="@{'/deleteinvitation' + ${invitation.id}}">
+                <td>
+                    <button class="btn btn-default">Cancel invitation</button>
+                </td>
+            </form>
+        </tr>
+    </table>
     <h1>Invitations send:</h1>
+
 </div>
 </body>
 </html>

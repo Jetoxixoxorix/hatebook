@@ -23,6 +23,16 @@
                     <button class="btn btn-default">Delete from friends</button>
                 </td>
             </form>
+            <form th:action="@{'/sendinvitation/' + ${user.id}}">
+                <td>
+                    <button class="btn btn-default" method="get">Send invitation</button>
+                </td>
+            </form>
+            <form>
+                <td>
+                    <button class="btn btn-default" method="get">Delete invitaion</button>
+                </td>
+            </form>
         </tr>
     </table>
 </div>
