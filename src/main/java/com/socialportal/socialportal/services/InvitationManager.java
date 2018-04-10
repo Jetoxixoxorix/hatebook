@@ -1,6 +1,7 @@
 package com.socialportal.socialportal.services;
 
 import com.socialportal.socialportal.models.Invitation;
+import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.repositories.InvitationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,17 @@ public class InvitationManager {
     }
 
     public List<Invitation> getInvitations(Long id){
-        return invitationRepository.getInvitationsByUserId(id);
+        return invitationRepository.getInvitationsByReceiver(userManager.getById(id));
+    }
+
+    public List<Invitation> getSendInvitations(User user){
+        return invitationRepository.getInvitationsBySendUser(user);
     }
 
     public void sendInvitation(Long userId, Long id) {
         Invitation invitation = new Invitation();
-        invitation.setUserId(userId);
-        invitation.setUser(userManager.getById(id));
+        invitation.setReceiver(userManager.getById(userId));
+        invitation.setSendUser(userManager.getById(id));
         invitationRepository.save(invitation);
     }
 

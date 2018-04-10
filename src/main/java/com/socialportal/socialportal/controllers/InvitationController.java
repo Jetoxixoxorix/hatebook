@@ -19,27 +19,28 @@ public class InvitationController {
     private IUserManager userManager;
 
     @Autowired
-    public InvitationController(InvitationManager invitationManager, IUserManager userManager){
+    public InvitationController(InvitationManager invitationManager, IUserManager userManager) {
         this.invitationManager = invitationManager;
         this.userManager = userManager;
     }
 
     @GetMapping("/invitations")
-    public String getInvitations(Model model){
+    public String getInvitations(Model model) {
         model.addAttribute("invitations", invitationManager.getInvitations(userManager.getUserId()));
+        model.addAttribute("sendInvitations", invitationManager.getSendInvitations(userManager.getById(userManager.getUserId())));
         return "invitations";
     }
 
     //later change to post
     @GetMapping("/sendinvitation/{id}")
-    public String sendInvitation(@PathVariable("id") Long id, Model model){
+    public String sendInvitation(@PathVariable("id") Long id, Model model) {
         invitationManager.sendInvitation(id, userManager.getUserId());
         return getInvitations(model);
     }
 
     //later change to post
     @GetMapping("/deleteinvitation/{id}")
-    public String deleteInvitation(@PathVariable("id") Long id, Model model){
+    public String deleteInvitation(@PathVariable("id") Long id, Model model) {
         invitationManager.deleteInvitation(id);
         return getInvitations(model);
     }

@@ -8,13 +8,13 @@
     <h1>Invitations received:</h1>
     <table>
         <tr th:object="${invitations}" th:each="invitation : ${invitations}">
-            <td th:text="${invitation.user.firstName} + ' ' + ${invitation.user.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${invitation.user.id}}" method="get">
+            <td th:text="${invitation.sendUser.firstName} + ' ' + ${invitation.sendUser.lastName}"></td>
+            <form action="#" th:action="@{'/userprofile/' + ${invitation.receiver.id}}" method="get">
                 <td>
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:action="@{'/addfriend/' + ${invitation.user.id} + '/' + ${invitation.id}}" method="post">
+            <form th:action="@{'/addfriend/' + ${invitation.sendUser.id} + '/' + ${invitation.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Accept invitation</button>
                 </td>
@@ -27,7 +27,21 @@
         </tr>
     </table>
     <h1>Invitations send:</h1>
-
+    <table>
+        <tr th:object="${sendInvitations}" th:each="invitation : ${sendInvitations}">
+            <td th:text="${invitation.receiver.firstName} + ' ' + ${invitation.receiver.lastName}"></td>
+            <form action="#" th:action="@{'/userprofile/' + ${invitation.receiver.id}}" method="get">
+                <td>
+                    <button class="btn btn-default">Profile</button>
+                </td>
+            </form>
+            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}">
+                <td>
+                    <button class="btn btn-default">Cancel invitation</button>
+                </td>
+            </form>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

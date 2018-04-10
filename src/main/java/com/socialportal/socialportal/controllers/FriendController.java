@@ -5,6 +5,7 @@ import com.socialportal.socialportal.errors.SameUserException;
 import com.socialportal.socialportal.services.IFriendManager;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.validators.IUserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class FriendController {
     private IUserManager userManager;
     private IUserValidator userValidator;
 
+    @Autowired
     public FriendController(IFriendManager friendManager, IUserManager userManager, IUserValidator userValidator){
         this.friendManager = friendManager;
         this.userManager = userManager;

@@ -17,9 +17,13 @@ public class Invitation {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    private Long userId;
+    //private Long userId;
 
     @ManyToOne
     @JoinColumn
-    private User user;
+    private User receiver;
+
+    @ManyToOne
+    @JoinColumn
+    private User sendUser;
 }
