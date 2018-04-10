@@ -6,7 +6,6 @@ import com.socialportal.socialportal.repositories.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.plaf.LabelUI;
 import java.util.LinkedList;
 import java.util.List;
 
