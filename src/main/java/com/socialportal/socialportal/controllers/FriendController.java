@@ -49,7 +49,6 @@ public class FriendController {
         }
 
         friendManager.addFriend(userManager.getUserId(), userManager.getById(id), invitationId);
-        //friendManager.addFriend(id, userManager.getById(userManager.getUserId()));
         return getFriendsList(model, userManager.getUserId());
     }
 

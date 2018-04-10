@@ -13,26 +13,29 @@
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:if="${user.id != loggedUserid and friends.contains(user) == false}" th:action="@{'/addfriend/' + ${user.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Add to friends</button>
-                </td>
-            </form>
+            <!--            <form th:if="${user.id != loggedUserid and friends.contains(user) == false}" th:action="@{'/addfriend/' + ${user.id}}" method="post">
+                            <td>
+                                <button class="btn btn-default">Add to friends</button>
+                            </td>
+                        </form>-->
             <form th:if="${friends.contains(user) == true}" th:action="@{'/deletefriend/' + ${user.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Delete from friends</button>
                 </td>
             </form>
-            <form th:action="@{'/sendinvitation/' + ${user.id}}">
+            <form th:if="${user.id != loggedUserid and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}"
+                  th:action="@{'/sendinvitation/' + ${user.id}}">
                 <td>
-                    <button class="btn btn-default" method="get">Send invitation</button>
+                    <button class="btn btn-default" method="get">Send invitation to friends</button>
                 </td>
             </form>
-            <form>
-                <td>
-                    <button class="btn btn-default" method="get">Delete invitaion</button>
-                </td>
-            </form>
+
+            <!--"-->
+            <!--          <form th:action="@{'/deleteinvitation/' + ${}}">
+                          <td>
+                              <button class="btn btn-default" method="get">Cancel invitation</button>
+                          </td>
+                      </form>-->
         </tr>
     </table>
 </div>

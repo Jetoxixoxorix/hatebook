@@ -16,9 +16,7 @@ public class Invitation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private Long id;
-
-    //private Long userId;
-
+    
     @ManyToOne
     @JoinColumn
     private User receiver;
