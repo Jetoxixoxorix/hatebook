@@ -4,6 +4,7 @@ package com.socialportal.socialportal.controllers;
 import com.socialportal.socialportal.errors.HasInvitationException;
 import com.socialportal.socialportal.errors.HasThisFriendException;
 import com.socialportal.socialportal.errors.SameUserException;
+import com.socialportal.socialportal.models.Invitation;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.services.InvitationManager;
 import com.socialportal.socialportal.validators.IUserValidator;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -37,8 +39,7 @@ public class InvitationController {
         return "invitations";
     }
 
-    //later change to post
-    @GetMapping("/sendinvitation/{id}")
+    @PostMapping("/sendinvitation/{id}")
     public String sendInvitation(@PathVariable("id") Long id, Model model) {
         try{
             userValidator.checkSendInvitation(userManager.getUserId(), id);
@@ -58,10 +59,16 @@ public class InvitationController {
         return getInvitations(model);
     }
 
-    //later change to post
-    @GetMapping("/deleteinvitation/{id}")
+    @PostMapping("/deleteinvitation/{id}")
     public String deleteInvitation(@PathVariable("id") Long id, Model model) {
         invitationManager.deleteInvitation(id);
+        return getInvitations(model);
+    }
+
+    @PostMapping("/deleteinvitation/{loggeduserid}/{id}")
+    public String deleteInvitationByUsersId(@PathVariable("loggeduserid") Long loggedUserId, @PathVariable("id") Long userId, Model model) {
+        Invitation invitation = invitationManager.getInvitation(userManager.getById(loggedUserId), userManager.getById(userId));
+        invitationManager.deleteInvitation(invitation.getId());
         return getInvitations(model);
     }
 }

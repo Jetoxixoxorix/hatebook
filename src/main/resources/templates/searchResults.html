@@ -19,18 +19,17 @@
                 </td>
             </form>
             <form th:if="${user.id != loggedUserid and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}"
-                  th:action="@{'/sendinvitation/' + ${user.id}}">
+                  th:action="@{'/sendinvitation/' + ${user.id}}" method="post">
                 <td>
-                    <button class="btn btn-default" method="get">Send invitation to friends</button>
+                    <button class="btn btn-default">Send invitation to friends</button>
                 </td>
             </form>
-<!--th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}" th:action="@{'/deleteinvitation/' + ${sendInvitations.}}"-->
-<!-- th:each="invitation : ${Rinvitations}" th:action="@{'/deleteinvitation/' + ${invitation.id}}"-->
-<!--            <form th:each="invitation : ${Sinvitations} or invitation : ${Rinvitations}" th:action="@{'/deleteinvitations/' + ${invitation.id}}" >
+            <form th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}"
+                  th:action="@{'/deleteinvitation/' + ${loggedUserid} + '/' + ${user.id}}" method="post">
                 <td>
-                    <button class="btn btn-default" method="get">Cancel invitation</button>
+                    <button class="btn btn-default">Cancel invitation</button>
                 </td>
-            </form>-->
+            </form>
         </tr>
     </table>
 </div>

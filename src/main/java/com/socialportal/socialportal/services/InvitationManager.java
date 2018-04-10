@@ -21,6 +21,13 @@ public class InvitationManager {
         this.userManager = userManager;
     }
 
+    public Invitation getInvitation(User receiver, User sender){
+        if(invitationRepository.getInvitationByReceiverAndSendUser(receiver, sender) != null)
+            return invitationRepository.getInvitationByReceiverAndSendUser(receiver, sender);
+        else
+            return invitationRepository.getInvitationByReceiverAndSendUser(sender, receiver);
+    }
+
     public List<Invitation> getReceivedInvitations(Long id){
         return invitationRepository.getInvitationsByReceiver(userManager.getById(id));
     }

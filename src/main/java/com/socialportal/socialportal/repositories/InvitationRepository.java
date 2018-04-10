@@ -10,4 +10,5 @@ public interface InvitationRepository extends CrudRepository<Invitation, Long> {
     Invitation getInvitationById(Long id);
     List<Invitation> getInvitationsByReceiver(User user);
     List<Invitation> getInvitationsBySendUser(User user);
+    Invitation getInvitationByReceiverAndSendUser(User receiver, User sender);
 }

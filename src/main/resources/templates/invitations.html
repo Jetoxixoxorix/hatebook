@@ -9,7 +9,7 @@
     <table>
         <tr th:object="${invitations}" th:each="invitation : ${invitations}">
             <td th:text="${invitation.sendUser.firstName} + ' ' + ${invitation.sendUser.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${invitation.receiver.id}}" method="get">
+            <form action="#" th:action="@{'/userprofile/' + ${invitation.sendUser.id}}" method="get">
                 <td>
                     <button class="btn btn-default">Profile</button>
                 </td>
@@ -19,7 +19,7 @@
                     <button class="btn btn-default">Accept invitation</button>
                 </td>
             </form>
-            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}">
+            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Cancel invitation</button>
                 </td>
@@ -35,7 +35,7 @@
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}">
+            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Cancel invitation</button>
                 </td>

@@ -10,7 +10,7 @@
                 <form  th:action="@{'/friends/' + ${userProfile.id}}">
                     <button type="submit">Friends</button>
                 </form>
-                <form th:action="@{/invitations}">
+                <form th:if="${loggedUserId == userProfile.id}" th:action="@{/invitations}">
                     <button type="submit">Invitations</button>
                 </form>
             </div>
