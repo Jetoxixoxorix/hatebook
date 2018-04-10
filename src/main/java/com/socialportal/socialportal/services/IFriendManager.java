@@ -9,6 +9,6 @@ public interface IFriendManager {
     List<Friend> getFriendsList(Long id);
     List<User> getUsersFromFriendsList(Long id);
 
-    void addFriend(Long loggedUserid, User user);
+    void addFriend(Long loggedUserid, User user, Long invitationId);
     void deleteFriend(Long loggedUserid, User user);
 }

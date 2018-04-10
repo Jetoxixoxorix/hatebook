@@ -14,12 +14,12 @@
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:action="@{'/addfriend/' + ${invitation.user.id}}" method="post">
+            <form th:action="@{'/addfriend/' + ${invitation.user.id} + '/' + ${invitation.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Accept invitation</button>
                 </td>
             </form>
-            <form th:action="@{'/deleteinvitation' + ${invitation.id}}">
+            <form th:action="@{'/deleteinvitation/' + ${invitation.id}}">
                 <td>
                     <button class="btn btn-default">Cancel invitation</button>
                 </td>
