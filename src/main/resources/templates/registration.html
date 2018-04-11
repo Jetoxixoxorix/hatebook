@@ -4,41 +4,46 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <h2>Register your account</h2>
-    <form action="#" th:action="@{/registration}" th:object="${userData}" method="post">
-        <table>
-            <tr>
-                <td>First Name</td>
-                <td><input class="form-control" type="text"  th:field="*{firstName}"/></td>
-                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</td>
-            </tr>
-            <tr>
-                <td>Last Name</td>
-                <td><input class="form-control" type="text" th:field="*{lastName}"/></td>
-                <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input class="form-control" type="email" th:field="*{username}"/></td>
-                <td th:if="${existingEmail}" th:text="${existingEmail}">Existing email error</td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input class="form-control" type="password" th:field="*{password}"/></td>
-                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-            </tr>
-            <tr>
-                <td>Confirm Password</td>
-                <td><input class="form-control" type="password" th:field="*{confirmPassword}"/></td>
-                <td th:if="${differentPasswords}" th:text="${differentPasswords}">Not matching passwords error</td>
-            </tr>
-            <tr>
-                <td>
-                    <button class="btn btn-default" id="register" type="submit">Register</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div th:if="${registrationCompleted == null}" id="registrationForm">
+        <h2>Register your account</h2>
+        <form action="#" th:action="@{/registration}" th:object="${userData}" method="post">
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td><input class="form-control" type="text" th:field="*{firstName}"/></td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input class="form-control" type="text" th:field="*{lastName}"/></td>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input class="form-control" type="email" th:field="*{username}"/></td>
+                    <td th:if="${existingEmail}" th:text="${existingEmail}">Existing email error</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input class="form-control" type="password" th:field="*{password}"/></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input class="form-control" type="password" th:field="*{confirmPassword}"/></td>
+                    <td th:if="${differentPasswords}" th:text="${differentPasswords}">Not matching passwords error</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-default" id="register" type="submit">Register</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div th:if="${registrationCompleted}">
+        <h1 th:text="${registrationCompleted}"></h1>
+    </div>
 </div>
 </body>
 </html>

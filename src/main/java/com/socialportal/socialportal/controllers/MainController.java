@@ -74,7 +74,7 @@ public class MainController {
     @PostMapping("/userprofile/{userid}/deletestatus/{id}")
     public String deleteStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
+            userValidator.deletePrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
@@ -114,7 +114,7 @@ public class MainController {
     @PostMapping("/userprofile/{id}/deletecomment/{commentId}")
     public String deleteComment(@PathVariable("id") Long id, @PathVariable("commentId") Long commentId, Model model) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId), commentManager.getComment(commentId).getUserId());
+            userValidator.deletePrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId), commentManager.getComment(commentId).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";

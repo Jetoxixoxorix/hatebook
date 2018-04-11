@@ -40,7 +40,7 @@ public class UserValidator implements IUserValidator {
             throw new DifferentPasswordException();
     }
 
-    public void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException {
+    public void deletePrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException {
         if (loggedUser != profileUser && loggedUser != statusUser)
             throw new HasPrivilegeException();
     }

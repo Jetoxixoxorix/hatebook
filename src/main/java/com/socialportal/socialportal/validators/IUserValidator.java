@@ -10,7 +10,7 @@ public interface IUserValidator {
 
     void checkPassword(User user) throws DifferentPasswordException;
 
-    void checkPrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException;
+    void deletePrivilege(Long loggedUser, Long statusUser, Long profileUser) throws HasPrivilegeException;
 
     void editPrivilege(Long loggedUser, Long statusUser) throws HasPrivilegeException;
 
