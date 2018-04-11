@@ -71,16 +71,17 @@ public class MainController {
         return getUserProfile(id, model);
     }
 
-    @PostMapping("/userprofile/{userid}/deletestatus/{id}")
-    public String deleteStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
+    @PostMapping("/userprofile/{userid}/deletestatus/{statusid}")
+    public String deleteStatus(Model model, @PathVariable("statusid") Long statusId, @PathVariable("userid") Long userId) {
         try {
-            userValidator.deletePrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
+            userValidator.deletePrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(statusId), statusManager.getUserStatus(statusId).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
         }
 
-        statusManager.deleteStatus(id);
+        commentManager.deleteComments(statusManager.getUserStatus(statusId));
+        statusManager.deleteStatus(statusId);
         return getUserProfile(userId, model);
     }
 

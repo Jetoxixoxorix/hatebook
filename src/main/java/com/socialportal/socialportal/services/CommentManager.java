@@ -7,6 +7,7 @@ import com.socialportal.socialportal.repositories.UserCommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Comment;
 import java.util.Date;
 import java.util.List;
 
@@ -18,25 +19,6 @@ public class CommentManager implements ICommentManager {
     @Autowired
     public CommentManager(UserCommentRepository userCommentRepository){
         this.userCommentRepository = userCommentRepository;
-    }
-
-    public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user) {
-        userComment.setUserId(userProfileId);
-        userComment.setDate(new Date());
-        userComment.setUserStatus(userStatus);
-        userComment.setAddingUser(user);
-        userCommentRepository.save(userComment);
-    }
-
-    public void deleteComment(Long id){
-        userCommentRepository.delete(userCommentRepository.getUserCommentByCommentId(id));
-    }
-
-    @Override
-    public void editComment(Long id, String content) {
-        UserComment userComment = getComment(id);
-        userComment.setContent(content);
-        userCommentRepository.save(userComment);
     }
 
     @Override
@@ -54,6 +36,36 @@ public class CommentManager implements ICommentManager {
     public UserComment getComment(Long id) {
         return userCommentRepository.getUserCommentByCommentId(id);
     }
+
+    @Override
+    public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user) {
+        userComment.setUserId(userProfileId);
+        userComment.setDate(new Date());
+        userComment.setUserStatus(userStatus);
+        userComment.setAddingUser(user);
+        userCommentRepository.save(userComment);
+    }
+
+    @Override
+    public void deleteComment(Long id){
+        userCommentRepository.delete(userCommentRepository.getUserCommentByCommentId(id));
+    }
+
+    @Override
+    public void editComment(Long id, String content) {
+        UserComment userComment = getComment(id);
+        userComment.setContent(content);
+        userCommentRepository.save(userComment);
+    }
+
+    @Override
+    public void deleteComments(UserStatus userStatus) {
+        List<UserComment> comments = userCommentRepository.getCommentsByUserStatus(userStatus);
+        for (UserComment comment : comments){
+            userCommentRepository.delete(comment);
+        }
+    }
+
 
     //temporary
     public Iterable<UserComment> allComments() {
