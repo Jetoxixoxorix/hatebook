@@ -26,16 +26,13 @@ public class UserManager implements IUserManager {
         this.userRepository = userRepository;
     }
 
-    public void register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
-
+    
     @Override
     public User findUserByEmail(String username) {
         return userRepository.findUserByUsername(username);
     }
 
+    @Override
     public User getUserById(Long id) {
         return userRepository.findUserById(id);
     }
@@ -66,6 +63,13 @@ public class UserManager implements IUserManager {
         else
             return null;
     }
+
+    @Override
+    public void registerUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
 
     //temporary
     public Iterable<User> allUsers() {

@@ -30,8 +30,8 @@ public class FriendController {
 
     @GetMapping("/friends/{id}")
     public String getFriendsList(Model model, @PathVariable("id") Long userProfileid){
-        model.addAttribute("friends", friendManager.getFriendsList(userProfileid));
-        model.addAttribute("yourFriends", friendManager.getUsersFromFriendsList(userManager.getUserId()));
+        model.addAttribute("friends", friendManager.getFriendsOfUser(userProfileid));
+        model.addAttribute("yourFriends", friendManager.getUsersFromFriendsOfUser(userManager.getUserId()));
         model.addAttribute("loggedUserid", userManager.getUserId());
         return "friends";
     }

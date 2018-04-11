@@ -32,7 +32,7 @@ public class InvitationManager implements IInvitationManager {
         return invitationRepository.getInvitationsByReceiver(userManager.getUserById(id));
     }
 
-    public List<User> getUsersFromInvitationsList(Long id) {
+    public List<User> getSendersOfInvitations(Long id) {
         List<Invitation> invitationList = getReceivedInvitations(id);
         List<User> users = new LinkedList<>();
         for (Invitation invitation : invitationList) {
@@ -42,12 +42,12 @@ public class InvitationManager implements IInvitationManager {
         return users;
     }
 
-    public List<Invitation> getSendInvitations(User user){
-        return invitationRepository.getInvitationsBySender(user);
+    public List<Invitation> getSendInvitations(Long id){
+        return invitationRepository.getInvitationsBySender(userManager.getUserById(id));
     }
 
-    public List<User> getSendUsersFromInvitationsList(Long id) {
-        List<Invitation> invitationList = getSendInvitations(userManager.getUserById(id));
+    public List<User> getReceiversOfInvitations(Long id) {
+        List<Invitation> invitationList = getSendInvitations(id);
         List<User> users = new LinkedList<>();
         for (Invitation invitation : invitationList) {
             users.add(invitation.getReceiver());

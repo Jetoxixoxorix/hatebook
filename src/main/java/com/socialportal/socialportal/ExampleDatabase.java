@@ -27,12 +27,12 @@ public class ExampleDatabase implements CommandLineRunner {
         User user3 = new User("Jan", "Niezbedny", "qwerty", "prosty3@gmail.com");
         User user4 = new User("Jan", "Zbedny", "qwerty", "prosty4@gmail.com");
         User user5 = new User("Piotr", "Kox", "qwerty", "prosty5@gmail.com");
-        userManager.register(user);
-        userManager.register(user1);
-        userManager.register(user2);
-        userManager.register(user3);
-        userManager.register(user4);
-        userManager.register(user5);
+        userManager.registerUser(user);
+        userManager.registerUser(user1);
+        userManager.registerUser(user2);
+        userManager.registerUser(user3);
+        userManager.registerUser(user4);
+        userManager.registerUser(user5);
 
         UserStatus userStatus = new UserStatus("First status",  1L, new Date(), user);
         UserStatus userStatus1 = new UserStatus("Second status",  1L, new Date(), user1);

@@ -11,7 +11,7 @@ public interface IUserManager {
     Long getUserId();
     List<User> findUsersByName(String name);
 
-    void register(User user);
+    void registerUser(User user);
 
     //temporary
     Iterable<User> allUsers();

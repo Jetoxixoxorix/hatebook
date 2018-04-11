@@ -49,7 +49,7 @@ public class UserController {
             return "registration";
         }
 
-        userManager.register(user);
+        userManager.registerUser(user);
         return "registrationCompleted";
     }
 }

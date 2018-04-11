@@ -20,10 +20,6 @@ public class CommentManager implements ICommentManager {
         this.userCommentRepository = userCommentRepository;
     }
 
-    public List<UserComment> getUserComments(Long id) {
-        return userCommentRepository.getUserCommentsByUserId(id);
-    }
-
     public void addNewComment(UserComment userComment, Long userProfileId, UserStatus userStatus, User user) {
         userComment.setUserId(userProfileId);
         userComment.setDate(new Date());
@@ -38,19 +34,24 @@ public class CommentManager implements ICommentManager {
 
     @Override
     public void editComment(Long id, String content) {
-        UserComment userComment = getUserComment(id);
+        UserComment userComment = getComment(id);
         userComment.setContent(content);
         userCommentRepository.save(userComment);
     }
 
     @Override
-    public Long getAuthorOfComment(Long id) {
-        UserComment userComment = userCommentRepository.getUserCommentByCommentId(id);
-        return userComment.getAddingUser().getId();
+    public List<UserComment> getUserComments(Long id) {
+        return userCommentRepository.getUserCommentsByUserId(id);
     }
 
     @Override
-    public UserComment getUserComment(Long id) {
+    public Long getIdOfAuthorOfComment(Long id) {
+        UserComment comment = getComment(id);
+        return comment.getAddingUser().getId();
+    }
+
+    @Override
+    public UserComment getComment(Long id) {
         return userCommentRepository.getUserCommentByCommentId(id);
     }
 

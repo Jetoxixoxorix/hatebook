@@ -8,9 +8,9 @@ import java.util.List;
 public interface IInvitationManager {
     Invitation getInvitation(User receiver, User sender);
     List<Invitation> getReceivedInvitations(Long id);
-    List<User> getUsersFromInvitationsList(Long id);
-    List<Invitation> getSendInvitations(User user);
-    List<User> getSendUsersFromInvitationsList(Long id);
+    List<User> getSendersOfInvitations(Long id);
+    List<Invitation> getSendInvitations(Long id);
+    List<User> getReceiversOfInvitations(Long id);
 
     void sendInvitation(Long userId, Long id);
     void deleteInvitation(Long id);

@@ -34,10 +34,10 @@ public class SearchController {
     public String searchUsers(@ModelAttribute("search") User user, Model model) {
         model.addAttribute("users", userManager.findUsersByName(user.getFirstName()));
         model.addAttribute("loggedUserid", userManager.getUserId());
-        model.addAttribute("friends", friendManager.getUsersFromFriendsList(userManager.getUserId()));
+        model.addAttribute("friends", friendManager.getUsersFromFriendsOfUser(userManager.getUserId()));
 
-        model.addAttribute("receivedInvitations", invitationManager.getUsersFromInvitationsList(userManager.getUserId()));
-        model.addAttribute("sendInvitations", invitationManager.getSendUsersFromInvitationsList(userManager.getUserId()));
+        model.addAttribute("receivedInvitations", invitationManager.getSendersOfInvitations(userManager.getUserId()));
+        model.addAttribute("sendInvitations", invitationManager.getReceiversOfInvitations(userManager.getUserId()));
         return "searchResults";
     }
 

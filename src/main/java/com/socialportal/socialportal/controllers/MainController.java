@@ -74,7 +74,7 @@ public class MainController {
     @PostMapping("/userprofile/{userid}/deletestatus/{id}")
     public String deleteStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
+            userValidator.checkPrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id), statusManager.getUserStatus(id).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
@@ -87,7 +87,7 @@ public class MainController {
     @GetMapping("/userprofile/{userid}/editstatus/{id}")
     public String editStatus(Model model, @PathVariable("id") Long id, @PathVariable("userid") Long userId) {
         try {
-            userValidator.editPrivilege(userManager.getUserId(), statusManager.getAuthorOfStatus(id));
+            userValidator.editPrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id));
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
@@ -114,7 +114,7 @@ public class MainController {
     @PostMapping("/userprofile/{id}/deletecomment/{commentId}")
     public String deleteComment(@PathVariable("id") Long id, @PathVariable("commentId") Long commentId, Model model) {
         try {
-            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId), commentManager.getUserComment(commentId).getUserId());
+            userValidator.checkPrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId), commentManager.getComment(commentId).getUserId());
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
@@ -127,13 +127,13 @@ public class MainController {
     @GetMapping("/userprofile/{userid}/editcomment/{id}")
     public String editComment(Model model, @PathVariable("id") Long commentId) {
         try {
-            userValidator.editPrivilege(userManager.getUserId(), commentManager.getAuthorOfComment(commentId));
+            userValidator.editPrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId));
         } catch (HasPrivilegeException e) {
             model.addAttribute("privilege", e.getMessage());
             return "errors";
         }
 
-        model.addAttribute("editComment", commentManager.getUserComment(commentId));
+        model.addAttribute("editComment", commentManager.getComment(commentId));
         return "editComment";
     }
 

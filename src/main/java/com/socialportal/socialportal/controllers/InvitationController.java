@@ -34,8 +34,8 @@ public class InvitationController {
 
     @GetMapping("/invitations")
     public String getInvitations(Model model) {
-        model.addAttribute("invitations", invitationManager.getReceivedInvitations(userManager.getUserId()));
-        model.addAttribute("sendInvitations", invitationManager.getSendInvitations(userManager.getUserById(userManager.getUserId())));
+        model.addAttribute("receivedInvitations", invitationManager.getReceivedInvitations(userManager.getUserId()));
+        model.addAttribute("sendInvitations", invitationManager.getSendInvitations(userManager.getUserId()));
         return "invitations";
     }
 
@@ -53,7 +53,6 @@ public class InvitationController {
             model.addAttribute("invitationExists", e.getMessage());
             return "errors";
         }
-
 
         invitationManager.sendInvitation(id, userManager.getUserId());
         return getInvitations(model);

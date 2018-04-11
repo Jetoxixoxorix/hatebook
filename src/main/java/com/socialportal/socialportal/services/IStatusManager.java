@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IStatusManager {
     List<UserStatus> getStatuses(Long id);
-    Long getAuthorOfStatus(Long id);
+    Long getIdOfAuthorOfStatus(Long id);
     UserStatus getUserStatus(Long id);
 
     void addNewStatus(UserStatus userStatus, Long userProfileId, User addingUser);
