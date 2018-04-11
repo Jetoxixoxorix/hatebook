@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -16,12 +17,14 @@ public class Invitation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private Long id;
-    
+
+    @NotNull
     @ManyToOne
     @JoinColumn
     private User receiver;
 
+    @NotNull
     @ManyToOne
     @JoinColumn
-    private User sendUser;
+    private User sender;
 }

@@ -48,14 +48,14 @@ public class FriendController {
             return "errors";
         }
 
-        friendManager.addFriend(userManager.getUserId(), userManager.getById(id), invitationId);
+        friendManager.addFriend(userManager.getUserId(), userManager.getUserById(id), invitationId);
         return getFriendsList(model, userManager.getUserId());
     }
 
     @PostMapping("/deletefriend/{id}")
     public String deleteFriend(@PathVariable("id") Long id, Model model){
-        friendManager.deleteFriend(userManager.getUserId(), userManager.getById(id));
-        friendManager.deleteFriend(id, userManager.getById(userManager.getUserId()));
+        friendManager.deleteFriend(userManager.getUserId(), userManager.getUserById(id));
+        friendManager.deleteFriend(id, userManager.getUserById(userManager.getUserId()));
 
         return getFriendsList(model, userManager.getUserId());
     }

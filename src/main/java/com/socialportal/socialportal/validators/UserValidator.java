@@ -64,13 +64,13 @@ public class UserValidator implements IUserValidator {
 
     private void checkHasInvitation(Long loggedUser, Long addedFriend) throws HasInvitationException {
         List<User> invitationList = invitationManager.getUsersFromInvitationsList(loggedUser);
-        if (invitationList.contains(userManager.getById(addedFriend)))
+        if (invitationList.contains(userManager.getUserById(addedFriend)))
             throw new HasInvitationException();
     }
 
     public void checkIsFriend(Long loggedUserId, Long addedFriend) throws HasThisFriendException {
         List<User> friendsList = friendManager.getUsersFromFriendsList(loggedUserId);
-        if (friendsList.contains(userManager.getById(addedFriend)))
+        if (friendsList.contains(userManager.getUserById(addedFriend)))
             throw new HasThisFriendException();
     }
 

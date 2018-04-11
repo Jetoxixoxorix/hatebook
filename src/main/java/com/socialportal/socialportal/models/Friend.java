@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -18,8 +19,10 @@ public class Friend {
     @Setter(AccessLevel.NONE)
     private Long id;
 
+    @NotNull
     private Long userId;
 
+    @NotNull
     @ManyToOne
     @JoinColumn
     private User friend;

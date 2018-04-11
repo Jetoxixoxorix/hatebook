@@ -22,32 +22,32 @@ public class InvitationManager implements IInvitationManager {
     }
 
     public Invitation getInvitation(User receiver, User sender){
-        if(invitationRepository.getInvitationByReceiverAndSendUser(receiver, sender) != null)
-            return invitationRepository.getInvitationByReceiverAndSendUser(receiver, sender);
+        if(invitationRepository.getInvitationByReceiverAndSender(receiver, sender) != null)
+            return invitationRepository.getInvitationByReceiverAndSender(receiver, sender);
         else
-            return invitationRepository.getInvitationByReceiverAndSendUser(sender, receiver);
+            return invitationRepository.getInvitationByReceiverAndSender(sender, receiver);
     }
 
     public List<Invitation> getReceivedInvitations(Long id){
-        return invitationRepository.getInvitationsByReceiver(userManager.getById(id));
+        return invitationRepository.getInvitationsByReceiver(userManager.getUserById(id));
     }
 
     public List<User> getUsersFromInvitationsList(Long id) {
         List<Invitation> invitationList = getReceivedInvitations(id);
         List<User> users = new LinkedList<>();
         for (Invitation invitation : invitationList) {
-            users.add(invitation.getSendUser());
+            users.add(invitation.getSender());
         }
 
         return users;
     }
 
     public List<Invitation> getSendInvitations(User user){
-        return invitationRepository.getInvitationsBySendUser(user);
+        return invitationRepository.getInvitationsBySender(user);
     }
 
     public List<User> getSendUsersFromInvitationsList(Long id) {
-        List<Invitation> invitationList = getSendInvitations(userManager.getById(id));
+        List<Invitation> invitationList = getSendInvitations(userManager.getUserById(id));
         List<User> users = new LinkedList<>();
         for (Invitation invitation : invitationList) {
             users.add(invitation.getReceiver());
@@ -58,8 +58,8 @@ public class InvitationManager implements IInvitationManager {
 
     public void sendInvitation(Long userId, Long id) {
         Invitation invitation = new Invitation();
-        invitation.setReceiver(userManager.getById(userId));
-        invitation.setSendUser(userManager.getById(id));
+        invitation.setReceiver(userManager.getUserById(userId));
+        invitation.setSender(userManager.getUserById(id));
         invitationRepository.save(invitation);
     }
 

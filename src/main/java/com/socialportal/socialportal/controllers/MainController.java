@@ -52,12 +52,12 @@ public class MainController {
         model.addAttribute("add", new UserStatus());
         model.addAttribute("statuses", statusManager.getStatuses(id));
         model.addAttribute("loggedUserId", userManager.getUserId());
-        model.addAttribute("userProfile", userManager.getById(id));
+        model.addAttribute("userProfile", userManager.getUserById(id));
 
         model.addAttribute("addComment", new UserComment());
         model.addAttribute("comments", commentManager.getUserComments(id));
 
-        if (userManager.getById(id) == null) {
+        if (userManager.getUserById(id) == null) {
             model.addAttribute("nonExistingUser", "There is no such user.");
         }
         return "userProfile";
@@ -67,7 +67,7 @@ public class MainController {
 
     @PostMapping("/userprofile/{id}")
     public String addStatus(@ModelAttribute("add") UserStatus userStatus, @PathVariable("id") Long id, Model model) {
-        statusManager.addNewStatus(userStatus, id, userManager.getById(userManager.getUserId()));
+        statusManager.addNewStatus(userStatus, id, userManager.getUserById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 
@@ -107,7 +107,7 @@ public class MainController {
 
     @PostMapping("/userprofile/{id}/addcomment/{statusId}")
     public String addComment(@PathVariable("id") Long id, @PathVariable("statusId") Long statusId, @ModelAttribute("addComment") UserComment userComment, Model model) {
-        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getById(userManager.getUserId()));
+        commentManager.addNewComment(userComment, id, statusManager.getUserStatus(statusId), userManager.getUserById(userManager.getUserId()));
         return getUserProfile(id, model);
     }
 

@@ -19,10 +19,13 @@ public class UserComment {
     @Setter(AccessLevel.NONE)
     private Long commentId;
 
+    @NotNull
     private String content;
 
+    @NotNull
     private Date date;
 
+    @NotNull
     private Long userId;
 
     @NotNull

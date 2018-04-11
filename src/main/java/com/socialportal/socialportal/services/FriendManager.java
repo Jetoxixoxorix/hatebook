@@ -45,7 +45,7 @@ public class FriendManager implements IFriendManager {
 
         Friend friend2 = new Friend();
         friend2.setUserId(user.getId());
-        friend2.setFriend(userManager.getById(loggedUserid));
+        friend2.setFriend(userManager.getUserById(loggedUserid));
         friendRepository.save(friend2);
 
         invitationManager.deleteInvitation(invitationId);

@@ -8,13 +8,13 @@
     <h1>Invitations received:</h1>
     <table>
         <tr th:object="${invitations}" th:each="invitation : ${invitations}">
-            <td th:text="${invitation.sendUser.firstName} + ' ' + ${invitation.sendUser.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${invitation.sendUser.id}}" method="get">
+            <td th:text="${invitation.getSender.firstName} + ' ' + ${invitation.getSender.lastName}"></td>
+            <form action="#" th:action="@{'/userprofile/' + ${invitation.getSender.id}}" method="get">
                 <td>
                     <button class="btn btn-default">Profile</button>
                 </td>
             </form>
-            <form th:action="@{'/addfriend/' + ${invitation.sendUser.id} + '/' + ${invitation.id}}" method="post">
+            <form th:action="@{'/addfriend/' + ${invitation.getSender.id} + '/' + ${invitation.id}}" method="post">
                 <td>
                     <button class="btn btn-default">Accept invitation</button>
                 </td>

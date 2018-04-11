@@ -35,7 +35,7 @@ public class InvitationController {
     @GetMapping("/invitations")
     public String getInvitations(Model model) {
         model.addAttribute("invitations", invitationManager.getReceivedInvitations(userManager.getUserId()));
-        model.addAttribute("sendInvitations", invitationManager.getSendInvitations(userManager.getById(userManager.getUserId())));
+        model.addAttribute("sendInvitations", invitationManager.getSendInvitations(userManager.getUserById(userManager.getUserId())));
         return "invitations";
     }
 
@@ -67,7 +67,7 @@ public class InvitationController {
 
     @PostMapping("/deleteinvitation/{loggeduserid}/{id}")
     public String deleteInvitationByUsersId(@PathVariable("loggeduserid") Long loggedUserId, @PathVariable("id") Long userId, Model model) {
-        Invitation invitation = invitationManager.getInvitation(userManager.getById(loggedUserId), userManager.getById(userId));
+        Invitation invitation = invitationManager.getInvitation(userManager.getUserById(loggedUserId), userManager.getUserById(userId));
         invitationManager.deleteInvitation(invitation.getId());
         return getInvitations(model);
     }

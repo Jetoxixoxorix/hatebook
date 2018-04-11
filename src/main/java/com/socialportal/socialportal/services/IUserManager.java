@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUserManager {
     User findUserByEmail(String email);
-    User getById(Long id);
+    User getUserById(Long id);
     Long getUserId();
     List<User> findUsersByName(String name);
 

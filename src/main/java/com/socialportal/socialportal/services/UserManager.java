@@ -36,7 +36,7 @@ public class UserManager implements IUserManager {
         return userRepository.findUserByUsername(username);
     }
 
-    public User getById(Long id) {
+    public User getUserById(Long id) {
         return userRepository.findUserById(id);
     }
 

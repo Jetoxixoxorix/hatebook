@@ -20,6 +20,7 @@ public class UserStatus {
     @Setter(AccessLevel.NONE)
     private Long statusId;
 
+    @NotNull
     private String content;
 
     @NotNull
