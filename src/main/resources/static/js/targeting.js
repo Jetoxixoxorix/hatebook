@@ -11,4 +11,16 @@ $(document).ready(function () {
         var form = list.find(".delete");
         form.submit();
     });
+
+    $(".editComment").on('click', function () {
+        var list = $(this).closest("ul");
+        var form = list.find(".editCommentForm");
+        form.submit();
+    });
+
+    $(".deleteComment").on('click', function () {
+        var list = $(this).closest("ul");
+        var form = list.find(".deleteCommentForm");
+        form.submit();
+    });
 });
