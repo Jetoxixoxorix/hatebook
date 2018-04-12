@@ -26,8 +26,13 @@
                     <div class="statusContent">
                         <div class="row">
                             <div class="col-md-6">
-                                <p class="name"
-                                   th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}"></p>
+                                <div class="username">
+                                    <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
+                                          method="get"
+                                          class="getProfileForm"></form>
+                                    <a href="#" class="getProfile"
+                                       th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}">Profile</a>
+                                </div>
                             </div>
                             <div class="pull-right">
                                 <div class="dropdown">
@@ -55,7 +60,13 @@
                         <div class="comments">
                             <div class="comment" th:each="comment : ${comments}"
                                  th:if="${comment.userStatus.statusId == status.statusId}">
-                                <p th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}"></p>
+                                <div class="username">
+                                    <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
+                                          method="get"
+                                          class="getProfileForm"></form>
+                                    <a href="#" class="getProfile"
+                                       th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}">Profile</a>
+                                </div>
                                 <p class="date" th:text="${comment.date}"></p>
                                 <div class="row">
                                     <div class="col-md-6">

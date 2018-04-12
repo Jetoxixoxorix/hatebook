@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="user">
                         <div class="col-md-6">
-                            <div class="userName">
+                            <div class="username">
                                 <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get"
                                       class="getProfileForm"></form>
                                 <a href="#" class="getProfile"
@@ -36,6 +36,12 @@
                                               class="sendInvitationForm"></form>
                                         <a href="#" class="sendInvitation">Send invitation to friends</a>
                                     </li>
+                                    <!--must do another addFriend method-->
+                                    <!--         <li th:if="${receivedInvitations.contains(user)}">
+                                                <form th:action="@{'/addfriend/' + ${user.id} + '/' + ${invitation.id}}"
+                                                       method="post" class="acceptInvitationForm"></form>
+                                                 <a href="#" class="acceptInvitation">Accept invitation</a>
+                                             </li>-->
                                     <li th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}">
                                         <form th:action="@{'/deleteinvitation/' + ${loggedUserid} + '/' + ${user.id}}"
                                               method="post" class="cancelInvitationForm"></form>

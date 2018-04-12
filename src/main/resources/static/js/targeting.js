@@ -42,6 +42,12 @@ $(document).ready(function () {
        form.submit();
     });
 
+    $(".acceptInvitation").on('click', function () {
+        var row = $(this).closest("ul");
+        var form = row.find(".acceptInvitationForm");
+        form.submit();
+    });
+
     $(".cancelInvitation").on('click', function () {
        var row = $(this).closest("ul");
        var form = row.find(".cancelInvitationForm");
