@@ -51,7 +51,6 @@ public class UserController {
 
         userManager.registerUser(user);
         model.addAttribute("registrationCompleted", "Your account is registered.");
-        /*return "registrationCompleted";*/
         return "registration";
     }
 }
