@@ -31,19 +31,18 @@
                                               method="post" class="deleteFriendForm"></form>
                                         <a href="#" class="deleteFriend">Delete from friends</a>
                                     </li>
-                                    <li th:if="${user.id != loggedUserid and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}">
+                                    <li th:if="${user.id != loggedUserId and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}">
                                         <form th:action="@{'/sendinvitation/' + ${user.id}}" method="post"
                                               class="sendInvitationForm"></form>
                                         <a href="#" class="sendInvitation">Send invitation to friends</a>
                                     </li>
-                                    <!--must do another addFriend method-->
-                                    <!--         <li th:if="${receivedInvitations.contains(user)}">
-                                                <form th:action="@{'/addfriend/' + ${user.id} + '/' + ${invitation.id}}"
-                                                       method="post" class="acceptInvitationForm"></form>
-                                                 <a href="#" class="acceptInvitation">Accept invitation</a>
-                                             </li>-->
+                                    <li th:if="${receivedInvitations.contains(user)}">
+                                        <form th:action="@{'/addfriend/' + ${user.id}}"
+                                              method="post" class="acceptInvitationForm"></form>
+                                        <a href="#" class="acceptInvitation">Accept invitation</a>
+                                    </li>
                                     <li th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}">
-                                        <form th:action="@{'/deleteinvitation/' + ${loggedUserid} + '/' + ${user.id}}"
+                                        <form th:action="@{'/deleteinvitation/' + ${loggedUserId} + '/' + ${user.id}}"
                                               method="post" class="cancelInvitationForm"></form>
                                         <a href="#" class="cancelInvitation">Cancel invitation</a>
                                     </li>

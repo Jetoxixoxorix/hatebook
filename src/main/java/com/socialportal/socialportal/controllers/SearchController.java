@@ -33,7 +33,7 @@ public class SearchController {
     @PostMapping("/search")
     public String searchUsers(@ModelAttribute("search") User user, Model model) {
         model.addAttribute("users", userManager.findUsersByName(user.getFirstName()));
-        model.addAttribute("loggedUserid", userManager.getUserId());
+        model.addAttribute("loggedUserId", userManager.getUserId());
         model.addAttribute("friends", friendManager.getUsersFromFriendsOfUser(userManager.getUserId()));
 
         model.addAttribute("receivedInvitations", invitationManager.getSendersOfInvitations(userManager.getUserId()));

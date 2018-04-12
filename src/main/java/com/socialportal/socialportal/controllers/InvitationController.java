@@ -67,7 +67,6 @@ public class InvitationController {
     @PostMapping("/deleteinvitation/{loggeduserid}/{id}")
     public String deleteInvitationByUsersId(@PathVariable("loggeduserid") Long loggedUserId, @PathVariable("id") Long userId, Model model) {
         Invitation invitation = invitationManager.getInvitation(userManager.getUserById(loggedUserId), userManager.getUserById(userId));
-        invitationManager.deleteInvitation(invitation.getId());
-        return getInvitations(model);
+        return deleteInvitation(invitation.getId(), model);
     }
 }
