@@ -23,4 +23,28 @@ $(document).ready(function () {
         var form = list.find(".deleteCommentForm");
         form.submit();
     });
+
+    $(".getProfile").on('click', function () {
+       var row = $(this).closest("ul");
+       var form = row.find(".getProfileForm");
+       form.submit();
+    });
+
+    $(".deleteFriend").on('click', function () {
+       var row = $(this).closest("ul");
+       var form = row.find(".deleteFriendForm");
+       form.submit();
+    });
+
+    $(".sendInvitation").on('click', function () {
+       var row = $(this).closest("ul");
+       var form = row.find(".sendInvitationForm");
+       form.submit();
+    });
+
+    $(".cancelInvitation").on('click', function () {
+       var row = $(this).closest("ul");
+       var form = row.find(".cancelInvitationForm");
+       form.submit();
+    });
 });

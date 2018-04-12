@@ -4,34 +4,51 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <h1>Results:</h1>
-    <table>
-        <tr th:object="${users}" th:each="user : ${users}">
-            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get">
-                <td>
-                    <button class="btn btn-default">Profile</button>
-                </td>
-            </form>
-            <form th:if="${friends.contains(user) == true}" th:action="@{'/deletefriend/' + ${user.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Delete from friends</button>
-                </td>
-            </form>
-            <form th:if="${user.id != loggedUserid and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}"
-                  th:action="@{'/sendinvitation/' + ${user.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Send invitation to friends</button>
-                </td>
-            </form>
-            <form th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}"
-                  th:action="@{'/deleteinvitation/' + ${loggedUserid} + '/' + ${user.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Cancel invitation</button>
-                </td>
-            </form>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <h1>Results:</h1>
+            <div class="users" th:object="${users}" th:each="user : ${users}">
+                <div class="row">
+                    <div class="user">
+                        <div class="col-md-6">
+                            <div class="userName">
+                                <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get"
+                                      class="getProfileForm"></form>
+                                <a href="#" class="getProfile"
+                                   th:text="${user.firstName} + ' ' + ${user.lastName}">Profile</a>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                        data-toggle="dropdown"><span
+                                        class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li th:if="${friends.contains(user) == true}">
+                                        <form th:action="@{'/deletefriend/' + ${user.id}}"
+                                              method="post" class="deleteFriendForm"></form>
+                                        <a href="#" class="deleteFriend">Delete from friends</a>
+                                    </li>
+                                    <li th:if="${user.id != loggedUserid and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}">
+                                        <form th:action="@{'/sendinvitation/' + ${user.id}}" method="post"
+                                              class="sendInvitationForm"></form>
+                                        <a href="#" class="sendInvitation">Send invitation to friends</a>
+                                    </li>
+                                    <li th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}">
+                                        <form th:action="@{'/deleteinvitation/' + ${loggedUserid} + '/' + ${user.id}}"
+                                              method="post" class="cancelInvitationForm"></form>
+                                        <a href="#" class="cancelInvitation">Cancel invitation</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
