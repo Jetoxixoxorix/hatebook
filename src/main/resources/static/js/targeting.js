@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     $(".getProfile").on('click', function () {
-       var row = $(this).closest("ul");
+       var row = $(this).closest("div");
        var form = row.find(".getProfileForm");
        form.submit();
     });
