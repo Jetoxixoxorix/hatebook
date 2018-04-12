@@ -49,3 +49,7 @@ textarea {
 .comments{
     margin-left: 10px;
 }
+
+.dropdown-menu li form{
+    display: none;
+}

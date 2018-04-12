@@ -36,25 +36,16 @@
                                             class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li hidden="hidden" class="statusId" th:text="${status.statusId}"></li>
+                                        <li hidden="hidden" class="userId" th:text="${userProfile.id}"></li>
                                         <li th:if="${loggedUserId} == ${status.addingUser.id}">
                                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/editstatus/' + ${status.statusId}}"
-                                                  method="get" id="edit"></form>
+                                                  method="get" class="edit"></form>
                                             <a href="#" class="editStatus">Edit</a>
                                         </li>
-                                        <!--onclick="document.getElementById('edit').submit()"-->
-                                        <!--                    <li>
-                                            <form th:if="${loggedUserId} == ${status.addingUser.id}"
-                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/editstatus/' + ${status.statusId}}"
-                                                  method="get">
-                                                <button class="btn btn-default" type="submit">Edit</button>
-                                            </form>
-                                        </li>-->
-                                        <li>
-                                            <form th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}"
-                                                  th:action="@{'/userprofile/' + ${userProfile.id} + '/deletestatus/' + ${status.statusId}}"
-                                                  method="post">
-                                                <button class="btn btn-default" type="submit">Delete</button>
-                                            </form>
+                                        <li th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}">
+                                            <form th:action="@{'/userprofile/' + ${userProfile.id} + '/deletestatus/' + ${status.statusId}}"
+                                                    method="post" class="delete"></form>
+                                            <a href="#" class="deleteStatus">Delete</a>
                                         </li>
                                     </ul>
                                 </div>
