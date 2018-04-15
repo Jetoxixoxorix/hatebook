@@ -37,4 +37,12 @@ public class UserComment {
     @ManyToOne
     @JoinColumn
     private User addingUser;
+
+    public UserComment(@NotNull String content, @NotNull Date date, @NotNull Long userId, @NotNull UserStatus userStatus, @NotNull User addingUser) {
+        this.content = content;
+        this.date = date;
+        this.userId = userId;
+        this.userStatus = userStatus;
+        this.addingUser = addingUser;
+    }
 }

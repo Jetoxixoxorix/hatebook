@@ -66,6 +66,11 @@ public class CommentManager implements ICommentManager {
         }
     }
 
+    @Override
+    public void addNewComment(UserComment userComment) {
+        userCommentRepository.save(userComment);
+    }
+
 
     //temporary
     public Iterable<UserComment> allComments() {

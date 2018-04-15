@@ -16,6 +16,7 @@ public interface ICommentManager {
     void editComment(Long id, String content);
     void deleteComments(UserStatus userStatus);
 
+    void addNewComment(UserComment userComment);
     //temporary
     Iterable<UserComment> allComments();
 }

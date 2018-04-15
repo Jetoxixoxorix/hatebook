@@ -1,7 +1,9 @@
 package com.socialportal.socialportal;
 
 import com.socialportal.socialportal.models.User;
+import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
+import com.socialportal.socialportal.services.ICommentManager;
 import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 @Component
 public class ExampleDatabase implements CommandLineRunner {
@@ -17,36 +20,48 @@ public class ExampleDatabase implements CommandLineRunner {
     IUserManager userManager;
 
     @Autowired
-    IStatusManager IStatusManager;
+    IStatusManager statusManager;
+
+    @Autowired
+    ICommentManager commentManager;
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("Jan", "Kox", "qwerty", "prosty@gmail.com");
-        User user1 = new User("Piotr", "Prox", "qwerty", "prosty1@gmail.com");
-        User user2 = new User("Magda", "Jet", "qwerty", "prosty2@gmail.com");
-        User user3 = new User("Jan", "Niezbedny", "qwerty", "prosty3@gmail.com");
-        User user4 = new User("Jan", "Zbedny", "qwerty", "prosty4@gmail.com");
-        User user5 = new User("Piotr", "Kox", "qwerty", "prosty5@gmail.com");
-        userManager.registerUser(user);
-        userManager.registerUser(user1);
-        userManager.registerUser(user2);
-        userManager.registerUser(user3);
-        userManager.registerUser(user4);
-        userManager.registerUser(user5);
+        LinkedList<User> users = new LinkedList<>();
+        users.add(new User("Jan", "Kox", "qwerty", "prosty@gmail.com"));
+        users.add(new User("Piotr", "Prox", "qwerty", "prosty1@gmail.com"));
+        users.add(new User("Magda", "Jet", "qwerty", "prosty2@gmail.com"));
+        users.add(new User("Jan", "Niezbedny", "qwerty", "prosty3@gmail.com"));
+        users.add( new User("Jan", "Zbedny", "qwerty", "prosty4@gmail.com"));
+        users.add( new User("Piotr", "Kox", "qwerty", "prosty5@gmail.com"));
 
-        UserStatus userStatus = new UserStatus("First status",  1L, new Date(), user);
-        UserStatus userStatus1 = new UserStatus("Second status",  1L, new Date(), user1);
-        UserStatus userStatus2 = new UserStatus("Third status",  2L, new Date(), user1);
-        UserStatus userStatus3 = new UserStatus("Fourth status",  2L, new Date(), user2);
-        UserStatus userStatus4 = new UserStatus("Fifth status",  2L, new Date(), user3);
-        UserStatus userStatus5 = new UserStatus("Sixth status",  3L, new Date(), user2);
-        UserStatus userStatus6 = new UserStatus("Seventh status",  3L, new Date(), user3);
-        IStatusManager.addNewStatus(userStatus, 1L, user);
-        IStatusManager.addNewStatus(userStatus1, 1L, user1);
-        IStatusManager.addNewStatus(userStatus2, 2L, user1);
-        IStatusManager.addNewStatus(userStatus3, 2L, user2);
-        IStatusManager.addNewStatus(userStatus4, 2L, user3);
-        IStatusManager.addNewStatus(userStatus5, 3L, user2);
-        IStatusManager.addNewStatus(userStatus6, 3L, user3);
+        for(User user : users){
+            userManager.registerUser(user);
+        }
+
+        LinkedList<UserStatus> statuses = new LinkedList<>();
+
+        statuses.add(new UserStatus("First status",  1L, new Date(), users.get(0)));
+        statuses.add(new UserStatus("Second status",  1L, new Date(), users.get(0)));
+        statuses.add(new UserStatus("Third status",  2L, new Date(), users.get(0)));
+        statuses.add(new UserStatus("Fourth status",  2L, new Date(), users.get(1)));
+        statuses.add(new UserStatus("Fifth status",  2L, new Date(), users.get(2)));
+        statuses.add(new UserStatus("Sixth status",  3L, new Date(), users.get(1)));
+        statuses.add(new UserStatus("Seventh status",  3L, new Date(), users.get(2)));
+
+        for(UserStatus status: statuses){
+            statusManager.addNewStatus(status);
+        }
+
+        LinkedList<UserComment> comments = new LinkedList<>();
+
+        comments.add(new UserComment("First Comment", new Date(), 1L, statuses.get(0), users.get(0)));
+        comments.add(new UserComment("Second Comment", new Date(), 1L, statuses.get(0), users.get(0)));
+        comments.add(new UserComment("Third Comment", new Date(), 1L, statuses.get(0), users.get(0)));
+        comments.add(new UserComment("Fourth Comment", new Date(), 1L, statuses.get(0), users.get(0)));
+
+        for(UserComment comment: comments){
+            commentManager.addNewComment(comment);
+        }
     }
 }

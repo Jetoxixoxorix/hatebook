@@ -14,6 +14,7 @@ public interface IStatusManager {
     void deleteStatus(Long id);
     void editUserStatus(Long id, String content);
 
+    void addNewStatus(UserStatus userStatus);
     //temporary
     Iterable<UserStatus> allStatus();
 }

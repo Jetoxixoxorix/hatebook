@@ -11,6 +11,10 @@
     margin-top: 8px;
 }
 
+#search ul {
+    padding-left: 0px;
+}
+
 .status {
     border: solid;
     margin-bottom: 10px;
