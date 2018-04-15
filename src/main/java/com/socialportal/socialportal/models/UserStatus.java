@@ -16,8 +16,9 @@ import java.util.Date;
 public class UserStatus {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     @Setter(AccessLevel.NONE)
+    @Column(name = "status_id")
     private Long statusId;
 
     @NotNull

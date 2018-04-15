@@ -8,11 +8,12 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@TableGenerator(name="tab", initialValue=0, allocationSize=50)
 @NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     @Setter(AccessLevel.NONE)
     @Column(name = "user_id")
     private Long id;

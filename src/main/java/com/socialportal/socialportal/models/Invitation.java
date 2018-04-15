@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Invitation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     @Setter(AccessLevel.NONE)
     private Long id;
 
