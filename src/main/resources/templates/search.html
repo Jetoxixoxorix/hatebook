@@ -4,17 +4,68 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <div id="search">
-        <form action="#" th:action="@{/search}" th:object="${search}" method="post">
-            <ul>
-                <li>
-                    <input id="searchName" class="form-control" type="text" th:field="*{firstName}"/>
-                </li>
-                <li>
-                    <button class="btn btn-default" id="find" type="submit">Find</button>
-                </li>
-            </ul>
-        </form>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="search">
+                <form action="#" th:action="@{/search}" th:object="${search}" method="post">
+                    <ul>
+                        <li>
+                            <input id="searchName" class="form-control" type="text" th:field="*{firstName}"/>
+                        </li>
+                        <li>
+                            <button class="btn btn-default" id="find" type="submit">Find</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div id="results" th:if="${users}">
+                <h1>Results:</h1>
+                <div class="users" th:object="${users}" th:each="user : ${users}">
+                    <div class="row">
+                        <div class="user">
+                            <div class="col-md-6">
+                                <div class="username">
+                                    <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get"
+                                          class="getProfileForm"></form>
+                                    <a href="#" class="getProfile"
+                                       th:text="${user.firstName} + ' ' + ${user.lastName}">Profile</a>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                            data-toggle="dropdown"><span
+                                            class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li th:if="${friends.contains(user) == true}">
+                                            <form th:action="@{'/deletefriend/' + ${user.id}}"
+                                                  method="post" class="deleteFriendForm"></form>
+                                            <a href="#" class="deleteFriend">Delete from friends</a>
+                                        </li>
+                                        <li th:if="${user.id != loggedUserId and friends.contains(user) == false and receivedInvitations.contains(user) == false and sendInvitations.contains(user) == false}">
+                                            <form th:action="@{'/sendinvitation/' + ${user.id}}" method="post"
+                                                  class="sendInvitationForm"></form>
+                                            <a href="#" class="sendInvitation">Send invitation to friends</a>
+                                        </li>
+                                        <li th:if="${receivedInvitations.contains(user)}">
+                                            <form th:action="@{'/addfriend/' + ${user.id}}"
+                                                  method="post" class="acceptInvitationForm"></form>
+                                            <a href="#" class="acceptInvitation">Accept invitation</a>
+                                        </li>
+                                        <li th:if="${receivedInvitations.contains(user) || sendInvitations.contains(user)}">
+                                            <form th:action="@{'/deleteinvitation/' + ${loggedUserId} + '/' + ${user.id}}"
+                                                  method="post" class="cancelInvitationForm"></form>
+                                            <a href="#" class="cancelInvitation">Cancel invitation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

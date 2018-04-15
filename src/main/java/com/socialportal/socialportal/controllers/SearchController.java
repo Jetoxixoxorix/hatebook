@@ -38,7 +38,8 @@ public class SearchController {
 
         model.addAttribute("receivedInvitations", invitationManager.getSendersOfInvitations(userManager.getUserId()));
         model.addAttribute("sendInvitations", invitationManager.getReceiversOfInvitations(userManager.getUserId()));
-        return "searchResults";
+        return "search";
+        //return "searchResults";
     }
 
 }
