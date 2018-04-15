@@ -1,5 +1,13 @@
+body {
+    background-color: lightcyan;
+}
+
 .navbar {
     background-color: #5cb85c;
+}
+
+.navbar a {
+    color: black;
 }
 
 #content {
@@ -16,8 +24,12 @@
 }
 
 .status {
-    border: solid;
+    border-style: solid;
+    border-color: #1b6d85;
+    border-radius: 10px;
+    border-width: 1px;
     margin-bottom: 10px;
+    background-color: white;
 }
 
 .status form textarea {
@@ -43,11 +55,6 @@ textarea {
 .date {
     font-size: 8px;
     color: grey;
-
-}
-
-.name {
-
 }
 
 .comments {
@@ -64,4 +71,8 @@ textarea {
 
 .user {
     margin-top: 10px;
+}
+
+.add button {
+    clear: left;
 }
