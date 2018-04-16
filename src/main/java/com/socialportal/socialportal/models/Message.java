@@ -35,5 +35,4 @@ public class Message {
     @ManyToOne
     @JoinColumn
     private User sender;
-
 }

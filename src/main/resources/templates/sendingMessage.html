@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+<nav th:replace="navbar :: navbar"></nav>
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="status">
+                <div class="statusContent"> <!-- + ${message.sender.id} + '/' + ${message.receiver.id}}-->
+                    <form th:action="@{'/sendmessage/'}"
+                          th:object="${message}" method="post">
+                        <textarea id="message" th:text="*{content}" th:field="*{content}"></textarea>
+                        <button class="btn btn-default" type="submit">Send</button>
+                    </form>
+                    <!--+ ${message.sender.id}}" -->
+                    <form th:action="@{'/userprofile/'}" method="get">
+                        <button class="btn btn-default" type="submit">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
