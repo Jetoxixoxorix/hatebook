@@ -13,7 +13,7 @@
                 <form th:if="${loggedUserId == userProfile.id}" th:action="@{/invitations}">
                     <button type="submit" class="btn btn-default">Invitations</button>
                 </form>
-                <form th:action="@{/message}">
+                <form th:action="@{'/message/' + ${loggedUserId} + '/' + ${userProfile.id}}">
                     <button type="submit" class="btn btn-default">Send Message</button>
                 </form>
             </div>
@@ -39,9 +39,9 @@
                             </div>
                             <div class="pull-right">
                                 <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                    <button class="btn btn-default dropdown-toggle menu" type="button"
                                             data-toggle="dropdown"><span
-                                            class="caret"></span></button>
+                                            class="glyphicon glyphicon-option-horizontal"></span></button>
                                     <ul class="dropdown-menu">
                                         <li th:if="${loggedUserId} == ${status.addingUser.id}">
                                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/editstatus/' + ${status.statusId}}"

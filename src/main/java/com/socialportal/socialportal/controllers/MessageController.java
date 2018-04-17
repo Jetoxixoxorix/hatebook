@@ -1,45 +1,43 @@
 package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.models.Message;
+import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.services.MessageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
 public class MessageController {
 
     private MessageManager messageManager;
+    private IUserManager userManager;
 
     @Autowired
-    public MessageController(MessageManager messageManager) {
+    public MessageController(MessageManager messageManager, IUserManager userManager) {
         this.messageManager = messageManager;
+        this.userManager = userManager;
     }
 
     @GetMapping("/messages/{senderId}/{receiverId}")
-    public String getMessages(Model model, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId){
+    public String getMessages(Model model, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId) {
         model.addAttribute("messages", messageManager.getMessages(receiverId, senderId));
         return "messages";
     }
 
-
-    //{senderId}/{receiverId}"
-    //, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId
-    @GetMapping("/message")
-    public String getMessage(Model model){
+    @GetMapping("/message/{senderId}/{receiverId}")
+    public String getMessage(Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
         model.addAttribute("message", new Message());
+        model.addAttribute("sender", userManager.getUserById(senderId));
+        model.addAttribute("receiver", userManager.getUserById(receiverId));
         return "sendingMessage";
     }
 
-    /*, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId*/
-    @PostMapping("/sendmessage/{receiverId}/{senderId}")
-    public String sendMessage(Model model){
-
-        return "messages";
+    @PostMapping("/sendmessage/{senderId}/{receiverId}")
+    public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
+        messageManager.sendMessage(message, senderId, receiverId);
+        return getMessages(model, senderId, receiverId);
     }
 }

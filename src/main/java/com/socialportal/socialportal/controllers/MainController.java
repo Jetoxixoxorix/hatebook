@@ -1,12 +1,14 @@
 package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.errors.HasPrivilegeException;
+import com.socialportal.socialportal.models.Message;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
 import com.socialportal.socialportal.services.ICommentManager;
 import com.socialportal.socialportal.services.IStatusManager;
 import com.socialportal.socialportal.services.IUserManager;
+import com.socialportal.socialportal.services.MessageManager;
 import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +24,15 @@ public class MainController {
     private IStatusManager statusManager;
     private IUserValidator userValidator;
     private ICommentManager commentManager;
+    private MessageManager messageManager;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, ICommentManager commentManager) {
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, ICommentManager commentManager, MessageManager messageManager) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.userValidator = userValidator;
         this.commentManager = commentManager;
+        this.messageManager = messageManager;
     }
 
     @GetMapping("/login")
@@ -163,5 +167,12 @@ public class MainController {
     public @ResponseBody
     Iterable<UserComment> allComments() {
         return commentManager.allComments();
+    }
+
+    //temporary
+    @GetMapping("allmessages")
+    public @ResponseBody
+    Iterable<Message> allMessages() {
+        return messageManager.allMessages();
     }
 }
