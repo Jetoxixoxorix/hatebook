@@ -5,7 +5,14 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Conversastions</h4>
+            <p th:each="user : ${people}" th:text="${user.firstName} + ' ' + ${user.lastName}"></p>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -23,7 +23,14 @@ public class MessageController {
 
     @GetMapping("/messages/{senderId}/{receiverId}")
     public String getMessages(Model model, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId) {
-        model.addAttribute("messages", messageManager.getMessages(receiverId, senderId));
+        model.addAttribute("people", messageManager);
+        //model.addAttribute("messages", messageManager.getMessages(receiverId, senderId));
+        return "messages";
+    }
+
+    @GetMapping("/messages")
+    public String getPeople(Model model){
+        model.addAttribute("people", messageManager.getPeople(userManager.getUserId()));
         return "messages";
     }
 
@@ -38,6 +45,6 @@ public class MessageController {
     @PostMapping("/sendmessage/{senderId}/{receiverId}")
     public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
         messageManager.sendMessage(message, senderId, receiverId);
-        return getMessages(model, senderId, receiverId);
+        return getPeople(model);
     }
 }

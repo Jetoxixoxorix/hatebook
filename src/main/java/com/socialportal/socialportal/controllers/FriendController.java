@@ -65,8 +65,6 @@ public class FriendController {
     @PostMapping("/deletefriend/{id}")
     public String deleteFriend(@PathVariable("id") Long id, Model model) {
         friendManager.deleteFriend(userManager.getUserId(), userManager.getUserById(id));
-        friendManager.deleteFriend(id, userManager.getUserById(userManager.getUserId()));
-
         return getFriendsList(model, userManager.getUserId());
     }
 }
