@@ -26,7 +26,7 @@ public class MessageController {
         model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
         model.addAttribute("messages", messageManager.getMessagesWithUser(id, interlocutorId));
         model.addAttribute("loggedUserId", userManager.getUserId());
-        //model.addAttribute("messages", messageManager.getMessages(receiverId, senderId));
+        model.addAttribute("interlocutor", userManager.getUserById(interlocutorId));
         return "messages";
     }
 

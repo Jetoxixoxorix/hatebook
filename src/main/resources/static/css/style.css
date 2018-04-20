@@ -79,10 +79,10 @@ textarea {
 
 .sendMessage {
     float: left;
-    clear: right;
+    clear: both;
 }
 
 .receivedMessage {
     float: right;
-    clear: left;
+    clear: both;
 }
