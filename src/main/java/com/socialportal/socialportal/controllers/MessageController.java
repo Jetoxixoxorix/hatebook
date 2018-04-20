@@ -30,8 +30,6 @@ public class MessageController {
         return "messages";
     }
 
-
-
     @GetMapping("/messages")
     public String getInterlocutors(Model model){
         model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
@@ -50,6 +48,6 @@ public class MessageController {
     @PostMapping("/sendmessage/{senderId}/{receiverId}")
     public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
         messageManager.sendMessage(message, senderId, receiverId);
-        return getInterlocutors(model);
+        return getMessage(model, senderId, receiverId);
     }
 }

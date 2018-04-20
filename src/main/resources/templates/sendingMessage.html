@@ -15,7 +15,6 @@
                         <textarea id="message" th:field="*{content}"></textarea>
                         <button class="btn btn-default" type="submit">Send</button>
                     </form>
-                    <!--+ ${message.sender.id}}" -->
                     <form th:action="@{'/userprofile/'}" method="get">
                         <button class="btn btn-default" type="submit">Cancel</button>
                     </form>

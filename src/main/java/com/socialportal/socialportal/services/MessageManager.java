@@ -28,17 +28,16 @@ public class MessageManager {
         messageRepository.save(message);
     }
 
-    public Set<User> getInterlocutors(Long id){
+    public Set<User> getInterlocutors(Long id) {
         List<Message> messages = getAllMessages(id);
         Set<User> interlocutors = new HashSet<>();
 
-        for(Message message : messages) {
-            if(message.getSender() == message.getReceiver())
+        for (Message message : messages) {
+            if (message.getSender() == message.getReceiver())
                 interlocutors.add(message.getReceiver());
-            else if(message.getSender() != userManager.getUserById(userManager.getUserId())){
+            else if (message.getSender() != userManager.getUserById(userManager.getUserId())) {
                 interlocutors.add(message.getSender());
-            }
-            else if(message.getReceiver() != userManager.getUserById(userManager.getUserId())){
+            } else if (message.getReceiver() != userManager.getUserById(userManager.getUserId())) {
                 interlocutors.add(message.getReceiver());
             }
         }
@@ -51,18 +50,31 @@ public class MessageManager {
         return messages;
     }
 
-    public Set<Message> getMessagesWithUser(Long senderId, Long receiverId){
-        //List<Message> allMessages = getAllMessages(userManager.getUserId());
+    public Set<Message> getMessagesWithUser(Long senderId, Long receiverId) {
         List<Message> messagesWithUser = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(receiverId), userManager.getUserById(senderId));
         List<Message> messagesWithUser2 = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(senderId), userManager.getUserById(receiverId));
 
-        Set<Message> messages = new LinkedHashSet<>(messagesWithUser);
-
-        for (Message message : messagesWithUser2){
-            messages.add(message);
+        for (Message message : messagesWithUser2) {
+            messagesWithUser.add(message);
         }
 
-        return messages;
+        return sortMessages(messagesWithUser);
+    }
+
+    public Set<Message> sortMessages(List<Message> messages) {
+        int size = messages.size();
+        while (size > 1) {
+            for (int i = 0; i < size - 1; i++) {
+                if (messages.get(i).getDate().after(messages.get(i + 1).getDate())) {
+                    messages.add(i, messages.get(i + 1));
+                    messages.remove(i + 2);
+                }
+            }
+            size -= 1;
+        }
+
+        Set<Message> messagesSet = new LinkedHashSet<>(messages);
+        return messagesSet;
     }
 
     //temoprary
