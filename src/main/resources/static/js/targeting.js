@@ -25,21 +25,21 @@ $(document).ready(function () {
     });
 
     $(".getProfile").on('click', function () {
-       var row = $(this).closest("div");
-       var form = row.find(".getProfileForm");
-       form.submit();
+        var row = $(this).closest("div");
+        var form = row.find(".getProfileForm");
+        form.submit();
     });
 
     $(".deleteFriend").on('click', function () {
-       var row = $(this).closest("ul");
-       var form = row.find(".deleteFriendForm");
-       form.submit();
+        var row = $(this).closest("ul");
+        var form = row.find(".deleteFriendForm");
+        form.submit();
     });
 
     $(".sendInvitation").on('click', function () {
-       var row = $(this).closest("ul");
-       var form = row.find(".sendInvitationForm");
-       form.submit();
+        var row = $(this).closest("ul");
+        var form = row.find(".sendInvitationForm");
+        form.submit();
     });
 
     $(".acceptInvitation").on('click', function () {
@@ -49,8 +49,14 @@ $(document).ready(function () {
     });
 
     $(".cancelInvitation").on('click', function () {
-       var row = $(this).closest("ul");
-       var form = row.find(".cancelInvitationForm");
-       form.submit();
+        var row = $(this).closest("ul");
+        var form = row.find(".cancelInvitationForm");
+        form.submit();
+    });
+
+    $(".getMessages").on('click', function () {
+        var row = $(this).closest("li");
+        var form = row.find(".getMessagesForm");
+        form.submit();
     });
 });

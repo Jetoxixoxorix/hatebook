@@ -8,9 +8,18 @@
     <div class="row">
         <div class="col-md-3">
             <h4>Conversastions</h4>
-            <p th:each="user : ${people}" th:text="${user.firstName} + ' ' + ${user.lastName}"></p>
+            <ul>
+                <li th:each="user : ${interlocutors}">
+                    <form th:action="@{'/messages/' + ${loggedUserId} + '/' + ${user.id}}" method="get"
+                          class="getMessagesForm"></form>
+                    <a href="#" class="getMessages" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
+                </li>
+            </ul>
         </div>
         <div class="col-md-6">
+            <div th:each="message : ${messages}">
+                <p th:text="${message.content}"></p>
+            </div>
         </div>
     </div>
 </div>

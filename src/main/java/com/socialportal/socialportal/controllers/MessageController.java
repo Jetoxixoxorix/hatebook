@@ -21,16 +21,21 @@ public class MessageController {
         this.userManager = userManager;
     }
 
-    @GetMapping("/messages/{senderId}/{receiverId}")
-    public String getMessages(Model model, @PathVariable("receiverId") Long receiverId, @PathVariable Long senderId) {
-        model.addAttribute("people", messageManager);
+    @GetMapping("/messages/{id}/{interlocutorId}")
+    public String getMessages(Model model, @PathVariable("id") Long id, @PathVariable("interlocutorId") Long interlocutorId) {
+        model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
+        model.addAttribute("messages", messageManager.getMessagesWithUser(id, interlocutorId));
+        model.addAttribute("loggedUserId", userManager.getUserId());
         //model.addAttribute("messages", messageManager.getMessages(receiverId, senderId));
         return "messages";
     }
 
+
+
     @GetMapping("/messages")
-    public String getPeople(Model model){
-        model.addAttribute("people", messageManager.getPeople(userManager.getUserId()));
+    public String getInterlocutors(Model model){
+        model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
+        model.addAttribute("loggedUserId", userManager.getUserId());
         return "messages";
     }
 
@@ -45,6 +50,6 @@ public class MessageController {
     @PostMapping("/sendmessage/{senderId}/{receiverId}")
     public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
         messageManager.sendMessage(message, senderId, receiverId);
-        return getPeople(model);
+        return getInterlocutors(model);
     }
 }

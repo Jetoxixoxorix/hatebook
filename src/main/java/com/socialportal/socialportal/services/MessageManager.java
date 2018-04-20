@@ -6,10 +6,7 @@ import com.socialportal.socialportal.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MessageManager {
@@ -31,26 +28,40 @@ public class MessageManager {
         messageRepository.save(message);
     }
 
-    public Set<User> getPeople(Long id){
-        List<Message> messages = getMessages(id);
-        Set<User> users = new HashSet<>();
+    public Set<User> getInterlocutors(Long id){
+        List<Message> messages = getAllMessages(id);
+        Set<User> interlocutors = new HashSet<>();
 
         for(Message message : messages) {
             if(message.getSender() == message.getReceiver())
-                users.add(message.getReceiver());
+                interlocutors.add(message.getReceiver());
             else if(message.getSender() != userManager.getUserById(userManager.getUserId())){
-                users.add(message.getSender());
+                interlocutors.add(message.getSender());
             }
             else if(message.getReceiver() != userManager.getUserById(userManager.getUserId())){
-                users.add(message.getReceiver());
+                interlocutors.add(message.getReceiver());
             }
         }
-        
-        return users;
+
+        return interlocutors;
     }
 
-    public List<Message> getMessages(Long id) {
+    public List<Message> getAllMessages(Long id) {
         List<Message> messages = messageRepository.getMessagesByReceiverOrSender(userManager.getUserById(id), userManager.getUserById(id));
+        return messages;
+    }
+
+    public Set<Message> getMessagesWithUser(Long senderId, Long receiverId){
+        //List<Message> allMessages = getAllMessages(userManager.getUserId());
+        List<Message> messagesWithUser = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(receiverId), userManager.getUserById(senderId));
+        List<Message> messagesWithUser2 = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(senderId), userManager.getUserById(receiverId));
+
+        Set<Message> messages = new LinkedHashSet<>(messagesWithUser);
+
+        for (Message message : messagesWithUser2){
+            messages.add(message);
+        }
+
         return messages;
     }
 
