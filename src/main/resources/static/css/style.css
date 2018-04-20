@@ -76,3 +76,13 @@ textarea {
 .add button {
     clear: left;
 }
+
+.sendMessage {
+    float: left;
+    clear: right;
+}
+
+.receivedMessage {
+    float: right;
+    clear: left;
+}
