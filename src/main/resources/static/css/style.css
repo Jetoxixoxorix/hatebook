@@ -86,3 +86,20 @@ textarea {
     float: right;
     clear: both;
 }
+
+.interlocutors {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.messages {
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.messages li {
+    background-color: white;
+    padding: 10px 10px 10px 5px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+}
