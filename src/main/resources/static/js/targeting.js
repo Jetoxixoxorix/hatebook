@@ -59,4 +59,10 @@ $(document).ready(function () {
         var form = row.find(".getMessagesForm");
         form.submit();
     });
+
+    $(".sendMessageTo").on('click', function () {
+        var row = $(this).closest("ul");
+        var form = row.find(".sendMessageToForm");
+        form.submit();
+    });
 });

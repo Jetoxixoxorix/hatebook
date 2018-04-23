@@ -58,6 +58,11 @@
                                                   method="post" class="cancelInvitationForm"></form>
                                             <a href="#" class="cancelInvitation">Cancel invitation</a>
                                         </li>
+                                        <li>
+                                            <form th:action="@{'/message/' + ${loggedUserId} + '/' + ${user.id}}"
+                                                  method="get" class="sendMessageToForm"></form>
+                                            <a href="#" class="sendMessageTo">Send Message</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
