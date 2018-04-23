@@ -1,68 +1,68 @@
 $(document).ready(function () {
     $(".editStatus").on('click', function () {
-        var list = $(this).closest("ul");
-        var form = list.find(".edit");
+        const list = $(this).closest("ul");
+        const form = list.find(".edit");
         form.submit();
     });
 
 
     $(".deleteStatus").on('click', function () {
-        var list = $(this).closest("ul");
-        var form = list.find(".delete");
+        const list = $(this).closest("ul");
+        const form = list.find(".delete");
         form.submit();
     });
 
     $(".editComment").on('click', function () {
-        var list = $(this).closest("ul");
-        var form = list.find(".editCommentForm");
+        const list = $(this).closest("ul");
+        const form = list.find(".editCommentForm");
         form.submit();
     });
 
     $(".deleteComment").on('click', function () {
-        var list = $(this).closest("ul");
-        var form = list.find(".deleteCommentForm");
+        const list = $(this).closest("ul");
+        const form = list.find(".deleteCommentForm");
         form.submit();
     });
 
     $(".getProfile").on('click', function () {
-        var row = $(this).closest("div");
-        var form = row.find(".getProfileForm");
+        const row = $(this).closest("div");
+        const form = row.find(".getProfileForm");
         form.submit();
     });
 
     $(".deleteFriend").on('click', function () {
-        var row = $(this).closest("ul");
-        var form = row.find(".deleteFriendForm");
+        const row = $(this).closest("ul");
+        const form = row.find(".deleteFriendForm");
         form.submit();
     });
 
     $(".sendInvitation").on('click', function () {
-        var row = $(this).closest("ul");
-        var form = row.find(".sendInvitationForm");
+        const row = $(this).closest("ul");
+        const form = row.find(".sendInvitationForm");
         form.submit();
     });
 
     $(".acceptInvitation").on('click', function () {
-        var row = $(this).closest("ul");
-        var form = row.find(".acceptInvitationForm");
+        const row = $(this).closest("ul");
+        const form = row.find(".acceptInvitationForm");
         form.submit();
     });
 
     $(".cancelInvitation").on('click', function () {
-        var row = $(this).closest("ul");
-        var form = row.find(".cancelInvitationForm");
+        const row = $(this).closest("ul");
+        const form = row.find(".cancelInvitationForm");
         form.submit();
     });
 
     $(".getMessages").on('click', function () {
-        var row = $(this).closest("li");
-        var form = row.find(".getMessagesForm");
+        const row = $(this).closest("li");
+        const form = row.find(".getMessagesForm");
         form.submit();
     });
 
     $(".sendMessageTo").on('click', function () {
-        var row = $(this).closest("ul");
-        var form = row.find(".sendMessageToForm");
+        const row = $(this).closest("ul");
+        const form = row.find(".sendMessageToForm");
         form.submit();
     });
 });
