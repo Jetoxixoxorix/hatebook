@@ -24,9 +24,9 @@
                         </div>
                         <div class="pull-right">
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                <button class="btn btn-default dropdown-toggle menu" type="button"
                                         data-toggle="dropdown"><span
-                                        class="caret"></span></button>
+                                        class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <form th:action="@{'/addfriend/' + ${invitation.sender.id} + '/' + ${invitation.id}}"
@@ -58,9 +58,9 @@
                         </div>
                         <div class="pull-right">
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle menu" type="button"
+                                <button class="btn btn-default dropdown-toggle menu" type="button"
                                         data-toggle="dropdown"><span
-                                        class="caret"></span></button>
+                                        class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
