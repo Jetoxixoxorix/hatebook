@@ -3,6 +3,7 @@ package com.socialportal.socialportal.controllers;
 import com.socialportal.socialportal.models.Message;
 import com.socialportal.socialportal.services.IUserManager;
 import com.socialportal.socialportal.services.MessageManager;
+import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,17 +38,17 @@ public class MessageController {
         return "messages";
     }
 
-    @GetMapping("/message/{senderId}/{receiverId}")
-    public String getMessage(Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
+    @GetMapping("/message/{receiverId}")
+    public String getMessage(Model model, @PathVariable("receiverId") Long receiverId) {
         model.addAttribute("message", new Message());
-        model.addAttribute("sender", userManager.getUserById(senderId));
+        model.addAttribute("sender", userManager.getUserById(userManager.getUserId()));
         model.addAttribute("receiver", userManager.getUserById(receiverId));
         return "sendingMessage";
     }
 
-    @PostMapping("/sendmessage/{senderId}/{receiverId}")
-    public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable Long senderId, @PathVariable("receiverId") Long receiverId) {
-        messageManager.sendMessage(message, senderId, receiverId);
-        return getMessage(model, senderId, receiverId);
+    @PostMapping("/sendmessage/{receiverId}")
+    public String sendMessage(@ModelAttribute("message") Message message, Model model, @PathVariable("receiverId") Long receiverId) {
+        messageManager.sendMessage(message, receiverId);
+        return getMessage(model, receiverId);
     }
 }

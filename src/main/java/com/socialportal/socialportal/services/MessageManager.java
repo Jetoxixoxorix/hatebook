@@ -20,9 +20,8 @@ public class MessageManager {
         this.userManager = userManager;
     }
 
-
-    public void sendMessage(Message message, Long senderId, Long receiverId) {
-        message.setSender(userManager.getUserById(senderId));
+    public void sendMessage(Message message, Long receiverId) {
+        message.setSender(userManager.getUserById(userManager.getUserId()));
         message.setReceiver(userManager.getUserById(receiverId));
         message.setDate(new Date());
         messageRepository.save(message);

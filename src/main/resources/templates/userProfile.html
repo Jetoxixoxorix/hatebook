@@ -13,7 +13,7 @@
                 <form th:if="${loggedUserId == userProfile.id}" th:action="@{/invitations}">
                     <button type="submit" class="btn btn-default">Invitations</button>
                 </form>
-                <form th:action="@{'/message/' + ${loggedUserId} + '/' + ${userProfile.id}}">
+                <form th:action="@{'/message/' + ${userProfile.id}}">
                     <button type="submit" class="btn btn-default">Send Message</button>
                 </form>
                 <form th:if="${loggedUserId == userProfile.id}" th:action="@{/messages}">
