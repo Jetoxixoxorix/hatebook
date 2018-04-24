@@ -70,7 +70,7 @@ public class MessageManager {
                     messages.remove(i + 2);
                 }
             }
-            size -= 1;
+            size--;
         }
 
         Set<Message> messagesSet = new LinkedHashSet<>(messages);

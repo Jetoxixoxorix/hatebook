@@ -5,8 +5,8 @@
 
     <groupId>com.socialportal</groupId>
     <artifactId>socialportal</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

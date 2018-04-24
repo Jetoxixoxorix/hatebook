@@ -77,16 +77,6 @@ textarea {
     clear: left;
 }
 
-.sendMessage {
-    float: left;
-    clear: both;
-}
-
-.receivedMessage {
-    float: right;
-    clear: both;
-}
-
 .interlocutors {
     list-style-type: none;
     padding-left: 0px;
@@ -98,8 +88,19 @@ textarea {
 }
 
 .messages li {
-    background-color: white;
     padding: 10px 10px 10px 5px;
     margin-bottom: 3px;
     border-radius: 10px;
+}
+
+.sendMessage {
+    background-color: white;
+    float: left;
+    clear: both;
+}
+
+.receivedMessage {
+    background-color: #2aabd2;
+    float: right;
+    clear: both;
 }
