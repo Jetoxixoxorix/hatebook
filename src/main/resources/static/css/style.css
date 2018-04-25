@@ -30,6 +30,7 @@ body {
     border-width: 1px;
     margin-bottom: 10px;
     background-color: white;
+    word-wrap: break-word;
 }
 
 .status form textarea {
