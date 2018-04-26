@@ -5,10 +5,7 @@ import com.socialportal.socialportal.models.Message;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.models.UserComment;
 import com.socialportal.socialportal.models.UserStatus;
-import com.socialportal.socialportal.services.ICommentManager;
-import com.socialportal.socialportal.services.IStatusManager;
-import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.MessageManager;
+import com.socialportal.socialportal.services.*;
 import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +21,10 @@ public class MainController {
     private IStatusManager statusManager;
     private IUserValidator userValidator;
     private ICommentManager commentManager;
-    private MessageManager messageManager;
+    private IMessageManager messageManager;
 
     @Autowired
-    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, ICommentManager commentManager, MessageManager messageManager) {
+    public MainController(IUserManager userManager, IStatusManager statusManager, IUserValidator userValidator, ICommentManager commentManager, IMessageManager messageManager) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.userValidator = userValidator;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class MessageManager {
+public class MessageManager implements IMessageManager {
 
     private MessageRepository messageRepository;
     private UserManager userManager;
@@ -20,6 +20,7 @@ public class MessageManager {
         this.userManager = userManager;
     }
 
+    @Override
     public void sendMessage(Message message, Long receiverId) {
         message.setSender(userManager.getUserById(userManager.getUserId()));
         message.setReceiver(userManager.getUserById(receiverId));
@@ -27,6 +28,7 @@ public class MessageManager {
         messageRepository.save(message);
     }
 
+    @Override
     public Set<User> getInterlocutors(Long id) {
         List<Message> messages = getAllMessages(id);
         Set<User> interlocutors = new HashSet<>();
@@ -44,11 +46,13 @@ public class MessageManager {
         return interlocutors;
     }
 
+    @Override
     public List<Message> getAllMessages(Long id) {
         List<Message> messages = messageRepository.getMessagesByReceiverOrSender(userManager.getUserById(id), userManager.getUserById(id));
         return messages;
     }
 
+    @Override
     public Set<Message> getMessagesWithUser(Long senderId, Long receiverId) {
         List<Message> messagesWithUser = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(receiverId), userManager.getUserById(senderId));
         List<Message> messagesWithUser2 = messageRepository.getMessagesByReceiverAndSender(userManager.getUserById(senderId), userManager.getUserById(receiverId));
@@ -60,6 +64,7 @@ public class MessageManager {
         return sortMessages(messagesWithUser);
     }
 
+    @Override
     public Set<Message> sortMessages(List<Message> messages) {
         int size = messages.size();
         while (size > 1) {
@@ -77,6 +82,7 @@ public class MessageManager {
     }
 
     //temoprary
+    @Override
     public Iterable<Message> allMessages() {
         return messageRepository.findAll();
     }

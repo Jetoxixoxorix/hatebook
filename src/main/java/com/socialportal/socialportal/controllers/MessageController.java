@@ -1,9 +1,8 @@
 package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.models.Message;
+import com.socialportal.socialportal.services.IMessageManager;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.services.MessageManager;
-import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class MessageController {
 
-    private MessageManager messageManager;
+    private IMessageManager messageManager;
     private IUserManager userManager;
 
     @Autowired
-    public MessageController(MessageManager messageManager, IUserManager userManager) {
+    public MessageController(IMessageManager messageManager, IUserManager userManager) {
         this.messageManager = messageManager;
         this.userManager = userManager;
     }
