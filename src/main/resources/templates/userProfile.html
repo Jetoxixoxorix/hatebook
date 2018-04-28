@@ -47,7 +47,7 @@
                                             class="glyphicon glyphicon-option-horizontal"></span></button>
                                     <ul class="dropdown-menu">
                                         <li th:if="${loggedUserId} == ${status.addingUser.id}">
-                                            <form th:action="@{'/userprofile/' + ${userProfile.id} + '/editstatus/' + ${status.statusId}}"
+                                            <form th:action="@{'/userprofile/editstatus/' + ${status.statusId}}"
                                                   method="get" class="edit"></form>
                                             <a href="#" class="editStatus">Edit</a>
                                         </li>
