@@ -1,15 +1,18 @@
 package com.socialportal.socialportal.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class GroupController {
 
-    public String getGroups(){
-        return null;
+    @GetMapping("/groups")
+    public String getGroups() {
+        return "groups";
     }
 
-    public String createGroup(){
-        return null;
+    @GetMapping("/creategroup")
+    public String createGroup() {
+        return "createGroup";
     }
 }

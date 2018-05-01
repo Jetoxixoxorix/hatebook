@@ -19,6 +19,9 @@
                 <form th:if="${loggedUserId == userProfile.id}" th:action="@{/messages}">
                     <button type="submit" class="btn btn-default">Messages</button>
                 </form>
+                <form th:if="${loggedUserId == userProfile.id}" th:action="@{/groups}">
+                    <button type="submit" class="btn btn-default">Groups</button>
+                </form>
             </div>
             <div class="col-md-6">
                 <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
