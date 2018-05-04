@@ -50,7 +50,7 @@ textarea {
 }
 
 .statusContent {
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 
 .date {
@@ -59,7 +59,7 @@ textarea {
 }
 
 .comments {
-    margin-left: 10px;
+    background-color: #9acfea;
 }
 
 .dropdown-menu li form {

@@ -27,7 +27,8 @@
                 <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
                 <div class="add">
                     <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${add}" method="post">
-                        <textarea id="addStatus" rows="4" cols="80" th:field="*{content}"></textarea>
+                        <textarea id="addStatus" class="form-control" th:field="*{content}"
+                                  placeholder="Write status"></textarea>
                         <button class="btn btn-default" id="add" type="submit">Add status</button>
                     </form>
                 </div>
@@ -108,7 +109,7 @@
                             </div>
                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/addcomment/' + ${status.statusId}}"
                                   th:object="${addComment}" method="post">
-                        <textarea id="addComment" rows="1" cols="40" placeholder="Add comment"
+                        <textarea id="addComment" class="form-control" placeholder="Write comment"
                                   th:field="*{content}"></textarea>
                                 <button class="btn btn-default" id="addCommentBtn" type="submit">Add comment</button>
                             </form>
