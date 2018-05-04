@@ -1,5 +1,6 @@
 package com.socialportal.socialportal.models;
 
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,15 +13,15 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
-public class Group {
+public class Collective {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     @Setter(AccessLevel.NONE)
-    private Long groupId;
+    private Long id;
 
     @NotNull
     private String name;

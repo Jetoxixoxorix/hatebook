@@ -70,58 +70,60 @@
                         <div class="comments">
                             <div class="comment" th:each="comment : ${comments}"
                                  th:if="${comment.userStatus.statusId == status.statusId}">
-                                <div class="username">
-                                    <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
-                                          method="get"
-                                          class="getProfileForm"></form>
-                                    <a href="#" class="getProfile"
-                                       th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}">Profile</a>
-                                </div>
-                                <p class="date" th:text="${comment.date}"></p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p th:text="${comment.content}"></p>
+                                <div>
+                                    <div class="username">
+                                        <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
+                                              method="get"
+                                              class="getProfileForm"></form>
+                                        <a href="#" class="getProfile"
+                                           th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}">Profile</a>
                                     </div>
-                                    <div class="col-md-1">
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle menu" type="button"
-                                                    data-toggle="dropdown"><span
-                                                    class="glyphicon glyphicon-option-horizontal"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <form th:if="${loggedUserId} == ${comment.addingUser.id}"
-                                                          th:action="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}"
-                                                          method="get" class="editCommentForm">
-                                                    </form>
-                                                    <a href="#" class="editComment">Edit</a>
-                                                </li>
-                                                <li>
-                                                    <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
-                                                          th:action="@{'/userprofile/' + ${userProfile.id} + '/deletecomment/' + ${comment.commentId}}"
-                                                          method="post" class="deleteCommentForm">
-                                                    </form>
-                                                    <a href="#" class="deleteComment">Delete</a>
-                                                </li>
-                                            </ul>
+                                    <p class="date" th:text="${comment.date}"></p>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <p class="commentContent" th:text="${comment.content}"></p>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle menu" type="button"
+                                                        data-toggle="dropdown"><span
+                                                        class="glyphicon glyphicon-option-horizontal"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <form th:if="${loggedUserId} == ${comment.addingUser.id}"
+                                                              th:action="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}"
+                                                              method="get" class="editCommentForm">
+                                                        </form>
+                                                        <a href="#" class="editComment">Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
+                                                              th:action="@{'/userprofile/' + ${userProfile.id} + '/deletecomment/' + ${comment.commentId}}"
+                                                              method="post" class="deleteCommentForm">
+                                                        </form>
+                                                        <a href="#" class="deleteComment">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <form th:action="@{'/userprofile/' + ${userProfile.id} + '/addcomment/' + ${status.statusId}}"
-                                  th:object="${addComment}" method="post">
+                                <form th:action="@{'/userprofile/' + ${userProfile.id} + '/addcomment/' + ${status.statusId}}"
+                                      th:object="${addComment}" method="post">
                         <textarea id="addComment" class="form-control" placeholder="Write comment"
                                   th:field="*{content}"></textarea>
-                                <button class="btn btn-default" id="addCommentBtn" type="submit">Add comment</button>
-                            </form>
+                                    <button class="btn btn-default" id="addCommentBtn" type="submit">Add comment
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="nonExistingUser" th:if="${nonExistingUser}">
+            <h1 th:text="${nonExistingUser}"></h1>
+        </div>
     </div>
-    <div class="nonExistingUser" th:if="${nonExistingUser}">
-        <h1 th:text="${nonExistingUser}"></h1>
-    </div>
-</div>
 </body>
 </html>

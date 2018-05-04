@@ -38,7 +38,7 @@ public class MessageController {
     }
 
     @GetMapping("/message/{receiverId}")
-    public String getMessage(Model model, @PathVariable("receiverId") Long receiverId) {
+    public String getMessage(@PathVariable("receiverId") Long receiverId, Model model) {
         model.addAttribute("message", new Message());
         model.addAttribute("sender", userManager.getUserById(userManager.getUserId()));
         model.addAttribute("receiver", userManager.getUserById(receiverId));
@@ -48,6 +48,6 @@ public class MessageController {
     @PostMapping("/sendmessage/{receiverId}")
     public String sendMessage(@ModelAttribute("message") Message message, @PathVariable("receiverId") Long receiverId, Model model) {
         messageManager.sendMessage(message, receiverId);
-        return getMessage(model, receiverId);
+        return getMessage(receiverId, model);
     }
 }

@@ -50,7 +50,16 @@ textarea {
 }
 
 .statusContent {
-    /*margin-left: 5px;*/
+
+}
+
+.comment {
+    margin-left: 10px;
+    padding-top: 5px;
+}
+
+.commentContent {
+    background-color: white;
 }
 
 .date {
