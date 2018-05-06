@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -26,6 +27,11 @@ public class GroupController {
     public String getGroups(Model model) {
         model.addAttribute("groups", collectiveManager.getGroups(userManager.getUserById(userManager.getUserId())));
         return "groups";
+    }
+
+    @GetMapping("/group/{id}")
+    public String getGroup(@PathVariable("id") Long groupId, Model model) {
+        return "group";
     }
 
     @GetMapping("/creategroup")

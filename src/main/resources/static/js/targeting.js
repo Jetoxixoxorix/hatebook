@@ -65,4 +65,10 @@ $(document).ready(function () {
         const form = row.find(".sendMessageToForm");
         form.submit();
     });
+
+    $(".groupName").on('click', function () {
+        const row = $(this).closest("li");
+        const form = row.find(".getGroupForm");
+        form.submit();
+    });
 });

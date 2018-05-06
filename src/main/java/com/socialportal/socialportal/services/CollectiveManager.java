@@ -37,14 +37,13 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
-
     public List<Collective> getGroups(User user) {
         List<CollectiveMember> members = collectiveMemberRepository.getCollectiveMemberByUser(user);
         List<Collective> groups = new LinkedList<>();
         for (CollectiveMember member: members) {
             groups.add(member.getGroup());
         }
-        
+
         return groups;
     }
 }
