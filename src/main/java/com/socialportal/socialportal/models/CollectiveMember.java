@@ -22,7 +22,7 @@ public class CollectiveMember {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private Group group;
+    private Collective group;
 
     @ManyToOne
     @JoinColumn
