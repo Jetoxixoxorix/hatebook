@@ -23,7 +23,8 @@ public class GroupController {
     }
 
     @GetMapping("/groups")
-    public String getGroups() {
+    public String getGroups(Model model) {
+        model.addAttribute("groups", collectiveManager.getGroups(userManager.getUserById(userManager.getUserId())));
         return "groups";
     }
 
@@ -34,7 +35,7 @@ public class GroupController {
     }
 
     @PostMapping("/creategroup")
-    public String createGroup(@ModelAttribute("createGroup") Collective group, Model model){
+    public String createGroup(@ModelAttribute("createGroup") Collective group, Model model) {
         collectiveManager.createGroup(group, userManager.getUserById(userManager.getUserId()));
         return "createGroup";
     }
