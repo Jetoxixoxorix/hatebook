@@ -118,3 +118,7 @@ textarea {
 .groups {
     list-style-type: none;
 }
+
+.groupInformation {
+    word-wrap: break-word;
+}

@@ -25,7 +25,7 @@ public class CollectiveManager {
         this.collectiveMemberRepository = collectiveMemberRepository;
     }
 
-    public void createGroup(Collective group, User user){
+    public void createGroup(Collective group, User user) {
         group.setCreatingDate(new Date());
         collectiveRepository.save(group);
 
@@ -37,10 +37,14 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
+    public Collective getGroup(Long id) {
+        return collectiveRepository.getCollectiveById(id);
+    }
+
     public List<Collective> getGroups(User user) {
         List<CollectiveMember> members = collectiveMemberRepository.getCollectiveMemberByUser(user);
         List<Collective> groups = new LinkedList<>();
-        for (CollectiveMember member: members) {
+        for (CollectiveMember member : members) {
             groups.add(member.getGroup());
         }
 
