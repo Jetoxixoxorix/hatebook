@@ -11,14 +11,20 @@
             </form>
         </div>
         <div class="col-md-6">
-            <h1>Your groups:</h1>
-            <ul class="groups" th:object="${groups}">
-                <li class="group" th:each="group : ${groups}">
-                    <form th:action="@{'/group/' + ${group.id}}" method="get" class="getGroupForm"></form>
-                    <a href="#" class="groupName" th:text="${group.name}"></a>
-                </li>
-            </ul>
+            <div th:if="${groups.size() != 0}">
+                <h1>Your groups:</h1>
+                <ul class="groups" th:object="${groups}">
+                    <li class="group" th:each="group : ${groups}">
+                        <form th:action="@{'/group/' + ${group.id}}" method="get" class="getGroupForm"></form>
+                        <a href="#" class="groupName" th:text="${group.name}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${groups.size() == 0}">
+                <p>You aren't member of any group.</p>
+            </div>
         </div>
     </div>
+</div>
 </body>
 </html>
