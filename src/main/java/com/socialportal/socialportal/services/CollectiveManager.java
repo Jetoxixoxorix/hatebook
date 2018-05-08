@@ -5,7 +5,6 @@ import com.socialportal.socialportal.models.CollectiveMember;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.repositories.CollectiveMemberRepository;
 import com.socialportal.socialportal.repositories.CollectiveRepository;
-import javafx.scene.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +38,10 @@ public class CollectiveManager {
 
     public Collective getGroup(Long id) {
         return collectiveRepository.getCollectiveById(id);
+    }
+
+    public boolean isMemberOfGroup(User user, Collective group){
+        return collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group) != null;
     }
 
     public List<Collective> getGroups(User user) {

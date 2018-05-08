@@ -32,6 +32,7 @@ public class GroupController {
     @GetMapping("/group/{id}")
     public String getGroup(@PathVariable("id") Long groupId, Model model) {
         model.addAttribute("group", collectiveManager.getGroup(groupId));
+        model.addAttribute("member", collectiveManager.isMemberOfGroup(userManager.getUserById(userManager.getUserId()), collectiveManager.getGroup(groupId)));
         return "group";
     }
 

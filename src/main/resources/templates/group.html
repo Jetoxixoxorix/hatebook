@@ -6,6 +6,12 @@
 <div id="content" class="container">
     <div class="row">
         <div class="col-md-3">
+            <div th:if="${member == false}">
+                <button class="btn btn-default">Join group</button>
+            </div>
+            <div th:if="${member}">
+                <p>You are a member of group.</p>
+            </div>
         </div>
         <div class="col-md-6">
             <h1 th:text="${group.name}"></h1>
