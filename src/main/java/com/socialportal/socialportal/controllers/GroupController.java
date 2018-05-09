@@ -44,7 +44,6 @@ public class GroupController {
 
     @PostMapping("/joingroup/{id}")
     public String joinGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
-        //.addAttribute("groupId", groupId);
         collectiveManager.addMember(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
         return getGroup(groupId, model);
     }
@@ -55,4 +54,9 @@ public class GroupController {
         return createGroup(model);
     }
 
+    @PostMapping("/leavegroup/{id}")
+    public String leaveGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
+        collectiveManager.leaveGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
+        return getGroups(model);
+    }
 }

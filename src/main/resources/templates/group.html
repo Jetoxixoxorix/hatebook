@@ -12,7 +12,9 @@
                 </form>
             </div>
             <div th:if="${member}">
-                <button class="btn btn-default">Leave group</button>
+                <form th:object="${group}" th:action="@{'/leavegroup/' + ${group.id}}" method="post">
+                    <button class="btn btn-default" type="submit">Leave group</button>
+                </form>
             </div>
         </div>
         <div class="col-md-6">

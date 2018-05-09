@@ -28,7 +28,7 @@ public class CollectiveManager {
         return collectiveRepository.getCollectiveById(id);
     }
 
-    public boolean isMemberOfGroup(User user, Collective group){
+    public boolean isMemberOfGroup(User user, Collective group) {
         return collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group) != null;
     }
 
@@ -54,11 +54,16 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
-    public void addMember(Collective group, User user){
+    public void addMember(Collective group, User user) {
         CollectiveMember collectiveMember = new CollectiveMember();
         collectiveMember.setGroup(group);
         collectiveMember.setUser(user);
 
         collectiveMemberRepository.save(collectiveMember);
+    }
+
+    public void leaveGroup(Collective group, User user) {
+        CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
+        collectiveMemberRepository.delete(collectiveMember);
     }
 }
