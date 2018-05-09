@@ -24,18 +24,6 @@ public class CollectiveManager {
         this.collectiveMemberRepository = collectiveMemberRepository;
     }
 
-    public void createGroup(Collective group, User user) {
-        group.setCreatingDate(new Date());
-        collectiveRepository.save(group);
-
-        CollectiveMember collectiveMember = new CollectiveMember();
-        collectiveMember.setGroup(group);
-        collectiveMember.setUser(user);
-        collectiveMember.setAdmin(true);
-
-        collectiveMemberRepository.save(collectiveMember);
-    }
-
     public Collective getGroup(Long id) {
         return collectiveRepository.getCollectiveById(id);
     }
@@ -52,5 +40,25 @@ public class CollectiveManager {
         }
 
         return groups;
+    }
+
+    public void createGroup(Collective group, User user) {
+        group.setCreatingDate(new Date());
+        collectiveRepository.save(group);
+
+        CollectiveMember collectiveMember = new CollectiveMember();
+        collectiveMember.setGroup(group);
+        collectiveMember.setUser(user);
+        collectiveMember.setAdmin(true);
+
+        collectiveMemberRepository.save(collectiveMember);
+    }
+
+    public void addMember(Collective group, User user){
+        CollectiveMember collectiveMember = new CollectiveMember();
+        collectiveMember.setGroup(group);
+        collectiveMember.setUser(user);
+
+        collectiveMemberRepository.save(collectiveMember);
     }
 }

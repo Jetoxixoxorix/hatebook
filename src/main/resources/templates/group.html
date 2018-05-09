@@ -6,11 +6,13 @@
 <div id="content" class="container">
     <div class="row">
         <div class="col-md-3">
-            <div th:if="${member == false}">
-                <button class="btn btn-default">Join group</button>
+            <div th:if="${!member}">
+                <form th:object="${group}" th:action="@{'/joingroup/' + ${group.id}}" method="post">
+                    <button class="btn btn-default" type="submit">Join group</button>
+                </form>
             </div>
             <div th:if="${member}">
-                <p>You are a member of group.</p>
+                <button class="btn btn-default">Leave group</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -21,5 +23,6 @@
             <p th:text="${group.description}"></p>
         </div>
     </div>
+</div>
 </body>
 </html>

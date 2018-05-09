@@ -42,10 +42,17 @@ public class GroupController {
         return "createGroup";
     }
 
+    @PostMapping("/joingroup/{id}")
+    public String joinGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
+        //.addAttribute("groupId", groupId);
+        collectiveManager.addMember(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
+        return getGroup(groupId, model);
+    }
+
     @PostMapping("/creategroup")
     public String createGroup(@ModelAttribute("createGroup") Collective group, Model model) {
         collectiveManager.createGroup(group, userManager.getUserById(userManager.getUserId()));
-        return "createGroup";
+        return createGroup(model);
     }
 
 }
