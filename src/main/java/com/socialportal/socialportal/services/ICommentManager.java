@@ -17,6 +17,4 @@ public interface ICommentManager {
     void deleteComments(UserStatus userStatus);
 
     void addNewComment(UserComment userComment);
-    //temporary
-    Iterable<UserComment> allComments();
 }

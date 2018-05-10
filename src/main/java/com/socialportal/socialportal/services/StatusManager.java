@@ -60,10 +60,4 @@ public class StatusManager implements IStatusManager {
     public void addNewStatus(UserStatus userStatus) {
         userStatusRepository.save(userStatus);
     }
-
-    //temporary
-    @Override
-    public Iterable<UserStatus> allStatus() {
-        return userStatusRepository.findAll();
-    }
 }

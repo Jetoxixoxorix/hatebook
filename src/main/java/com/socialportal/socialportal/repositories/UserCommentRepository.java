@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface UserCommentRepository extends CrudRepository<UserComment, Long> {
     List<UserComment> getUserCommentsByUserId(Long id);
+
     UserComment getUserCommentByCommentId(Long id);
 
     List<UserComment> getCommentsByUserStatus(UserStatus userStatus);

@@ -70,11 +70,5 @@ public class CommentManager implements ICommentManager {
     public void addNewComment(UserComment userComment) {
         userCommentRepository.save(userComment);
     }
-
-
-    //temporary
-    public Iterable<UserComment> allComments() {
-        return userCommentRepository.findAll();
-    }
 }
 

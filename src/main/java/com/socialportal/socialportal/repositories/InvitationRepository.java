@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface InvitationRepository extends CrudRepository<Invitation, Long> {
     Invitation getInvitationById(Long id);
+
     List<Invitation> getInvitationsByReceiver(User user);
+
     List<Invitation> getInvitationsBySender(User user);
+
     Invitation getInvitationByReceiverAndSender(User receiver, User sender);
 }

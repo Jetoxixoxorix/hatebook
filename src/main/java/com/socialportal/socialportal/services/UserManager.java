@@ -69,10 +69,4 @@ public class UserManager implements IUserManager {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
-
-    //temporary
-    public Iterable<User> allUsers() {
-        return userRepository.findAll();
-    }
 }

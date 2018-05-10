@@ -144,32 +144,4 @@ public class MainController {
         commentManager.editComment(commentId, content);
         return getUserProfile(userid, model);
     }
-
-    //temporary
-    @GetMapping("/users")
-    public @ResponseBody
-    Iterable<User> allUsers() {
-        return userManager.allUsers();
-    }
-
-    //temporary
-    @GetMapping("/statuses")
-    public @ResponseBody
-    Iterable<UserStatus> allStatuses() {
-        return statusManager.allStatus();
-    }
-
-    //temporary
-    @GetMapping("/comments")
-    public @ResponseBody
-    Iterable<UserComment> allComments() {
-        return commentManager.allComments();
-    }
-
-    //temporary
-    @GetMapping("allmessages")
-    public @ResponseBody
-    Iterable<Message> allMessages() {
-        return messageManager.allMessages();
-    }
 }

@@ -17,7 +17,4 @@ public interface IMessageManager {
     Set<Message> sortMessages(List<Message> messages);
 
     void sendMessage(Message message, Long receiverId);
-
-    //temoprary
-    Iterable<Message> allMessages();
 }

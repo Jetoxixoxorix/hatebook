@@ -80,10 +80,4 @@ public class MessageManager implements IMessageManager {
         Set<Message> messagesSet = new LinkedHashSet<>(messages);
         return messagesSet;
     }
-
-    //temoprary
-    @Override
-    public Iterable<Message> allMessages() {
-        return messageRepository.findAll();
-    }
 }

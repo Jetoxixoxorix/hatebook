@@ -12,7 +12,4 @@ public interface IUserManager {
     List<User> findUsersByName(String name);
 
     void registerUser(User user);
-
-    //temporary
-    Iterable<User> allUsers();
 }
