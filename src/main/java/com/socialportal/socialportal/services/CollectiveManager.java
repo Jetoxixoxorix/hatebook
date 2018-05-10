@@ -28,10 +28,6 @@ public class CollectiveManager {
         return collectiveRepository.getCollectiveById(id);
     }
 
-    public boolean isMemberOfGroup(User user, Collective group) {
-        return collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group) != null;
-    }
-
     public List<Collective> getGroups(User user) {
         List<CollectiveMember> members = collectiveMemberRepository.getCollectiveMemberByUser(user);
         List<Collective> groups = new LinkedList<>();
@@ -40,6 +36,25 @@ public class CollectiveManager {
         }
 
         return groups;
+    }
+
+/*    public List<User> getGroupMembers(Collective group) {
+        List<CollectiveMember> membersOfGroup = collectiveMemberRepository.getCollectiveMembersByGroup(group);
+        List<User> groupUsers = new LinkedList<>();
+
+        for (CollectiveMember member : membersOfGroup) {
+            groupUsers.add(member.getUser());
+        }
+
+        return groupUsers;
+    }  */
+
+    public List<CollectiveMember> getGroupMembers(Collective group) {
+        return collectiveMemberRepository.getCollectiveMembersByGroup(group);
+    }
+
+    public boolean isMemberOfGroup(User user, Collective group) {
+        return collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group) != null;
     }
 
     public void createGroup(Collective group, User user) {
@@ -67,14 +82,12 @@ public class CollectiveManager {
         collectiveMemberRepository.delete(collectiveMember);
     }
 
-    public List<User> getGroupMembers(Collective group) {
-        List<CollectiveMember> membersOfGroup = collectiveMemberRepository.getCollectiveMembersByGroup(group);
-        List<User> groupUsers = new LinkedList<>();
+    public void deleteFromGroup(Collective group, User user) {
+        leaveGroup(group, user);
+    }
 
-        for (CollectiveMember member : membersOfGroup) {
-            groupUsers.add(member.getUser());
-        }
-
-        return groupUsers;
+    public boolean isAdmin(Collective group, User user) {
+        CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
+        return collectiveMember.isAdmin();
     }
 }

@@ -41,6 +41,7 @@ public class GroupController {
         model.addAttribute("group", collectiveManager.getGroup(groupId));
         model.addAttribute("member", collectiveManager.isMemberOfGroup(userManager.getUserById(userManager.getUserId()), collectiveManager.getGroup(groupId)));
         model.addAttribute("members", collectiveManager.getGroupMembers(collectiveManager.getGroup(groupId)));
+        model.addAttribute("isAdmin", collectiveManager.isAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId())));
         return "groupMembers";
     }
 
@@ -66,5 +67,11 @@ public class GroupController {
     public String leaveGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
         collectiveManager.leaveGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
         return getGroups(model);
+    }
+
+    @PostMapping("/deleteuser/{groupid}/{userid}")
+    public String deleteFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
+        collectiveManager.deleteFromGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
+        return getGroup(groupId, model);
     }
 }

@@ -24,13 +24,28 @@
         </div>
         <div class="col-md-6">
             <form id="groupNameForm" th:action="@{'/group/' + ${group.id}}" method="get"></form>
-            <a class="groupName" href="#" onclick="document.getElementById('groupNameForm').submit()" th:text="${group.name}"></a>
+            <a class="groupName" href="#" onclick="document.getElementById('groupNameForm').submit()"
+               th:text="${group.name}"></a>
             <h2>Members:</h2>
             <ul class="members" th:object="${members}">
                 <li th:each="user : ${members}">
-                    <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get"
+                    <form action="#" th:action="@{'/userprofile/' + ${user.user.id}}" method="get"
                           class="getProfileForm"></form>
-                    <a href="#" class="getProfile" th:text="${user.firstName + ' ' + user.lastName}"></a>
+                    <a href="#" class="getProfile" th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
+                    <div class="pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle menu" type="button"
+                                    data-toggle="dropdown"><span
+                                    class="glyphicon glyphicon-option-horizontal"></span></button>
+                            <ul class="dropdown-menu">
+                                <li th:if="${isAdmin}">
+                                    <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
+                                          method="post" class="deleteUserForm"></form>
+                                    <a href="#" class="deleteUser">Delete from group</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
