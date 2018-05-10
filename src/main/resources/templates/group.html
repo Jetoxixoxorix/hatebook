@@ -21,9 +21,15 @@
                     <button class="btn btn-default" type="submit">Members</button>
                 </form>
             </div>
+            <div>
+                <form th:action="@{/groups}">
+                    <button type="submit" class="btn btn-default">Groups</button>
+                </form>
+            </div>
         </div>
         <div class="col-md-6">
-            <h1 th:text="${group.name}"></h1>
+            <form id="groupNameForm" th:action="@{'/group/' + ${group.id}}" method="get"></form>
+            <a class="groupName" href="#" onclick="document.getElementById('groupNameForm').submit()" th:text="${group.name}"></a>
         </div>
         <div class="col-md-3 groupInformation">
             <h6><b>Group description</b></h6>

@@ -123,3 +123,14 @@ textarea {
 .groupInformation {
     word-wrap: break-word;
 }
+
+.members {
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+a.groupName {
+    text-decoration: none;
+    font-size: 30px;
+    color: #0f0f0f;
+}

@@ -53,7 +53,7 @@ public class GroupController {
     @PostMapping("/creategroup")
     public String createGroup(@ModelAttribute("createGroup") Collective group, Model model) {
         collectiveManager.createGroup(group, userManager.getUserById(userManager.getUserId()));
-        return createGroup(model);
+        return getGroups(model);
     }
 
     @PostMapping("/joingroup/{id}")
