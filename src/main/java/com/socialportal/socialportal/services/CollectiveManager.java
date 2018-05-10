@@ -66,4 +66,15 @@ public class CollectiveManager {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         collectiveMemberRepository.delete(collectiveMember);
     }
+
+    public List<User> getGroupMembers(Collective group) {
+        List<CollectiveMember> membersOfGroup = collectiveMemberRepository.getCollectiveMembersByGroup(group);
+        List<User> groupUsers = new LinkedList<>();
+
+        for (CollectiveMember member : membersOfGroup) {
+            groupUsers.add(member.getUser());
+        }
+
+        return groupUsers;
+    }
 }

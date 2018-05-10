@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GroupController {
-    
+
     private CollectiveManager collectiveManager;
     private UserManager userManager;
 
@@ -36,22 +36,30 @@ public class GroupController {
         return "group";
     }
 
+    @GetMapping("/group/{id}/members")
+    public String getGroupMembers(@PathVariable("id") Long groupId, Model model) {
+        model.addAttribute("group", collectiveManager.getGroup(groupId));
+        model.addAttribute("member", collectiveManager.isMemberOfGroup(userManager.getUserById(userManager.getUserId()), collectiveManager.getGroup(groupId)));
+        model.addAttribute("members", collectiveManager.getGroupMembers(collectiveManager.getGroup(groupId)));
+        return "groupMembers";
+    }
+
     @GetMapping("/creategroup")
     public String createGroup(Model model) {
         model.addAttribute("createGroup", new Collective());
         return "createGroup";
     }
 
-    @PostMapping("/joingroup/{id}")
-    public String joinGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
-        collectiveManager.addMember(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
-        return getGroup(groupId, model);
-    }
-
     @PostMapping("/creategroup")
     public String createGroup(@ModelAttribute("createGroup") Collective group, Model model) {
         collectiveManager.createGroup(group, userManager.getUserById(userManager.getUserId()));
         return createGroup(model);
+    }
+
+    @PostMapping("/joingroup/{id}")
+    public String joinGroup(@ModelAttribute("group") Collective group, @PathVariable("id") Long groupId, Model model) {
+        collectiveManager.addMember(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId()));
+        return getGroup(groupId, model);
     }
 
     @PostMapping("/leavegroup/{id}")

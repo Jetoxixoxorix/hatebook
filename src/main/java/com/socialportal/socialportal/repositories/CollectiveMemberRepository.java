@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface CollectiveMemberRepository extends CrudRepository<CollectiveMember, Long> {
     List getCollectiveMemberByUser(User user);
-    CollectiveMember getCollectiveMemberByUserAndGroup(User user, Collective collective);
+    CollectiveMember getCollectiveMemberByUserAndGroup(User user, Collective group);
+    List<CollectiveMember> getCollectiveMembersByGroup(Collective group);
 }
