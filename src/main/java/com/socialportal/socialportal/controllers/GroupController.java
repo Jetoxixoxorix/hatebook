@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GroupController {
-
+//testing
     private CollectiveManager collectiveManager;
     private UserManager userManager;
 
