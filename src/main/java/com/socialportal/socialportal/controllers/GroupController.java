@@ -73,7 +73,7 @@ public class GroupController {
     @PostMapping("/deleteuser/{groupid}/{userid}")
     public String removeFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
         collectiveManager.removeFromGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
-        return getGroup(groupId, model);
+        return getGroupMembers(groupId, model);
     }
 
     @PostMapping("/makeadmin/{groupid}/{userid}")
