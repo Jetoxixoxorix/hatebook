@@ -84,8 +84,14 @@ public class CollectiveManager {
 
     public boolean isAdmin(Collective group, User user) {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
-        if(collectiveMember == null)
+        if (collectiveMember == null)
             return false;
         return collectiveMember.isAdmin();
+    }
+
+    public void makeUserAnAdmin(Collective group, User user) {
+        CollectiveMember member = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
+        member.setAdmin(true);
+        collectiveMemberRepository.save(member);
     }
 }

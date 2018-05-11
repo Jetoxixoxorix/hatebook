@@ -75,4 +75,10 @@ public class GroupController {
         collectiveManager.removeFromGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroup(groupId, model);
     }
+
+    @PostMapping("/makeadmin/{groupid}/{userid}")
+    public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model){
+        collectiveManager.makeUserAnAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
+        return getGroupMembers(groupId, model);
+    }
 }
