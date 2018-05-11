@@ -88,6 +88,8 @@ public class CollectiveManager {
 
     public boolean isAdmin(Collective group, User user) {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
+        if(collectiveMember == null)
+            return false;
         return collectiveMember.isAdmin();
     }
 }
