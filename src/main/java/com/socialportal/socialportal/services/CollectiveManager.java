@@ -77,13 +77,9 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
-    public void leaveGroup(Collective group, User user) {
+    public void removeFromGroup(Collective group, User user) {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         collectiveMemberRepository.delete(collectiveMember);
-    }
-
-    public void deleteFromGroup(Collective group, User user) {
-        leaveGroup(group, user);
     }
 
     public boolean isAdmin(Collective group, User user) {

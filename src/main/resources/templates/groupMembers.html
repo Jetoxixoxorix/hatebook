@@ -28,7 +28,7 @@
                th:text="${group.name}"></a>
             <h2>Members:</h2>
             <ul class="members" th:object="${members}">
-                <li th:each="user : ${members}">
+                <li id="member" th:each="user : ${members}">
                     <form action="#" th:action="@{'/userprofile/' + ${user.user.id}}" method="get"
                           class="getProfileForm"></form>
                     <a href="#" class="getProfile" th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
@@ -38,10 +38,11 @@
                                     data-toggle="dropdown"><span
                                     class="glyphicon glyphicon-option-horizontal"></span></button>
                             <ul class="dropdown-menu">
-                                <li th:if="${isAdmin}">
+                                <li th:if="${isAdmin || user.user.id == loggedUserId}">
                                     <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
                                           method="post" class="deleteUserForm"></form>
-                                    <a href="#" class="deleteUser">Delete from group</a>
+                                    <a th:if="${isAdmin && user.user.id != loggedUserId}" href="#" class="deleteUser">Delete from group</a>
+                                    <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave group</a>
                                 </li>
                             </ul>
                         </div>

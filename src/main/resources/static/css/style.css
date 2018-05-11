@@ -134,3 +134,8 @@ a.groupName {
     font-size: 30px;
     color: #0f0f0f;
 }
+
+#member {
+    margin-bottom: 20px;
+    clear: right;
+}
