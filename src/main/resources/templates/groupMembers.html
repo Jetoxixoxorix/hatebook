@@ -28,11 +28,10 @@
                th:text="${group.name}"></a>
             <div class="admins">
                 <h2>Admins:</h2>
-                <ul class="members" th:object="${members}">
+                <ul class="membersList" th:object="${members}">
                     <li class="member" th:each="user : ${members}" th:if="${user.admin}">
-                        <form action="#" th:action="@{'/userprofile/' + ${user.user.id}}" method="get"
-                              class="getProfileForm"></form>
-                        <a href="#" class="getProfile" th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
+                        <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
+                           th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
                         <div class="pull-right">
                             <div class="dropdown">
                                 <button class="btn btn-default dropdown-toggle menu" type="button"
@@ -62,9 +61,8 @@
                 <h2>Members:</h2>
                 <ul class="membersList" th:object="${members}">
                     <li class="member" th:each="user : ${members}" th:if="${!user.admin}">
-                        <form action="#" th:action="@{'/userprofile/' + ${user.user.id}}" method="get"
-                              class="getProfileForm"></form>
-                        <a href="#" class="getProfile" th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
+                        <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
+                           th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
                         <div class="pull-right">
                             <div class="dropdown">
                                 <button class="btn btn-default dropdown-toggle menu" type="button"
