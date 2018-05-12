@@ -16,9 +16,7 @@
                     <div class="user">
                         <div class="col-md-6">
                             <div class="username">
-                                <form action="#" th:action="@{'/userprofile/' + ${invitation.sender.id}}" method="get"
-                                      class="getProfileForm"></form>
-                                <a href="#" class="getProfile"
+                                <a class="getProfile" th:href="@{'/userprofile/' + ${invitation.sender.id}}"
                                    th:text="${invitation.sender.firstName} + ' ' + ${invitation.sender.lastName}">Profile</a>
                             </div>
                         </div>
@@ -31,12 +29,13 @@
                                     <li>
                                         <form th:action="@{'/addfriend/' + ${invitation.sender.id} + '/' + ${invitation.id}}"
                                               method="post" class="acceptInvitationForm"></form>
-                                        <a href="#" class="acceptInvitation">Accept invitation</a>
+                                        <a class="acceptInvitation" href="#">Accept invitation</a>
                                     </li>
                                     <li>
                                         <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
                                               class="cancelInvitationForm"></form>
-                                        <a href="#" class="cancelInvitation">Cancel invitation</a>
+                                        <a class="cancelInvitation"
+                                           th:href="@{'/deleteinvitation/' + ${invitation.id}}">Cancel invitation</a>
                                     </li>
                                 </ul>
                             </div>

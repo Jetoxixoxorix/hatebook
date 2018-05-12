@@ -10,9 +10,7 @@
             <h4>Conversastions</h4>
             <ul class="interlocutors">
                 <li th:each="user : ${interlocutors}">
-                    <form th:action="@{'/messages/' + ${loggedUserId} + '/' + ${user.id}}" method="get"
-                          class="getMessagesForm"></form>
-                    <a href="#" class="getMessages" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
+                    <a th:href="@{'/messages/' + ${loggedUserId} + '/' + ${user.id}}" class="getMessages" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
                 </li>
             </ul>
         </div>

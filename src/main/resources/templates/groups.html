@@ -15,8 +15,7 @@
                 <h1>Your groups:</h1>
                 <ul class="groups" th:object="${groups}">
                     <li class="group" th:each="group : ${groups}">
-                        <form th:action="@{'/group/' + ${group.id}}" method="get" class="getGroupForm"></form>
-                        <a href="#" class="groupName" th:text="${group.name}"></a>
+                        <a class="groupName" th:href="@{'/group/' + ${group.id}}" th:text="${group.name}"></a>
                     </li>
                 </ul>
             </div>

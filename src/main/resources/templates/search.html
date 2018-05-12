@@ -26,9 +26,7 @@
                         <div class="user">
                             <div class="col-md-6">
                                 <div class="username">
-                                    <form action="#" th:action="@{'/userprofile/' + ${user.id}}" method="get"
-                                          class="getProfileForm"></form>
-                                    <a href="#" class="getProfile"
+                                    <a class="getProfile" th:href="@{'/userprofile/' + ${user.id}}"
                                        th:text="${user.firstName} + ' ' + ${user.lastName}">Profile</a>
                                 </div>
                             </div>
@@ -59,9 +57,8 @@
                                             <a href="#" class="cancelInvitation">Cancel invitation</a>
                                         </li>
                                         <li>
-                                            <form th:action="@{'/message/' + ${user.id}}"
-                                                  method="get" class="sendMessageToForm"></form>
-                                            <a href="#" class="sendMessageTo">Send Message</a>
+                                            <a class="sendMessageTo" th:href="@{'/message/' + ${user.id}}">Send
+                                                Message</a>
                                         </li>
                                     </ul>
                                 </div>

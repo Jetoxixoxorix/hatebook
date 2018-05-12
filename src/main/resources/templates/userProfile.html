@@ -37,10 +37,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="username">
-                                    <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
-                                          method="get"
-                                          class="getProfileForm"></form>
-                                    <a href="#" class="getProfile"
+                                    <a class="getProfile" th:href="@{'/userprofile/' + ${status.addingUser.id}}"
                                        th:text="${status.addingUser.firstName} + ' ' + ${status.addingUser.lastName}">Profile</a>
                                 </div>
                             </div>
@@ -51,9 +48,7 @@
                                             class="glyphicon glyphicon-option-horizontal"></span></button>
                                     <ul class="dropdown-menu">
                                         <li th:if="${loggedUserId} == ${status.addingUser.id}">
-                                            <form th:action="@{'/userprofile/editstatus/' + ${status.statusId}}"
-                                                  method="get" class="edit"></form>
-                                            <a href="#" class="editStatus">Edit</a>
+                                            <a class="editStatus" th:href="@{'/userprofile/editstatus/' + ${status.statusId}}">Edit</a>
                                         </li>
                                         <li th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}">
                                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/deletestatus/' + ${status.statusId}}"
@@ -72,10 +67,7 @@
                                  th:if="${comment.userStatus.statusId == status.statusId}">
                                 <div>
                                     <div class="username">
-                                        <form action="#" th:action="@{'/userprofile/' + ${status.addingUser.id}}"
-                                              method="get"
-                                              class="getProfileForm"></form>
-                                        <a href="#" class="getProfile"
+                                        <a class="getProfile" th:href="@{'/userprofile/' + ${status.addingUser.id}}"
                                            th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}">Profile</a>
                                     </div>
                                     <p class="date" th:text="${comment.date}"></p>
@@ -90,11 +82,7 @@
                                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <form th:if="${loggedUserId} == ${comment.addingUser.id}"
-                                                              th:action="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}"
-                                                              method="get" class="editCommentForm">
-                                                        </form>
-                                                        <a href="#" class="editComment">Edit</a>
+                                                        <a  class="editComment" th:href="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}">Edit</a>
                                                     </li>
                                                     <li>
                                                         <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
