@@ -46,4 +46,16 @@ $(document).ready(function () {
         const form = row.find(".makeAdminForm");
         form.submit();
     });
+
+    $(".deleteFriend").on('click', function () {
+        const row = $(this).closest("li");
+        const form = row.find(".deleteFriendForm");
+        form.submit();
+    });
+
+    $(".addFriend").on('click', function () {
+        const row = $(this).closest("li");
+        const form = row.find(".addFriendForm");
+        form.submit();
+    });
 });

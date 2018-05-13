@@ -5,29 +5,38 @@
 <body>
 <nav th:replace="navbar :: navbar"></nav>
 <div id="content" class="container">
-    <h1>Friends:</h1>
-    <table>
-        <tr th:object="${friends}" th:each="friend : ${friends}">
-            <td th:text="${friend.friend.firstName} + ' ' + ${friend.friend.lastName}"></td>
-            <form action="#" th:action="@{'/userprofile/' + ${friend.friend.id}}" method="get">
-                <td>
-                    <button class="btn btn-default">Profile</button>
-                </td>
-            </form>
-            <form th:if="${yourFriends.contains(friend.friend) == true}"
-                  th:action="@{'/deletefriend/' + ${friend.friend.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Delete from friends</button>
-                </td>
-            </form>
-            <form th:if="${yourFriends.contains(friend.friend) == false and loggedUserid != friend.friend.id}"
-                  th:action="@{'/addfriend/' + ${friend.friend.id}}" method="post">
-                <td>
-                    <button class="btn btn-default">Add to friends</button>
-                </td>
-            </form>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <h1>Friends:</h1>
+            <ul class="friendsList">
+                <li class="friend" th:object="${friends}" th:each="friend : ${friends}">
+                    <a th:href="@{'/userprofile/' + ${friend.friend.id}}"
+                       th:text="${friend.friend.firstName} + ' ' + ${friend.friend.lastName}"></a>
+                    <div class="pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle menu" type="button"
+                                    data-toggle="dropdown"><span
+                                    class="glyphicon glyphicon-option-horizontal"></span></button>
+                            <ul class="dropdown-menu">
+                                <li th:if="${yourFriends.contains(friend.friend) == true}">
+                                    <form class="deleteFriendForm" th:action="@{'/deletefriend/' + ${friend.friend.id}}"
+                                          method="post"></form>
+                                    <a class="deleteFriend" href="#">Delete from friends</a>
+                                </li>
+                                <li th:if="${yourFriends.contains(friend.friend) == false and loggedUserid != friend.friend.id}">
+                                    <form class="addFriendForm" th:action="@{'/addfriend/' + ${friend.friend.id}}"
+                                          method="post"></form>
+                                    <a class="addFriend" href="#">Add to friends</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>

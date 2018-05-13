@@ -124,20 +124,31 @@ textarea {
     word-wrap: break-word;
 }
 
-.membersList {
-    padding-left: 0px;
-    list-style-type: none;
-}
-
 a.groupName {
     text-decoration: none;
     font-size: 30px;
     color: #0f0f0f;
 }
 
+.membersList {
+    padding-left: 0px;
+    list-style-type: none;
+}
+
 .member {
-    margin-bottom: 20px;
-    clear: right;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friendsList {
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.friend {
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
