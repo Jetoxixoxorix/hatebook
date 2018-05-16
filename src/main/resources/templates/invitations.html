@@ -10,68 +10,55 @@
         </div>
         <div class="col-md-6">
             <h1>Invitations received:</h1>
-            <div class="receivedInvitations" th:object="${receivedInvitations}"
-                 th:each="invitation : ${receivedInvitations}">
-                <div class="row">
-                    <div class="user">
-                        <div class="col-md-6">
-                            <div class="username">
-                                <a class="getProfile" th:href="@{'/userprofile/' + ${invitation.sender.id}}"
-                                   th:text="${invitation.sender.firstName} + ' ' + ${invitation.sender.lastName}">Profile</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle menu" type="button"
-                                        data-toggle="dropdown"><span
-                                        class="glyphicon glyphicon-option-horizontal"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <form th:action="@{'/addfriend/' + ${invitation.sender.id} + '/' + ${invitation.id}}"
-                                              method="post" class="acceptInvitationForm"></form>
-                                        <a class="acceptInvitation" href="#">Accept invitation</a>
-                                    </li>
-                                    <li>
-                                        <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
-                                              class="cancelInvitationForm"></form>
-                                        <a class="cancelInvitation"
-                                           th:href="@{'/deleteinvitation/' + ${invitation.id}}">Cancel invitation</a>
-                                    </li>
-                                </ul>
-                            </div>
+            <ul class="list receivedInvitations" th:object="${receivedInvitations}">
+                <li class="listMember" th:each="invitation : ${receivedInvitations}">
+                    <a class="getProfile" th:href="@{'/userprofile/' + ${invitation.sender.id}}"
+                       th:text="${invitation.sender.firstName} + ' ' + ${invitation.sender.lastName}"></a>
+                    <div class="pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle menu" type="button"
+                                    data-toggle="dropdown"><span
+                                    class="glyphicon glyphicon-option-horizontal"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form th:action="@{'/addfriend/' + ${invitation.sender.id} + '/' + ${invitation.id}}"
+                                          method="post" class="acceptInvitationForm"></form>
+                                    <a class="acceptInvitation" href="#">Accept invitation</a>
+                                </li>
+                                <li>
+                                    <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
+                                          class="cancelInvitationForm"></form>
+                                    <a class="cancelInvitation"
+                                       th:href="@{'/deleteinvitation/' + ${invitation.id}}">Cancel invitation</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
             <h1>Invitations send:</h1>
-            <div class="sendInvitations" th:object="${sendInvitations}" th:each="invitation : ${sendInvitations}">
-                <div class="row">
-                    <div class="user">
-                        <div class="col-md-6">
-                            <div class="username">
-                                <form action="#" th:action="@{'/userprofile/' + ${invitation.receiver.id}}" method="get"
-                                      class="getProfileForm"></form>
-                                <a href="#" class="getProfile"
-                                   th:text="${invitation.receiver.firstName} + ' ' + ${invitation.receiver.lastName}">Profile</a>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle menu" type="button"
-                                        data-toggle="dropdown"><span
-                                        class="glyphicon glyphicon-option-horizontal"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
-                                              class="cancelInvitationForm"></form>
-                                        <a href="#" class="cancelInvitation">Cancel invitation</a>
-                                    </li>
-                                </ul>
-                            </div>
+            <ul class="list sendInvitations" th:object="${sendInvitations}">
+                <li class="listMember" th:each="invitation : ${sendInvitations}">
+                    <a class="getProfile" th:href="@{'/userprofile/' + ${invitation.receiver.id}}"
+                       th:text="${invitation.receiver.firstName} + ' ' + ${invitation.receiver.lastName}">Profile</a>
+                    <div class="pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle menu" type="button"
+                                    data-toggle="dropdown"><span
+                                    class="glyphicon glyphicon-option-horizontal"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
+                                          class="cancelInvitationForm"></form>
+                                    <a class="cancelInvitation" href="#" >Cancel invitation</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
         </div>
     </div>
 </div>
