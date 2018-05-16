@@ -7,21 +7,23 @@
     <div class="existingUser" th:if="${nonExistingUser == null}">
         <div class="row">
             <div class="col-md-3">
-                <form th:action="@{'/friends/' + ${userProfile.id}}">
-                    <button type="submit" class="btn btn-default">Friends</button>
-                </form>
-                <form th:if="${loggedUserId == userProfile.id}" th:action="@{/invitations}">
-                    <button type="submit" class="btn btn-default">Invitations</button>
-                </form>
-                <form th:action="@{'/message/' + ${userProfile.id}}">
-                    <button type="submit" class="btn btn-default">Send Message</button>
-                </form>
-                <form th:if="${loggedUserId == userProfile.id}" th:action="@{/messages}">
-                    <button type="submit" class="btn btn-default">Messages</button>
-                </form>
-                <form th:if="${loggedUserId == userProfile.id}" th:action="@{/groups}">
-                    <button type="submit" class="btn btn-default">Groups</button>
-                </form>
+                <ul class="list">
+                    <li>
+                        <a th:href="@{'/friends/' + ${userProfile.id}}">Friends</a>
+                    </li>
+                    <li>
+                        <a th:if="${loggedUserId == userProfile.id}" th:href="@{/invitations}">Invitations</a>
+                    </li>
+                    <li>
+                        <a th:if="${loggedUserId == userProfile.id}" th:href="@{/messages}">Messages</a>
+                    </li>
+                    <li>
+                        <a th:if="${loggedUserId == userProfile.id}" th:href="@{/groups}">Groups</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/message/' + ${userProfile.id}}">Send message</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-6">
                 <h1 th:text="${userProfile.firstName} + ' ' + ${userProfile.lastName}"></h1>
@@ -48,7 +50,8 @@
                                             class="glyphicon glyphicon-option-horizontal"></span></button>
                                     <ul class="dropdown-menu">
                                         <li th:if="${loggedUserId} == ${status.addingUser.id}">
-                                            <a class="editStatus" th:href="@{'/userprofile/editstatus/' + ${status.statusId}}">Edit</a>
+                                            <a class="editStatus"
+                                               th:href="@{'/userprofile/editstatus/' + ${status.statusId}}">Edit</a>
                                         </li>
                                         <li th:if="${loggedUserId} == ${status.userId} or ${loggedUserId} == ${status.addingUser.id}">
                                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/deletestatus/' + ${status.statusId}}"
@@ -82,7 +85,8 @@
                                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a  class="editComment" th:href="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}">Edit</a>
+                                                        <a class="editComment"
+                                                           th:href="@{'/userprofile/' + ${userProfile.id} + '/editcomment/' + ${comment.commentId}}">Edit</a>
                                                     </li>
                                                     <li>
                                                         <form th:if="${loggedUserId} == ${comment.userId} or ${loggedUserId} == ${comment.addingUser.id}"
