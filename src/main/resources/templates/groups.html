@@ -13,7 +13,7 @@
         <div class="col-md-6">
             <div th:if="${groups.size() != 0}">
                 <h1>Your groups:</h1>
-                <ul class="groups" th:object="${groups}">
+                <ul class="list" th:object="${groups}">
                     <li class="group" th:each="group : ${groups}">
                         <a class="groupName" th:href="@{'/group/' + ${group.id}}" th:text="${group.name}"></a>
                     </li>

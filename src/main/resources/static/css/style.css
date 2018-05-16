@@ -49,10 +49,6 @@ textarea {
     resize: none;
 }
 
-.statusContent {
-
-}
-
 .comment {
     margin-left: 10px;
     padding-top: 5px;
@@ -87,16 +83,6 @@ textarea {
     clear: left;
 }
 
-.interlocutors {
-    list-style-type: none;
-    padding-left: 0px;
-}
-
-.messages {
-    padding-left: 0px;
-    list-style-type: none;
-}
-
 .messages li {
     padding: 10px 10px 10px 5px;
     margin-bottom: 3px;
@@ -115,11 +101,6 @@ textarea {
     clear: both;
 }
 
-.groups {
-    padding-left: 0px;
-    list-style-type: none;
-}
-
 .groupInformation {
     word-wrap: break-word;
 }
@@ -130,24 +111,12 @@ a.groupName {
     color: #0f0f0f;
 }
 
-.membersList {
+.list {
     padding-left: 0px;
     list-style-type: none;
 }
 
-.member {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.friendsList {
-    padding-left: 0px;
-    list-style-type: none;
-}
-
-.friend {
+.listMember {
     margin-bottom: 10px;
     display: flex;
     align-items: center;

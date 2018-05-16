@@ -10,8 +10,8 @@
         </div>
         <div class="col-md-6">
             <h1>Friends:</h1>
-            <ul class="friendsList">
-                <li class="friend" th:object="${friends}" th:each="friend : ${friends}">
+            <ul class="list">
+                <li class="listMember" th:object="${friends}" th:each="friend : ${friends}">
                     <a th:href="@{'/userprofile/' + ${friend.friend.id}}"
                        th:text="${friend.friend.firstName} + ' ' + ${friend.friend.lastName}"></a>
                     <div class="pull-right">

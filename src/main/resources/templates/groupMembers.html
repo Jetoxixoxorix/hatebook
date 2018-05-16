@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-3">
             <p>Actions for the group</p>
-            <ul>
+            <ul class="list">
                 <li th:if="${!member}">
                     <form th:object="${group}" th:action="@{'/joingroup/' + ${group.id}}" method="post">
                         <button class="btn btn-default" type="submit">Join group</button>
@@ -25,7 +25,7 @@
                 </li>
             </ul>
             <p>General actions</p>
-            <ul>
+            <ul class="list">
                 <li>
                     <form th:action="@{/groups}">
                         <button type="submit" class="btn btn-default">Groups</button>
@@ -33,78 +33,77 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="col-md-6">
-        <a class="groupName" th:href="@{'/group/' + ${group.id}}" th:text="${group.name}"></a>
-        <div class="admins">
-            <h2>Admins:</h2>
-            <ul class="membersList" th:object="${members}">
-                <li class="member" th:each="user : ${members}" th:if="${user.admin}">
-                    <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
-                       th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
-                    <div class="pull-right">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle menu" type="button"
-                                    data-toggle="dropdown"><span
-                                    class="glyphicon glyphicon-option-horizontal"></span></button>
-                            <ul class="dropdown-menu">
-                                <li th:if="${isAdmin || user.user.id == loggedUserId}">
-                                    <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
-                                          method="post" class="deleteUserForm"></form>
-                                    <a th:if="${isAdmin && user.user.id != loggedUserId}" href="#"
-                                       class="deleteUser">Delete from group</a>
-                                    <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
-                                        group</a>
-                                </li>
-                                <li th:if="${isAdmin && !user.admin}">
-                                    <form th:action="@{'/makeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
-                                          method="post" class="makeAdminForm"></form>
-                                    <a class="makeAdmin" href="#">Make admin</a>
-                                </li>
-                            </ul>
+        <div class="col-md-6">
+            <a class="groupName" th:href="@{'/group/' + ${group.id}}" th:text="${group.name}"></a>
+            <div class="admins">
+                <h2>Admins:</h2>
+                <ul class="list" th:object="${members}">
+                    <li class="listMember" th:each="user : ${members}" th:if="${user.admin}">
+                        <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
+                           th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
+                        <div class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle menu" type="button"
+                                        data-toggle="dropdown"><span
+                                        class="glyphicon glyphicon-option-horizontal"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li th:if="${isAdmin || user.user.id == loggedUserId}">
+                                        <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
+                                              method="post" class="deleteUserForm"></form>
+                                        <a th:if="${isAdmin && user.user.id != loggedUserId}" href="#"
+                                           class="deleteUser">Delete from group</a>
+                                        <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
+                                            group</a>
+                                    </li>
+                                    <li th:if="${isAdmin && !user.admin}">
+                                        <form th:action="@{'/makeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
+                                              method="post" class="makeAdminForm"></form>
+                                        <a class="makeAdmin" href="#">Make admin</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="members">
-            <h2>Members:</h2>
-            <ul class="membersList" th:object="${members}">
-                <li class="member" th:each="user : ${members}" th:if="${!user.admin}">
-                    <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
-                       th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
-                    <div class="pull-right">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle menu" type="button"
-                                    data-toggle="dropdown"><span
-                                    class="glyphicon glyphicon-option-horizontal"></span></button>
-                            <ul class="dropdown-menu">
-                                <li th:if="${isAdmin || user.user.id == loggedUserId}">
-                                    <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
-                                          method="post" class="deleteUserForm"></form>
-                                    <a th:if="${isAdmin && user.user.id != loggedUserId}" href="#"
-                                       class="deleteUser">Delete
-                                        from group</a>
-                                    <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
-                                        group</a>
-                                </li>
-                                <li th:if="${isAdmin && !user.admin}">
-                                    <form th:action="@{'/makeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
-                                          method="post" class="makeAdminForm"></form>
-                                    <a class="makeAdmin" href="#">Make admin</a>
-                                </li>
-                            </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="members">
+                <h2>Members:</h2>
+                <ul class="list" th:object="${members}">
+                    <li class="listMember" th:each="user : ${members}" th:if="${!user.admin}">
+                        <a th:href="@{'/userprofile/' + ${user.user.id}}" class="getProfile"
+                           th:text="${user.user.firstName + ' ' + user.user.lastName}"></a>
+                        <div class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle menu" type="button"
+                                        data-toggle="dropdown"><span
+                                        class="glyphicon glyphicon-option-horizontal"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li th:if="${isAdmin || user.user.id == loggedUserId}">
+                                        <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
+                                              method="post" class="deleteUserForm"></form>
+                                        <a th:if="${isAdmin && user.user.id != loggedUserId}" href="#"
+                                           class="deleteUser">Delete
+                                            from group</a>
+                                        <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
+                                            group</a>
+                                    </li>
+                                    <li th:if="${isAdmin && !user.admin}">
+                                        <form th:action="@{'/makeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
+                                              method="post" class="makeAdminForm"></form>
+                                        <a class="makeAdmin" href="#">Make admin</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3 groupInformation">
+            <h6><b>Group description</b></h6>
+            <p th:text="${group.description}"></p>
         </div>
     </div>
-    <div class="col-md-3 groupInformation">
-        <h6><b>Group description</b></h6>
-        <p th:text="${group.description}"></p>
-    </div>
-</div>
 </div>
 </body>
 </html>
