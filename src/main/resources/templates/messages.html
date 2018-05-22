@@ -19,9 +19,9 @@
             <ul class="messages list">
                 <div th:each="message : ${messages}">
                     <li th:if="${message.sender.id} == ${loggedUserId}" class="sendMessage"
-                        th:text="${message.content}"></li>
+                        th:text="${message.content}" th:title="${message.date}"></li>
                     <li th:if="${message.sender.id != loggedUserId}" class="receivedMessage"
-                        th:text="${message.content}"></li>
+                        th:text="${message.content}" th:title="${message.date}"></li>
                 </div>
             </ul>
         </div>
