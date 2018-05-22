@@ -30,7 +30,7 @@
                 <div class="add">
                     <form th:action="@{'/userprofile/' + ${userProfile.id}}" th:object="${add}" method="post">
                         <textarea id="addStatus" class="form-control" th:field="*{content}"
-                                  placeholder="Write status"></textarea>
+                                  placeholder="Write status" maxlength="3000"></textarea>
                         <button class="btn btn-default" id="add" type="submit">Add status</button>
                     </form>
                 </div>
@@ -104,7 +104,7 @@
                             <form th:action="@{'/userprofile/' + ${userProfile.id} + '/addcomment/' + ${status.statusId}}"
                                   th:object="${addComment}" method="post">
                                     <textarea id="addComment" class="form-control" placeholder="Write comment"
-                                              th:field="*{content}"></textarea>
+                                              th:field="*{content}" maxlength="3000"></textarea>
                                 <button class="btn btn-default" id="addCommentBtn" type="submit">Add comment
                                 </button>
                             </form>

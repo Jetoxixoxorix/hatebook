@@ -12,7 +12,7 @@
                 <div class="statusContent">
                     <form th:action="@{'/sendmessage/' + ${receiver.id}}"
                           th:object="${message}" method="post">
-                        <textarea id="message" class="form-control" th:field="*{content}"></textarea>
+                        <textarea id="message" class="form-control" th:field="*{content}" maxlength="3000"></textarea>
                         <button class="btn btn-default" type="submit">Send</button>
                     </form>
                     <form th:action="@{'/userprofile/'}" method="get">
