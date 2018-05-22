@@ -54,7 +54,7 @@ textarea {
     padding-top: 5px;
 }
 
-.commentContent {
+.commentText {
     background-color: white;
 }
 
@@ -121,4 +121,13 @@ a.groupName {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.commentContent {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    margin-bottom: 0px;
 }

@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
     $(".deleteFriend").on('click', function () {
-        const row = $(this).closest("ul");
+        const row = $(this).closest("li");
         const form = row.find(".deleteFriendForm");
         form.submit();
     });
@@ -50,12 +50,6 @@ $(document).ready(function () {
     $(".removeAdmin").on('click', function () {
         const row = $(this).closest("li");
         const form = row.find(".removeAdminForm");
-        form.submit();
-    });
-
-    $(".deleteFriend").on('click', function () {
-        const row = $(this).closest("li");
-        const form = row.find(".deleteFriendForm");
         form.submit();
     });
 

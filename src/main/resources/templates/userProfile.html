@@ -74,9 +74,9 @@
                                            th:text="${comment.addingUser.firstName} + ' ' + ${comment.addingUser.lastName}">Profile</a>
                                     </div>
                                     <p class="date" th:text="${comment.date}"></p>
-                                    <div class="row">
+                                    <div class="row commentContent">
                                         <div class="col-md-9">
-                                            <p class="commentContent" th:text="${comment.content}"></p>
+                                            <p class="commentText" th:text="${comment.content}"></p>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="dropdown">
