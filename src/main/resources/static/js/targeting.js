@@ -47,6 +47,12 @@ $(document).ready(function () {
         form.submit();
     });
 
+    $(".removeAdmin").on('click', function () {
+        const row = $(this).closest("li");
+        const form = row.find(".removeAdminForm");
+        form.submit();
+    });
+
     $(".deleteFriend").on('click', function () {
         const row = $(this).closest("li");
         const form = row.find(".deleteFriendForm");

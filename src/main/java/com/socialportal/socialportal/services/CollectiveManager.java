@@ -94,4 +94,10 @@ public class CollectiveManager {
         member.setAdmin(true);
         collectiveMemberRepository.save(member);
     }
+
+    public void removeAdminFromUser(Collective group, User user) {
+        CollectiveMember member = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
+        member.setAdmin(false);
+        collectiveMemberRepository.save(member);
+    }
 }

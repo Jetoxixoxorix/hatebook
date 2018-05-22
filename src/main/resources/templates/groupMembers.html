@@ -57,10 +57,11 @@
                                         <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
                                             group</a>
                                     </li>
-                                    <li th:if="${isAdmin && !user.admin}">
-                                        <form th:action="@{'/makeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
-                                              method="post" class="makeAdminForm"></form>
-                                        <a class="makeAdmin" href="#">Make admin</a>
+                                    <!--                                    th:if="${isAdmin && !user.admin}"-->
+                                    <li>
+                                        <form th:action="@{'/removeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
+                                              method="post" class="removeAdminForm"></form>
+                                        <a class="removeAdmin" href="#">Remove admin from user</a>
                                     </li>
                                 </ul>
                             </div>
