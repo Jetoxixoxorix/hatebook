@@ -20,6 +20,9 @@
                                     data-toggle="dropdown"><span
                                     class="glyphicon glyphicon-option-horizontal"></span></button>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="sendMessageTo" th:href="@{'/message/' + ${friend.friend.id}}">Send Message</a>
+                                </li>
                                 <li th:if="${yourFriends.contains(friend.friend) == true}">
                                     <form class="deleteFriendForm" th:action="@{'/deletefriend/' + ${friend.friend.id}}"
                                           method="post"></form>

@@ -47,6 +47,9 @@
                                         data-toggle="dropdown"><span
                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.id}}">Send Message</a>
+                                    </li>
                                     <li th:if="${isAdmin || user.user.id == loggedUserId}">
                                         <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
                                               method="post" class="deleteUserForm"></form>
@@ -78,6 +81,9 @@
                                         data-toggle="dropdown"><span
                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.id}}">Send Message</a>
+                                    </li>
                                     <li th:if="${isAdmin || user.user.id == loggedUserId}">
                                         <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
                                               method="post" class="deleteUserForm"></form>
