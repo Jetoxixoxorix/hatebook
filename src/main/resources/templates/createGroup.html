@@ -10,7 +10,8 @@
         <div class="col-md-6">
             <form th:action="@{/creategroup}" th:object="${createGroup}" method="post">
                 <input class="form-control" type="text" placeholder="Name of group" th:field="*{name}"/>
-                <textarea class="form-control" placeholder="Description of group" th:field="*{description}"></textarea>
+                <textarea class="form-control" placeholder="Description of group" th:field="*{description}"
+                          maxlength="3000"></textarea>
                 <button class="btn btn-primary" type="submit">Create</button>
             </form>
         </div>

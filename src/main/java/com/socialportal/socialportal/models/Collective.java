@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -27,8 +28,14 @@ public class Collective {
     private String name;
 
     @NotNull
+    @Size(max = 3000)
     private String description;
 
     @NotNull
     private Date creatingDate;
+
+    public Collective(@NotNull String name, @NotNull String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
