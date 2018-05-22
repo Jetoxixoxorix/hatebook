@@ -9,27 +9,26 @@
             <p>Actions for the group</p>
             <ul class="list">
                 <li th:if="${!member}">
-                    <form th:object="${group}" th:action="@{'/joingroup/' + ${group.id}}" method="post">
-                        <button class="btn btn-default" type="submit">Join group</button>
-                    </form>
+                    <form id="joinGroup" th:object="${group}" th:action="@{'/joingroup/' + ${group.id}}"
+                          method="post"></form>
+                    <a href="#" onclick="document.getElementById('joinGroup').submit()">Join group</a>
                 </li>
                 <li th:if="${member}">
-                    <form th:object="${group}" th:action="@{'/leavegroup/' + ${group.id}}" method="post">
-                        <button class="btn btn-default" type="submit">Leave group</button>
-                    </form>
+                    <form id="leaveGroup" th:object="${group}" th:action="@{'/leavegroup/' + ${group.id}}"
+                          method="post"></form>
+                    <a href="#" onclick="document.getElementById('leaveGroup').submit()">Leave group</a>
                 </li>
                 <li>
-                    <form th:action="@{'/group/' + ${group.id} + '/members'}" method="get">
-                        <button class="btn btn-default" type="submit">Members</button>
-                    </form>
+                    <a th:href="@{'/group/' + ${group.id} + '/members'}">Members</a>
                 </li>
             </ul>
             <p>General actions</p>
             <ul class="list">
                 <li>
-                    <form th:action="@{/groups}">
-                        <button type="submit" class="btn btn-default">Groups</button>
-                    </form>
+                    <a th:href="@{/groups}">Groups</a>
+                </li>
+                <li>
+                    <a th:href="@{/creategroup}">Create group</a>
                 </li>
             </ul>
         </div>
