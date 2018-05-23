@@ -31,4 +31,10 @@ public class CollectiveMember {
 
     @NotNull
     private boolean isAdmin;
+
+    public CollectiveMember(@NotNull Collective group, @NotNull User user, @NotNull boolean isAdmin) {
+        this.group = group;
+        this.user = user;
+        this.isAdmin = isAdmin;
+    }
 }

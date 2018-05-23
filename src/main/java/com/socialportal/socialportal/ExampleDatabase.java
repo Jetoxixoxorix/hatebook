@@ -1,9 +1,6 @@
 package com.socialportal.socialportal;
 
-import com.socialportal.socialportal.models.Collective;
-import com.socialportal.socialportal.models.User;
-import com.socialportal.socialportal.models.UserComment;
-import com.socialportal.socialportal.models.UserStatus;
+import com.socialportal.socialportal.models.*;
 import com.socialportal.socialportal.services.CollectiveManager;
 import com.socialportal.socialportal.services.ICommentManager;
 import com.socialportal.socialportal.services.IStatusManager;
@@ -80,6 +77,13 @@ public class ExampleDatabase implements CommandLineRunner {
 
         for (Collective group: groups){
             collectiveManager.createGroup(group, users.get(0));
+        }
+
+        
+        for (int i = 0; i < groups.size(); i++) {
+            for (int j = 1; j < users.size(); j++){
+                collectiveManager.addMember(groups.get(i), users.get(j));
+            }
         }
     }
 }
