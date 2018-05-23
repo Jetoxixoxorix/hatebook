@@ -1,8 +1,10 @@
 package com.socialportal.socialportal.controllers;
 
+import com.socialportal.socialportal.errors.NotAnAdminException;
 import com.socialportal.socialportal.models.Collective;
 import com.socialportal.socialportal.services.CollectiveManager;
 import com.socialportal.socialportal.services.UserManager;
+import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,13 @@ public class GroupController {
 
     private CollectiveManager collectiveManager;
     private UserManager userManager;
+    private IUserValidator userValidator;
 
     @Autowired
-    public GroupController(CollectiveManager collectiveManager, UserManager userManager) {
+    public GroupController(CollectiveManager collectiveManager, UserManager userManager, IUserValidator userValidator) {
         this.collectiveManager = collectiveManager;
         this.userManager = userManager;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/groups")
@@ -72,18 +76,26 @@ public class GroupController {
 
     @PostMapping("/deleteuser/{groupid}/{userid}")
     public String removeFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
+
+        try {
+            userValidator.hasAdminPrivilige(groupId, userManager.getUserId());
+        } catch (NotAnAdminException e) {
+            model.addAttribute("notAnAdmin", e.getMessage());
+            return "errors";
+        }
+
         collectiveManager.removeFromGroup(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroupMembers(groupId, model);
     }
 
     @PostMapping("/makeadmin/{groupid}/{userid}")
-    public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model){
+    public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
         collectiveManager.makeUserAnAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroupMembers(groupId, model);
     }
 
     @PostMapping("/removeadmin/{groupid}/{userid}")
-    public String removeAdminFromUser(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model){
+    public String removeAdminFromUser(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
         collectiveManager.removeAdminFromUser(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroupMembers(groupId, model);
     }

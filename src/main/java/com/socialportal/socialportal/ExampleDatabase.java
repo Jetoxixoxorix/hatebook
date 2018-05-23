@@ -79,7 +79,6 @@ public class ExampleDatabase implements CommandLineRunner {
             collectiveManager.createGroup(group, users.get(0));
         }
 
-        
         for (int i = 0; i < groups.size(); i++) {
             for (int j = 1; j < users.size(); j++){
                 collectiveManager.addMember(groups.get(i), users.get(j));
