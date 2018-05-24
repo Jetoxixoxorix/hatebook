@@ -47,7 +47,7 @@
                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.id}}">Send Message</a>
+                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.user.id}}">Send Message</a>
                                     </li>
                                     <li th:if="${isAdmin || user.user.id == loggedUserId}">
                                         <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
@@ -57,7 +57,6 @@
                                         <a th:if="${user.user.id == loggedUserId}" href="#" class="deleteUser">Leave
                                             group</a>
                                     </li>
-                                    <!--                                    th:if="${isAdmin && !user.admin}"-->
                                     <li>
                                         <form th:action="@{'/removeadmin/' + ${group.id} +  '/' + ${user.user.id}}"
                                               method="post" class="removeAdminForm"></form>
@@ -82,7 +81,7 @@
                                         class="glyphicon glyphicon-option-horizontal"></span></button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.id}}">Send Message</a>
+                                        <a class="sendMessageTo" th:href="@{'/message/' + ${user.user.id}}">Send Message</a>
                                     </li>
                                     <li th:if="${isAdmin || user.user.id == loggedUserId}">
                                         <form th:action="@{'/deleteuser/' + ${group.id} +  '/' + ${user.user.id}}"
