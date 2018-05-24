@@ -19,4 +19,6 @@ public interface IUserValidator {
     void checkSendInvitation(Long loggedUser, Long addedFriend) throws HasInvitationException, HasThisFriendException, SameUserException;
 
     void hasAdminPrivilige(Long groupId, Long loggedUser) throws NotAnAdminException;
+
+    void isAMemberOfGroup(Long groupId, Long userId) throws NotAMemberOfGroup;
 }

@@ -88,5 +88,10 @@ public class UserValidator implements IUserValidator {
         if (!collectiveManager.isAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(loggedUser)))
             throw new NotAnAdminException();
     }
+
+    public void isAMemberOfGroup(Long groupId, Long userId) throws NotAMemberOfGroup {
+        if (!collectiveManager.isMemberOfGroup(userManager.getUserById(userId), collectiveManager.getGroup(groupId)))
+            throw new NotAMemberOfGroup();
+    }
 }
 

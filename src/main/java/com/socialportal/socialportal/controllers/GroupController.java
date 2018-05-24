@@ -1,5 +1,6 @@
 package com.socialportal.socialportal.controllers;
 
+import com.socialportal.socialportal.errors.NotAMemberOfGroup;
 import com.socialportal.socialportal.errors.NotAnAdminException;
 import com.socialportal.socialportal.models.Collective;
 import com.socialportal.socialportal.services.CollectiveManager;
@@ -78,9 +79,13 @@ public class GroupController {
     public String removeFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
 
         try {
+            userValidator.isAMemberOfGroup(groupId, userId);
             userValidator.hasAdminPrivilige(groupId, userManager.getUserId());
         } catch (NotAnAdminException e) {
             model.addAttribute("notAnAdmin", e.getMessage());
+            return "errors";
+        } catch (NotAMemberOfGroup e) {
+            model.addAttribute("notAMember", e.getMessage());
             return "errors";
         }
 
