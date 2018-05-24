@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class CollectiveManager {
+public class CollectiveManager implements ICollectiveManager {
 
     private CollectiveRepository collectiveRepository;
     private CollectiveMemberRepository collectiveMemberRepository;
@@ -24,10 +24,12 @@ public class CollectiveManager {
         this.collectiveMemberRepository = collectiveMemberRepository;
     }
 
+    @Override
     public Collective getGroup(Long id) {
         return collectiveRepository.getCollectiveById(id);
     }
 
+    @Override
     public List<Collective> getGroups(User user) {
         List<CollectiveMember> members = collectiveMemberRepository.getCollectiveMemberByUser(user);
         List<Collective> groups = new LinkedList<>();
@@ -38,25 +40,17 @@ public class CollectiveManager {
         return groups;
     }
 
-/*    public List<User> getGroupMembers(Collective group) {
-        List<CollectiveMember> membersOfGroup = collectiveMemberRepository.getCollectiveMembersByGroup(group);
-        List<User> groupUsers = new LinkedList<>();
-
-        for (CollectiveMember member : membersOfGroup) {
-            groupUsers.add(member.getUser());
-        }
-
-        return groupUsers;
-    }  */
-
+    @Override
     public List<CollectiveMember> getGroupMembers(Collective group) {
         return collectiveMemberRepository.getCollectiveMembersByGroup(group);
     }
 
+    @Override
     public boolean isMemberOfGroup(User user, Collective group) {
         return collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group) != null;
     }
 
+    @Override
     public void createGroup(Collective group, User user) {
         group.setCreatingDate(new Date());
         collectiveRepository.save(group);
@@ -69,6 +63,7 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
+    @Override
     public void addMember(Collective group, User user) {
         CollectiveMember collectiveMember = new CollectiveMember();
         collectiveMember.setGroup(group);
@@ -77,11 +72,13 @@ public class CollectiveManager {
         collectiveMemberRepository.save(collectiveMember);
     }
 
+    @Override
     public void removeFromGroup(Collective group, User user) {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         collectiveMemberRepository.delete(collectiveMember);
     }
 
+    @Override
     public boolean isAdmin(Collective group, User user) {
         CollectiveMember collectiveMember = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         if (collectiveMember == null)
@@ -89,12 +86,14 @@ public class CollectiveManager {
         return collectiveMember.isAdmin();
     }
 
+    @Override
     public void makeUserAnAdmin(Collective group, User user) {
         CollectiveMember member = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         member.setAdmin(true);
         collectiveMemberRepository.save(member);
     }
 
+    @Override
     public void removeAdminFromUser(Collective group, User user) {
         CollectiveMember member = collectiveMemberRepository.getCollectiveMemberByUserAndGroup(user, group);
         member.setAdmin(false);

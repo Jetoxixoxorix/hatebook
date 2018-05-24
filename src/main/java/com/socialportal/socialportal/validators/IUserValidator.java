@@ -18,10 +18,4 @@ public interface IUserValidator {
     void checkAddingFriend(Long loggedUser, Long addedFriend) throws SameUserException, HasThisFriendException;
 
     void checkSendInvitation(Long loggedUser, Long addedFriend) throws HasInvitationException, HasThisFriendException, SameUserException;
-
-    void hasAdminPrivilige(Long groupId, Long loggedUser) throws NotAnAdminException;
-
-    void isAMemberOfGroup(Long groupId, Long userId) throws NotAMemberOfGroup;
-
-    String isAdminAndIsMember(Long groupId, Long userId, Model model);
 }

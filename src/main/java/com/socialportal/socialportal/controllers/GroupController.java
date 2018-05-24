@@ -1,11 +1,9 @@
 package com.socialportal.socialportal.controllers;
 
-import com.socialportal.socialportal.errors.NotAMemberOfGroup;
-import com.socialportal.socialportal.errors.NotAnAdminException;
 import com.socialportal.socialportal.models.Collective;
-import com.socialportal.socialportal.services.CollectiveManager;
-import com.socialportal.socialportal.services.UserManager;
-import com.socialportal.socialportal.validators.IUserValidator;
+import com.socialportal.socialportal.services.ICollectiveManager;
+import com.socialportal.socialportal.services.IUserManager;
+import com.socialportal.socialportal.validators.IGroupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class GroupController {
 
-    private CollectiveManager collectiveManager;
-    private UserManager userManager;
-    private IUserValidator userValidator;
+    private ICollectiveManager collectiveManager;
+    private IUserManager userManager;
+    private IGroupValidator groupValidator;
 
     @Autowired
-    public GroupController(CollectiveManager collectiveManager, UserManager userManager, IUserValidator userValidator) {
+    public GroupController(ICollectiveManager collectiveManager, IUserManager userManager, IGroupValidator groupValidator) {
         this.collectiveManager = collectiveManager;
         this.userManager = userManager;
-        this.userValidator = userValidator;
+        this.groupValidator = groupValidator;
     }
 
     @GetMapping("/groups")
@@ -78,7 +76,7 @@ public class GroupController {
     @PostMapping("/deleteuser/{groupid}/{userid}")
     public String removeFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
 
-        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
+        String error = groupValidator.isAdminAndIsMember(groupId, userId, model);
 
         if (error != null)
             return error;
@@ -90,7 +88,7 @@ public class GroupController {
     @PostMapping("/makeadmin/{groupid}/{userid}")
     public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
 
-        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
+        String error = groupValidator.isAdminAndIsMember(groupId, userId, model);
 
         if (error != null)
             return error;
@@ -102,7 +100,7 @@ public class GroupController {
     @PostMapping("/removeadmin/{groupid}/{userid}")
     public String removeAdminFromUser(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
 
-        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
+        String error = groupValidator.isAdminAndIsMember(groupId, userId, model);
 
         if (error != null)
             return error;

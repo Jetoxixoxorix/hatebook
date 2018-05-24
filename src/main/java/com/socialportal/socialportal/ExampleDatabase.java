@@ -1,13 +1,9 @@
 package com.socialportal.socialportal;
 
 import com.socialportal.socialportal.models.*;
-import com.socialportal.socialportal.services.CollectiveManager;
-import com.socialportal.socialportal.services.ICommentManager;
-import com.socialportal.socialportal.services.IStatusManager;
-import com.socialportal.socialportal.services.IUserManager;
+import com.socialportal.socialportal.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.provisioning.GroupManager;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,14 +15,14 @@ public class ExampleDatabase implements CommandLineRunner {
     private IUserManager userManager;
     private IStatusManager statusManager;
     private ICommentManager commentManager;
-    private CollectiveManager collectiveManager;
+    private ICollectiveManager ICollectiveManager;
 
     @Autowired
-    public ExampleDatabase(IUserManager userManager, IStatusManager statusManager, ICommentManager commentManager, CollectiveManager collectiveManager) {
+    public ExampleDatabase(IUserManager userManager, IStatusManager statusManager, ICommentManager commentManager, ICollectiveManager ICollectiveManager) {
         this.userManager = userManager;
         this.statusManager = statusManager;
         this.commentManager = commentManager;
-        this.collectiveManager = collectiveManager;
+        this.ICollectiveManager = ICollectiveManager;
     }
 
     @Override
@@ -76,12 +72,12 @@ public class ExampleDatabase implements CommandLineRunner {
         groups.add(new Collective("Fifth Group", "Lorem Ipsum"));
 
         for (Collective group: groups){
-            collectiveManager.createGroup(group, users.get(0));
+            ICollectiveManager.createGroup(group, users.get(0));
         }
 
         for (int i = 0; i < groups.size(); i++) {
             for (int j = 1; j < users.size(); j++){
-                collectiveManager.addMember(groups.get(i), users.get(j));
+                ICollectiveManager.addMember(groups.get(i), users.get(j));
             }
         }
     }
