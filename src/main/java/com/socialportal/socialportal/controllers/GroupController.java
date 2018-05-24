@@ -95,6 +95,18 @@ public class GroupController {
 
     @PostMapping("/makeadmin/{groupid}/{userid}")
     public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
+
+        try {
+            userValidator.isAMemberOfGroup(groupId, userId);
+            userValidator.hasAdminPrivilige(groupId, userManager.getUserId());
+        } catch (NotAnAdminException e) {
+            model.addAttribute("notAnAdmin", e.getMessage());
+            return "errors";
+        } catch (NotAMemberOfGroup e) {
+            model.addAttribute("notAMember", e.getMessage());
+            return "errors";
+        }
+
         collectiveManager.makeUserAnAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroupMembers(groupId, model);
     }
