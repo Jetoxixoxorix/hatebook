@@ -11,6 +11,7 @@ import com.socialportal.socialportal.services.IInvitationManager;
 import com.socialportal.socialportal.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -92,6 +93,21 @@ public class UserValidator implements IUserValidator {
     public void isAMemberOfGroup(Long groupId, Long userId) throws NotAMemberOfGroup {
         if (!collectiveManager.isMemberOfGroup(userManager.getUserById(userId), collectiveManager.getGroup(groupId)))
             throw new NotAMemberOfGroup();
+    }
+
+    public String isAdminAndIsMember(Long groupId, Long userId, Model model) {
+        try {
+            isAMemberOfGroup(groupId, userId);
+            hasAdminPrivilige(groupId, userManager.getUserId());
+        } catch (NotAnAdminException e) {
+            model.addAttribute("notAnAdmin", e.getMessage());
+            return "errors";
+        } catch (NotAMemberOfGroup e) {
+            model.addAttribute("notAMember", e.getMessage());
+            return "errors";
+        }
+
+        return null;
     }
 }
 

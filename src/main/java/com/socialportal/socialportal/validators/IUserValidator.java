@@ -2,6 +2,7 @@ package com.socialportal.socialportal.validators;
 
 import com.socialportal.socialportal.errors.*;
 import com.socialportal.socialportal.models.User;
+import org.springframework.ui.Model;
 
 public interface IUserValidator {
     void validateUser(User user) throws DifferentPasswordException, ExistingEmailException;
@@ -21,4 +22,6 @@ public interface IUserValidator {
     void hasAdminPrivilige(Long groupId, Long loggedUser) throws NotAnAdminException;
 
     void isAMemberOfGroup(Long groupId, Long userId) throws NotAMemberOfGroup;
+
+    String isAdminAndIsMember(Long groupId, Long userId, Model model);
 }

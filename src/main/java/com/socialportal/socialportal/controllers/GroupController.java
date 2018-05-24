@@ -77,8 +77,8 @@ public class GroupController {
 
     @PostMapping("/deleteuser/{groupid}/{userid}")
     public String removeFromGroup(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
-        
-        String error = isAdminAndIsMember(groupId, userId, model);
+
+        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
 
         if (error != null)
             return error;
@@ -90,7 +90,7 @@ public class GroupController {
     @PostMapping("/makeadmin/{groupid}/{userid}")
     public String makeUserAnAdmin(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
 
-        String error = isAdminAndIsMember(groupId, userId, model);
+        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
 
         if (error != null)
             return error;
@@ -99,23 +99,14 @@ public class GroupController {
         return getGroupMembers(groupId, model);
     }
 
-    public String isAdminAndIsMember(Long groupId, Long userId, Model model) {
-        try {
-            userValidator.isAMemberOfGroup(groupId, userId);
-            userValidator.hasAdminPrivilige(groupId, userManager.getUserId());
-        } catch (NotAnAdminException e) {
-            model.addAttribute("notAnAdmin", e.getMessage());
-            return "errors";
-        } catch (NotAMemberOfGroup e) {
-            model.addAttribute("notAMember", e.getMessage());
-            return "errors";
-        }
-
-        return null;
-    }
-
     @PostMapping("/removeadmin/{groupid}/{userid}")
     public String removeAdminFromUser(@PathVariable("groupid") Long groupId, @PathVariable("userid") Long userId, Model model) {
+
+        String error = userValidator.isAdminAndIsMember(groupId, userId, model);
+
+        if (error != null)
+            return error;
+
         collectiveManager.removeAdminFromUser(collectiveManager.getGroup(groupId), userManager.getUserById(userId));
         return getGroupMembers(groupId, model);
     }
