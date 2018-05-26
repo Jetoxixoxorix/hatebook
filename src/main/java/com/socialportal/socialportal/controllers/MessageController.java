@@ -1,10 +1,8 @@
 package com.socialportal.socialportal.controllers;
 
-import com.socialportal.socialportal.errors.NotYourMessagesException;
 import com.socialportal.socialportal.models.Message;
 import com.socialportal.socialportal.services.IMessageManager;
 import com.socialportal.socialportal.services.IUserManager;
-import com.socialportal.socialportal.validators.IUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,27 +14,17 @@ public class MessageController {
 
     private IMessageManager messageManager;
     private IUserManager userManager;
-    private IUserValidator userValidator;
 
     @Autowired
-    public MessageController(IMessageManager messageManager, IUserManager userManager, IUserValidator userValidator) {
+    public MessageController(IMessageManager messageManager, IUserManager userManager) {
         this.messageManager = messageManager;
         this.userManager = userManager;
-        this.userValidator = userValidator;
     }
 
-    @GetMapping("/messages/{id}/{interlocutorId}")
-    public String getMessages(@PathVariable("id") Long id, @PathVariable("interlocutorId") Long interlocutorId, Model model) {
-
-        try {
-            userValidator.showingMessagePrivilege(userManager.getUserId(), id);
-        } catch (NotYourMessagesException e){
-            model.addAttribute("messages", e.getMessage());
-            return "errors";
-        }
-
+    @GetMapping("/messages/{interlocutorId}")
+    public String getMessages(@PathVariable("interlocutorId") Long interlocutorId, Model model) {
         model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
-        model.addAttribute("messages", messageManager.getMessagesWithUser(id, interlocutorId));
+        model.addAttribute("messages", messageManager.getMessagesWithUser(userManager.getUserId(), interlocutorId));
         model.addAttribute("loggedUserId", userManager.getUserId());
         model.addAttribute("interlocutor", userManager.getUserById(interlocutorId));
         return "messages";

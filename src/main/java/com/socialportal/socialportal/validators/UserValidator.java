@@ -76,10 +76,5 @@ public class UserValidator implements IUserValidator {
         if (loggedUser == addedFriend)
             throw new SameUserException();
     }
-
-    public void showingMessagePrivilege(Long loggedUser, Long messageUserId) throws NotYourMessagesException {
-        if(loggedUser != messageUserId)
-            throw new NotYourMessagesException();
-    }
 }
 
