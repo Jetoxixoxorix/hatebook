@@ -24,9 +24,12 @@ public class MessageController {
     @GetMapping("/messages/{interlocutorId}")
     public String getMessages(@PathVariable("interlocutorId") Long interlocutorId, Model model) {
         model.addAttribute("interlocutors", messageManager.getInterlocutors(userManager.getUserId()));
-        model.addAttribute("messages", messageManager.getMessagesWithUser(userManager.getUserId(), interlocutorId));
         model.addAttribute("loggedUserId", userManager.getUserId());
-        model.addAttribute("interlocutor", userManager.getUserById(interlocutorId));
+        model.addAttribute("messages", messageManager.getMessagesWithUser(userManager.getUserId(), interlocutorId));
+
+        if (messageManager.getMessagesWithUser(userManager.getUserId(), interlocutorId).size() != 0)
+            model.addAttribute("interlocutor", userManager.getUserById(interlocutorId));
+
         return "messages";
     }
 
