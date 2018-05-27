@@ -21,6 +21,10 @@ public class InvitationManager implements IInvitationManager {
         this.userManager = userManager;
     }
 
+    public Invitation getInvitationById(Long id){
+        return invitationRepository.getInvitationById(id);
+    }
+
     public Invitation getInvitation(User receiver, User sender){
         if(invitationRepository.getInvitationByReceiverAndSender(receiver, sender) != null)
             return invitationRepository.getInvitationByReceiverAndSender(receiver, sender);

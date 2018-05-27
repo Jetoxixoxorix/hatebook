@@ -18,4 +18,6 @@ public interface IUserValidator {
     void checkAddingFriend(Long loggedUser, Long addedFriend) throws SameUserException, HasThisFriendException;
 
     void checkSendInvitation(Long loggedUser, Long addedFriend) throws HasInvitationException, HasThisFriendException, SameUserException;
+
+    void checkIfUserInvitation(Long invitationId) throws NotYourInvitationException;
 }

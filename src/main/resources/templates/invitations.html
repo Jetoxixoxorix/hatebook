@@ -26,10 +26,9 @@
                                     <a class="acceptInvitation" href="#">Accept invitation</a>
                                 </li>
                                 <li>
-                                    <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
-                                          class="cancelInvitationForm"></form>
-                                    <a class="cancelInvitation"
-                                       th:href="@{'/deleteinvitation/' + ${invitation.id}}">Cancel invitation</a>
+                                    <form class="cancelInvitationForm"
+                                          th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"></form>
+                                    <a class="cancelInvitation" href="#">Cancel invitation</a>
                                 </li>
                             </ul>
                         </div>
@@ -50,7 +49,7 @@
                                 <li>
                                     <form th:action="@{'/deleteinvitation/' + ${invitation.id}}" method="post"
                                           class="cancelInvitationForm"></form>
-                                    <a class="cancelInvitation" href="#" >Cancel invitation</a>
+                                    <a class="cancelInvitation" href="#">Cancel invitation</a>
                                 </li>
                             </ul>
                         </div>

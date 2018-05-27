@@ -2,6 +2,7 @@ package com.socialportal.socialportal.validators;
 
 
 import com.socialportal.socialportal.errors.*;
+import com.socialportal.socialportal.models.Invitation;
 import com.socialportal.socialportal.models.User;
 import com.socialportal.socialportal.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,12 @@ public class UserValidator implements IUserValidator {
     public void checkSameUser(Long loggedUser, Long addedFriend) throws SameUserException {
         if (loggedUser == addedFriend)
             throw new SameUserException();
+    }
+
+    public void checkIfUserInvitation(Long invitationId) throws NotYourInvitationException {
+        Invitation invitation = invitationManager.getInvitationById(invitationId);
+        if (!(invitation.getSender() == userManager.getUserById(userManager.getUserId()) || invitation.getReceiver() == userManager.getUserById(userManager.getUserId())))
+            throw new NotYourInvitationException();
     }
 }
 

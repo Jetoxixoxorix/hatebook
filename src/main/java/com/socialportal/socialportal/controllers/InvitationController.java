@@ -3,6 +3,7 @@ package com.socialportal.socialportal.controllers;
 
 import com.socialportal.socialportal.errors.HasInvitationException;
 import com.socialportal.socialportal.errors.HasThisFriendException;
+import com.socialportal.socialportal.errors.NotYourInvitationException;
 import com.socialportal.socialportal.errors.SameUserException;
 import com.socialportal.socialportal.models.Invitation;
 import com.socialportal.socialportal.services.IInvitationManager;
@@ -41,10 +42,10 @@ public class InvitationController {
 
     @PostMapping("/sendinvitation/{id}")
     public String sendInvitation(@PathVariable("id") Long id, Model model) {
-        try{
+        try {
             userValidator.checkSendInvitation(userManager.getUserId(), id);
         } catch (SameUserException e) {
-            model.addAttribute("sameUser",e.getMessage());
+            model.addAttribute("sameUser", e.getMessage());
             return "errors";
         } catch (HasThisFriendException e) {
             model.addAttribute("haveThisFriend", e.getMessage());
@@ -60,6 +61,15 @@ public class InvitationController {
 
     @PostMapping("/deleteinvitation/{id}")
     public String deleteInvitation(@PathVariable("id") Long id, Model model) {
+
+        try {
+            userValidator.checkIfUserInvitation(id);
+        } catch (NotYourInvitationException e) {
+            model.addAttribute("invitation", e.getMessage());
+            return "errors";
+        }
+
+
         invitationManager.deleteInvitation(id);
         return getInvitations(model);
     }
