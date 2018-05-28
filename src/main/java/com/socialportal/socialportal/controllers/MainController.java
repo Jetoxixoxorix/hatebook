@@ -73,6 +73,7 @@ public class MainController {
 
     @PostMapping("/userprofile/{userid}/deletestatus/{statusid}")
     public String deleteStatus(Model model, @PathVariable("statusid") Long statusId, @PathVariable("userid") Long userId) {
+
         try {
             userValidator.deletePrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(statusId), statusManager.getUserStatus(statusId).getUserId());
         } catch (HasPrivilegeException e) {
@@ -87,6 +88,7 @@ public class MainController {
 
     @GetMapping("/userprofile/editstatus/{id}")
     public String editStatus(@PathVariable("id") Long id, Model model) {
+
         try {
             userValidator.editPrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id));
         } catch (HasPrivilegeException e) {
@@ -101,6 +103,14 @@ public class MainController {
 
     @PostMapping("/userprofile/{userid}/editstatus/{id}")
     public String editStatus(@PathVariable("id") Long id, @PathVariable("userid") Long userId, String content, Model model) {
+
+        try {
+            userValidator.editPrivilege(userManager.getUserId(), statusManager.getIdOfAuthorOfStatus(id));
+        } catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "errors";
+        }
+
         statusManager.editUserStatus(id, content);
         return getUserProfile(userId, model);
     }
@@ -115,6 +125,7 @@ public class MainController {
 
     @PostMapping("/userprofile/{id}/deletecomment/{commentId}")
     public String deleteComment(@PathVariable("id") Long id, @PathVariable("commentId") Long commentId, Model model) {
+
         try {
             userValidator.deletePrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId), commentManager.getComment(commentId).getUserId());
         } catch (HasPrivilegeException e) {
@@ -128,6 +139,7 @@ public class MainController {
 
     @GetMapping("/userprofile/{userid}/editcomment/{id}")
     public String editComment(@PathVariable("id") Long commentId, Model model) {
+
         try {
             userValidator.editPrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId));
         } catch (HasPrivilegeException e) {
@@ -141,6 +153,14 @@ public class MainController {
 
     @PostMapping("/userprofile/{userid}/editcomment/{id}")
     public String editComment(@PathVariable("userid") Long userid, String content, @PathVariable("id") Long commentId, Model model) {
+
+        try {
+            userValidator.editPrivilege(userManager.getUserId(), commentManager.getIdOfAuthorOfComment(commentId));
+        } catch (HasPrivilegeException e) {
+            model.addAttribute("privilege", e.getMessage());
+            return "errors";
+        }
+
         commentManager.editComment(commentId, content);
         return getUserProfile(userid, model);
     }

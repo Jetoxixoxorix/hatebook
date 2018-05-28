@@ -69,7 +69,6 @@ public class InvitationController {
             return "errors";
         }
 
-
         invitationManager.deleteInvitation(id);
         return getInvitations(model);
     }

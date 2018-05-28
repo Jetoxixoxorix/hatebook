@@ -40,10 +40,10 @@ public class FriendController {
         return "friends";
     }
 
-    @PostMapping("/addfriend/{id}/{invitationid}")
-    public String addFriend(@PathVariable Long id, @PathVariable("invitationid") Long invitationId, Model model) {
+    @PostMapping("/addfriend/{addedFriendId}/{invitationid}")
+    public String addFriend(@PathVariable Long addedFriendId, @PathVariable("invitationid") Long invitationId, Model model) {
         try {
-            userValidator.checkAddingFriend(userManager.getUserId(), id);
+            userValidator.checkAddingFriend(userManager.getUserId(), addedFriendId);
         } catch (SameUserException e) {
             model.addAttribute("sameUser", e.getMessage());
             return "errors";
@@ -52,7 +52,7 @@ public class FriendController {
             return "errors";
         }
 
-        friendManager.addFriend(userManager.getUserId(), userManager.getUserById(id), invitationId);
+        friendManager.addFriend(userManager.getUserId(), userManager.getUserById(addedFriendId), invitationId);
         return getFriendsList(model, userManager.getUserId());
     }
 
