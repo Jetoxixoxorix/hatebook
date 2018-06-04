@@ -58,12 +58,25 @@ public class GroupController {
 
     @GetMapping("/group/{id}/info")
     public String getGroupInfo(@PathVariable("id") Long groupId, Model model) {
+
+        String error = groupValidator.isAdminAndIsMember(groupId, userManager.getUserId(), model);
+
+        if (error != null)
+            return error;
+
         model.addAttribute("groupInfo", collectiveManager.getGroup(groupId));
         return "groupInfo";
     }
 
     @PostMapping("/group/{id}/info")
     public String changeGroupInfo(@PathVariable("id") Long groupId, String name, String description, Model model) {
+
+        String error = groupValidator.isAdminAndIsMember(groupId, userManager.getUserId(), model);
+
+        if (error != null)
+            return error;
+
+
         collectiveManager.changeGroupInfo(groupId, name, description);
         return getGroup(groupId, model);
     }
