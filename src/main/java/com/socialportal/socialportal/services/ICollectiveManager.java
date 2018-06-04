@@ -26,4 +26,6 @@ public interface ICollectiveManager {
     void makeUserAnAdmin(Collective group, User user);
 
     void removeAdminFromUser(Collective group, User user);
+
+    void changeGroupInfo(Long groupId, String name, String description);
 }

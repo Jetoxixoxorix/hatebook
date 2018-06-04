@@ -61,6 +61,12 @@ public class GroupController {
         return "groupInfo";
     }
 
+    @PostMapping("/group/{id}/info")
+    public String changeGroupInfo(@PathVariable("id") Long groupId, String name, String description, Model model) {
+        collectiveManager.changeGroupInfo(groupId, name, description);
+        return getGroup(groupId, model);
+    }
+
     @PostMapping("/creategroup")
     public String createGroup(@ModelAttribute("createGroup") Collective group, Model model) {
         collectiveManager.createGroup(group, userManager.getUserById(userManager.getUserId()));

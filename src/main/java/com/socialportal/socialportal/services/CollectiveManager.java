@@ -99,4 +99,11 @@ public class CollectiveManager implements ICollectiveManager {
         member.setAdmin(false);
         collectiveMemberRepository.save(member);
     }
+
+    public void changeGroupInfo(Long groupId, String name, String description) {
+        Collective group = getGroup(groupId);
+        group.setName(name);
+        group.setDescription(description);
+        collectiveRepository.save(group);
+    }
 }
