@@ -21,7 +21,7 @@
                 <li>
                     <a th:href="@{'/group/' + ${group.id} + '/members'}">Members</a>
                 </li>
-                <li>
+                <li th:if="${admin}">
                     <a th:href="@{'/group/' + ${group.id} + '/info'}">Change group details</a>
                 </li>
             </ul>

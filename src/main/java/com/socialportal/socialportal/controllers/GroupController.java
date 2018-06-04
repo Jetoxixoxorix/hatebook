@@ -36,6 +36,7 @@ public class GroupController {
     public String getGroup(@PathVariable("id") Long groupId, Model model) {
         model.addAttribute("group", collectiveManager.getGroup(groupId));
         model.addAttribute("member", collectiveManager.isMemberOfGroup(userManager.getUserById(userManager.getUserId()), collectiveManager.getGroup(groupId)));
+        model.addAttribute("admin", collectiveManager.isAdmin(collectiveManager.getGroup(groupId), userManager.getUserById(userManager.getUserId())));
         return "group";
     }
 
